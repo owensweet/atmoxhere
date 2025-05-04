@@ -18,6 +18,7 @@ class Firestore {
     }
 
     //other crud methods add here
+    //filtered product methods could go here (filter using params?)
 }
 
 export default Firestore
