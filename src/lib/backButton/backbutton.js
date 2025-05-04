@@ -8,7 +8,7 @@ export function BackButton() {
         onClick={() => router.back()}
        className="absolute top-4 left-4 z-[-10] text-white border-2 px-4 py-1 rounded"
         >
-        BACK
+        &lt;&lt;
         </button>
     )
 }
