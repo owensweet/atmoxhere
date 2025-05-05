@@ -14,7 +14,9 @@ export default function ShopHome()
 
   return (
     <div className="text-center">
+      <div className="scanlines"></div>
       <h1 className="text-3xl flex items-center justify-center mt-15 font-extrabold py-0">ATMOXHERE SHOP</h1>
+      <div className="scanlines2"></div>
       <hr className="border-t-2 my-4 mx-auto w-3/4 py-7" />
       <div className="flex flex-col space-y-10">
 

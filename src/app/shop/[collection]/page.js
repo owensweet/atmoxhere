@@ -1,13 +1,17 @@
 'use client';
 
 import Image from "next/image";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Firestore from '../../../lib/firebase/Firestore'
 import { BackButton } from '../../../lib/backButton/backbutton';
+import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 
 
-export default function CollectionPage({ params }) {
+export default function CollectionPage() {
+
+  const params = useParams();
   const [products, setProducts] = useState([]);
   const firestore = new Firestore();
 
@@ -55,8 +59,10 @@ export default function CollectionPage({ params }) {
 
 function Card({ name, slug, desc, price, stock }) {
 
+  const router = useRouter();
+
   const handleClick = () => {
-    console.log('clicked');
+    router.push('')
   }
 
   return (
