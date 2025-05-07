@@ -62,7 +62,7 @@ function Card({ name, slug, desc, price, stock }) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('')
+    router.push(`/shop/all/${slug}`)
   }
 
   return (
