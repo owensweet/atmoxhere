@@ -1,0 +1,2 @@
+- CRT MONITOR EDGE BEVELING
+- background pixel animation stuff or ascii art
