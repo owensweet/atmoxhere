@@ -120,7 +120,7 @@
   }
   &:after {
     background: repeating-linear-gradient(
-      90deg,
+      110deg,
       var(--crt-red) 1px,
       var(--crt-green) 2px,
       var(--crt-blue) 3px

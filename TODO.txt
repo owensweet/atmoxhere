@@ -1,3 +1,6 @@
 - CRT MONITOR EDGE BEVELING
 - background pixel animation stuff or ascii art
 - scroll height continues to next page and that is an issue
+- shit is sticking out of the body????
+- fix the blue lines on the crt and its too red frfr
+- fuck round wiht the sigilism shit
