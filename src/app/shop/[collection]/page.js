@@ -15,6 +15,10 @@ export default function CollectionPage() {
   const [products, setProducts] = useState([]);
   const firestore = new Firestore();
 
+  const charLength = 8000;
+  const [chars, setChars] = useState('');
+  const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ'
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await firestore.getAllProducts();
@@ -34,12 +38,37 @@ export default function CollectionPage() {
     filtered = products.filter((product) => product.collection === params.collection)
   }
 
+  useEffect(() => {
+    const generateChars = () => {
+      let result = '';
+      for (let i = 0; i < charLength; i++)
+      {
+        result += matrixChars[Math.floor(Math.random() * matrixChars.length)];
+      }
+      return result;
+    };
+
+    setChars(generateChars());
+
+    const interval = setInterval(() => {
+      setChars(generateChars());
+    }, 150);
+
+    return () => clearInterval(interval);
+
+  }, []);
+
 
 
   return (
-    <div>
+    <div className="pt-16">
+      <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="w-full h-full text-green-400 opacity-45 text-m leading-tight break-all whitespace-pre-wrap p-2">
+          {chars}
+        </div>
+      </div>
       <BackButton />
-      <h1 className="text-3xl flex items-center justify-center mt-15 font-extrabold py-0">{ params.collection }</h1>
+      <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">{ params.collection }</h1>
       <hr className="border-t-2 my-4 mx-auto w-3/4 py-7" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-10">
         {filtered.map(product => (
@@ -72,10 +101,10 @@ function Card({ name, slug, desc, price, stock }) {
           src={`/images/${slug}1.jpg`}
           alt={name}
           fill
-          className="object-cover rounded-t"
+          className="object-cover rounded-t z-10"
         />
       </div>
-      <div className="p-4 text-white">
+      <div className="p-4 text-white bg-black">
         <h2 className="text-lg font-semibold">{name}</h2>
         <p className="text-md">${price}</p>
         <p className="text-xs">stock: [{stock}]</p>

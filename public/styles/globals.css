@@ -90,3 +90,41 @@
   pointer-events: none;
   opacity: 0.5;
 }
+
+.crt {
+  background-color: rgb(25, 25, 30);
+  text-shadow: 0 0 0.2em currentColor, 1px 1px rgba(255, 0, 255, 0.5),
+    -1px -1px rgba(0, 255, 255, 0.4);
+  position: relative;
+  &:before,
+  &:after {
+    content: "";
+    transform: translateZ(0);
+    pointer-events: none;
+    /* opacity: 0.5; */
+    mix-blend-mode: overlay;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+  &:before {
+    background: repeating-linear-gradient(
+      var(--crt-red) 0px,
+      var(--crt-green) 2px,
+      var(--crt-blue) 4px
+    );
+  }
+  &:after {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--crt-red) 1px,
+      var(--crt-green) 2px,
+      var(--crt-blue) 3px
+    );
+  }
+}
+

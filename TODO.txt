@@ -1,2 +1,3 @@
 - CRT MONITOR EDGE BEVELING
 - background pixel animation stuff or ascii art
+- scroll height continues to next page and that is an issue

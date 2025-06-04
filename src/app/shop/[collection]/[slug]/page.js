@@ -3,6 +3,8 @@ import Firestore from '@/lib/firebase/Firestore';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react'; 
+import { BackButton } from '../../../../lib/backButton/backbutton';
+
 
 class Product {
     constructor(name, slug, descript) {
@@ -48,9 +50,9 @@ export default function Info() {
 
 function ProductInfo({ name, slug, description, price, stock }) {
     return (
-      <div>
-        <div className="scanlines1"></div>
-        <h1 className="text-3xl flex items-center justify-center mt-15 font-extrabold py-0">ATMOXHERE SHOP</h1>
+      <div className="pt-16">
+        <BackButton />
+        <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">ATMOXHERE SHOP</h1>
         <hr className="border-t-2 my-4 mx-auto w-3/4 py-3" />
         <div className="flex flex-col overflow-hidden w-full h-300 text-center py-0">
             <ImageGallery slug={slug} />
@@ -66,6 +68,7 @@ function ProductInfo({ name, slug, description, price, stock }) {
   function ImageGallery({ slug }) {
     const [images, setImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    
   
     useEffect(() => {
       let index = 1;
@@ -99,6 +102,7 @@ function ProductInfo({ name, slug, description, price, stock }) {
     };
   
     if (images.length === 0) return <p className="text-center h-full">Loading images...</p>;
+    const str = "0".repeat(currentIndex + 1) + "o".repeat(images.length - (currentIndex) - 1);
   
     return (
       <div className="flex flex-col items-center mt-4 space-y-4">
@@ -107,7 +111,7 @@ function ProductInfo({ name, slug, description, price, stock }) {
           alt={`${slug} image ${currentIndex + 1}`}
           width={300}
           height={300}
-          className="rounded border"
+          className="rounded border z-10"
         />
         <div className="flex gap-4">
           <button
@@ -123,8 +127,8 @@ function ProductInfo({ name, slug, description, price, stock }) {
             Next
           </button>
         </div>
-        <p className="text-sm text-gray-500">
-          Image {currentIndex + 1} of {images.length}  
+        <p className="text-l text-gray-500">
+          {str}
         </p>
       </div>
     );

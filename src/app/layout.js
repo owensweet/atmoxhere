@@ -14,31 +14,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 
-  // const charLength = 2000;
-
-  // const [chars, setChars] = useState('');
-
-  // const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ'
-
-  // useEffect(() => {
-  //   const generateChars = () => {
-  //     let result = '';
-  //     for (let i = 0; i < charLength; i++)
-  //     {
-  //       result += matrixChars[Math.floor(Math.random() * matrixChars.length)];
-  //     }
-  //     return result;
-  //   };
-
-  //   setChars(generateChars());
-
-  //   const interval = setInterval(() => {
-  //     setChars(generateChars());
-  //   }, 150);
-
-  //   return () => clearInterval(interval);
-
-  // }, []);
+  
 
   return (
     <html lang="en">
@@ -51,15 +27,12 @@ export default function RootLayout({ children }) {
 	    />
 	  </head>
       <body
-        className={kodeMono.className}
+        className={kodeMono.className + " crt"}
       >
+        <div className="scanlines"></div>
         {/* add header code here instead perhaps */}
-        {/* <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          <div className="w-full h-full text-green-400 opacity-35 text-xs leading-tight break-all whitespace-pre-wrap p-2">
-            {chars}
-          </div>
-        </div> */}
         {children}
+        <div className="scanlines2"></div>
       </body>
     </html>
   );
