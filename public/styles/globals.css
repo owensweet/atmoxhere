@@ -130,20 +130,20 @@
 }
 
 .crt::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(
-                circle at center,
-                transparent 20%,
-                rgba(0, 0, 0, 0.2) 50%,
-                rgba(0, 0, 0, 0.6) 80%,
-                rgba(0, 0, 0, 0.9) 100%
-            );
-            pointer-events: none;
-            z-index: 1;
-        }
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at center,
+      transparent 20%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.75) 80%,
+      rgba(0, 0, 0, 0.98) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
 

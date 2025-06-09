@@ -15,7 +15,7 @@ export default function CollectionPage() {
   const [products, setProducts] = useState([]);
   const firestore = new Firestore();
 
-  const charLength = 8000;
+  const charLength = 12000;
   const [chars, setChars] = useState('');
   const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ'
 
