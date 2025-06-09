@@ -54,11 +54,11 @@ function ProductInfo({ name, slug, description, price, stock }) {
         <BackButton />
         <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">ATMOXHERE SHOP</h1>
         <hr className="border-t-2 my-4 mx-auto w-3/4 py-3" />
-        <div className="flex flex-col overflow-hidden w-full h-300 text-center py-0">
+        <div className="flex flex-col overflow-hidden w-full h-300 text-center py-0 px-5">
             <ImageGallery slug={slug} />
             <h1>{name}</h1>
             <p className="text-center text-gray-400">{description}</p>
-            <h3>${price}</h3>
+            <h2>${price} USD</h2>
             <p>Stock: [{stock}]</p>
         </div>
       </div>

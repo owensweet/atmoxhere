@@ -68,7 +68,7 @@ export default function CollectionPage() {
         </div>
       </div>
       <BackButton />
-      <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">{ params.collection }</h1>
+      <h1 className="text-4xl flex items-center justify-center mt-0 font-extrabold py-0">{ params.collection }</h1>
       <hr className="border-t-2 my-4 mx-auto w-3/4 py-7" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-10">
         {filtered.map(product => (
