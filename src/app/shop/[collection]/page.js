@@ -62,8 +62,8 @@ export default function CollectionPage() {
 
   return (
     <div className="pt-16">
-      <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="w-full h-full text-green-400 opacity-45 text-m leading-tight break-all whitespace-pre-wrap p-2">
+      <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
+        <div className="w-full h-full text-green-400 opacity-30 text-m leading-tight break-all whitespace-pre-wrap p-2">
           {chars}
         </div>
       </div>
@@ -98,7 +98,7 @@ function Card({ name, slug, desc, price, stock }) {
     <div onClick={handleClick} className="rounded overflow-hidden shadow-md border-2 max-w-[300px] w-full mx-auto">
       <div className="aspect-square relative w-full">
         <Image
-          src={`/images/${slug}1.jpg`}
+          src={`/images/${slug}1.png`}
           alt={name}
           fill
           className="object-cover rounded-t z-10"

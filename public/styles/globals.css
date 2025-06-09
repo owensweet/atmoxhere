@@ -92,7 +92,7 @@
 }
 
 .crt {
-  background-color: rgb(25, 25, 30);
+  /* background-color: hsl(154 50% 5%); */
   text-shadow: 0 0 0.2em currentColor, 1px 1px rgba(255, 0, 255, 0.5),
     -1px -1px rgba(0, 255, 255, 0.4);
   position: relative;
@@ -101,7 +101,7 @@
     content: "";
     transform: translateZ(0);
     pointer-events: none;
-    /* opacity: 0.5; */
+    opacity: 0.5;
     mix-blend-mode: overlay;
     position: absolute;
     height: 100%;
@@ -125,6 +125,25 @@
       var(--crt-green) 2px,
       var(--crt-blue) 3px
     );
+    /* background: hsl(154 50% 5%); */
   }
 }
+
+.crt::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at center,
+                transparent 20%,
+                rgba(0, 0, 0, 0.2) 50%,
+                rgba(0, 0, 0, 0.6) 80%,
+                rgba(0, 0, 0, 0.9) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
 

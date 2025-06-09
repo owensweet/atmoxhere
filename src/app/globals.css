@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #181a1b;
+  --background: hsl(154 50% 10%);
   --foreground: white;
-  --crt-red: rgb(218, 49, 49);
-  --crt-green: rgb(112, 159, 115);
-  --crt-blue: rgb(40, 129, 206);
+  --crt-red: rgb(255, 0, 100);
+  --crt-green: rgb(0, 230, 84);
+  --crt-blue: rgb(20, 100, 255);
 }
 
   /* @theme inline {
@@ -17,16 +17,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #181a1b;
+    --background: hsl(154 50% 5%);
     --foreground: white;
   }
 }
 
 body {
   background: var(--background);
+  /* background: hsl(154 50% 5%); */
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   margin-top: 0px;
   
 }

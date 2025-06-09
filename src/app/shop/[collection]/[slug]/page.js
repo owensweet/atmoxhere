@@ -70,28 +70,56 @@ function ProductInfo({ name, slug, description, price, stock }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     
   
+    // useEffect(() => {
+    //   let index = 1;
+    //   let urls = [];
+  
+    //   const checkNext = async () => {
+    //     const url = `/images/${slug}${index}.png`; // hardcoded to only read png
+    //     try {
+    //       const res = await fetch(url);
+    //       if (res.ok) {
+    //         urls.push(url);
+    //         index++;
+    //         checkNext(); // keep loading
+    //       } else {
+    //         setImages(urls);
+    //       }
+    //     } catch {
+    //       setImages(urls);
+    //     }
+    //   };
+  
+    //   checkNext();
+    // }, [slug]);
+
     useEffect(() => {
       let index = 1;
       let urls = [];
-  
-      const checkNext = async () => {
-        const url = `/images/${slug}${index}.jpg`; // or .png
-        try {
-          const res = await fetch(url);
-          if (res.ok) {
-            urls.push(url);
-            index++;
-            checkNext(); // keep loading
-          } else {
-            setImages(urls);
+
+      const checkImages = async () => {
+        while(true) {
+          const url = `/images/${slug}${index}.png`;
+          try {
+            const res = await fetch(url);
+            if (res.ok) {
+              urls.push(url);
+              index++;
+            } else {
+              break
+            }
+          } catch (error) {
+            break;
           }
-        } catch {
-          setImages(urls);
+
         }
+
+        setImages(urls);
+
       };
-  
-      checkNext();
-    }, [slug]);
+
+      checkImages();
+    }, [slug])
   
     const handlePrev = () => {
       setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
