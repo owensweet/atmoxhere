@@ -24,16 +24,14 @@ export default function RootLayout({ children }) {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
 	    />
 	  </head>
-      <ClientWrapper>
         <body
           className={kodeMono.className + " crt overflow-x-hidden"}
         >
           <div className="scanlines"></div>
           {/* add header code here instead perhaps */}
-          {children}
+          <ClientWrapper>{children}</ClientWrapper>
           <div className="scanlines2"></div>
         </body>
-      </ClientWrapper>
     </html>
   );
 }

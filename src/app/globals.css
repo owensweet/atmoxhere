@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: hsl(154 50% 7%);
+  --background: hsl(154 50% 11%);
   --foreground: white;
   --crt-red: rgb(255, 0, 100);
   --crt-green: rgb(0, 230, 84);
@@ -17,7 +17,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: hsl(154 50% 7%);
+    --background: hsl(154 50% 11%);
     --foreground: white;
   }
 }

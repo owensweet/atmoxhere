@@ -64,7 +64,7 @@ export default function CollectionPage() {
   return (
     <div className="pt-16">
       <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
-        <div className="w-full h-full text-teal-700 opacity-30 text-m leading-tight break-all whitespace-pre-wrap p-2">
+        <div className="w-full h-full text-teal-700 opacity-38 text-m leading-tight break-all whitespace-pre-wrap p-2">
           {chars}
         </div>
       </div>
