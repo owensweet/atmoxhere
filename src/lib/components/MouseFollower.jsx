@@ -111,14 +111,14 @@ export default function MouseFollower() {
       src={`/images/test2.png`}
       alt="test2"
       fill
-      className="absolute inset-0 animate-[spin_4s_linear_infinite] brightness-125 drop-shadow-[0_0_10px_rgba(0,200,90,0.6)]"
+      className="absolute inset-0 animate-[spin_4s_linear_infinite] brightness-125 drop-shadow-[0_0_10px_rgba(0,200,90,0.6)] pointer-events-none"
     />
     <Image
       src={`/images/test1.png`}
       alt="test1"
       width={60}
       height={60}
-      className="relative z-10 animate-reverse-spin brightness-110 drop-shadow-[0_0_30px_rgba(0,200,80,0.3)]"
+      className="relative z-10 animate-reverse-spin brightness-110 drop-shadow-[0_0_30px_rgba(0,200,80,0.3)] pointer-events-none"
     />
     </div>
   )
