@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from 'react';
 import Firestore from '../lib/firebase/Firestore'
 import Link from 'next/link'
-import '../../public/styles/globals.css';
+import '@/styles/globals.css';
 
 
 

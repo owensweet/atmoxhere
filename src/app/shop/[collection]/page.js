@@ -6,7 +6,7 @@ import Firestore from '@/lib/firebase/Firestore'
 import { BackButton } from '@/lib/backButton/backbutton';
 import { useRouter } from 'next/navigation';
 import { useParams } from 'next/navigation';
-import './public/styles/globals.css';
+import '@/styles/globals.css';
 
 
 

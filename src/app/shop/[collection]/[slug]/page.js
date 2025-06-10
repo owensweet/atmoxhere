@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react'; 
 import { BackButton } from '@/lib/backButton/backbutton';
-import './public/styles/globals.css'
+import '@/styles/globals.css'
 
 
 class Product {
