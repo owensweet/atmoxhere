@@ -3,7 +3,8 @@ import Firestore from '@/lib/firebase/Firestore';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react'; 
-import { BackButton } from '../../../../lib/backButton/backbutton';
+import { BackButton } from '@/lib/backButton/backbutton';
+import './public/styles/globals.css'
 
 
 class Product {
@@ -33,19 +34,19 @@ export default function Info() {
 
     return (
         <div>
-    {product ? (
-      <ProductInfo 
-        name={product.name}
-        slug={product.slug}
-        description={product.description}
-        price={product.priceUSD}
-        stock={product.stock}
-      />
-    ) : (
-      <p className="text-center mt-10 text-gray-500">Loading product...</p>
-    )}
-  </div>
-    )
+          {product ? (
+            <ProductInfo 
+              name={product.name}
+              slug={product.slug}
+              description={product.description}
+              price={product.priceUSD}
+              stock={product.stock}
+            />
+          ) : (
+            <p className="text-center mt-10 text-gray-500">Loading product...</p>
+          )}
+        </div>
+          )
 }
 
 function ProductInfo({ name, slug, description, price, stock }) {
@@ -54,10 +55,11 @@ function ProductInfo({ name, slug, description, price, stock }) {
         <BackButton />
         <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">ATMOXHERE SHOP</h1>
         <hr className="border-t-2 my-4 mx-auto w-3/4 py-3" />
-        <div className="flex flex-col overflow-hidden w-full h-300 text-center py-0 px-5">
+        <div className="flex flex-col overflow-hidden w-full h-300 text-center py-0 px-10 gap-5">
             <ImageGallery slug={slug} />
-            <h1>{name}</h1>
+            <h1 className="text-4xl">{name}</h1>
             <p className="text-center text-gray-400">{description}</p>
+            <div id='buy-button-=palcehodler'>[placeholder]Purchase</div>
             <h2>${price} USD</h2>
             <p>Stock: [{stock}]</p>
         </div>
@@ -130,7 +132,7 @@ function ProductInfo({ name, slug, description, price, stock }) {
     };
   
     if (images.length === 0) return <p className="text-center h-full">Loading images...</p>;
-    const str = "0".repeat(currentIndex + 1) + "o".repeat(images.length - (currentIndex) - 1);
+    const str = "_ ".repeat(currentIndex) + (currentIndex + 1) + " ".repeat(currentIndex + 1) + "_ ".repeat(images.length - (currentIndex) - 1); // first letter was '0 ' but now its a number and i kind of like it 
   
     return (
       <div className="flex flex-col items-center mt-4 space-y-4">
@@ -140,24 +142,37 @@ function ProductInfo({ name, slug, description, price, stock }) {
           width={300}
           height={300}
           className="rounded border z-10"
+          style={{ filter: 'drop-shadow(0 0 15px rgba(0, 0, 0, 1))' }}
         />
         <div className="flex gap-4">
           <button
             onClick={handlePrev}
-            className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300 text-black"
+            className="bg-black/40 px-4 py-2 rounded hover:bg-gray-300 text-black my-auto h-10"
           >
-            Prev
+            <Image
+              src="/images/arrow_icon.png"
+              alt="Previous"
+              width={24}
+              height={24}
+              className="transform -scale-x-100 invert drop-black"
+            />
           </button>
+          <p className="text-xl text-gray-500">
+            {str}
+          </p>
           <button
             onClick={handleNext}
-            className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300 text-black"
+            className="bg-black/40 px-4 py-2 rounded hover:bg-gray-300 text-black my-auto h-10"
           >
-            Next
+            <Image
+              src="/images/arrow_icon.png"
+              alt="Previous"
+              width={24}
+              height={24}
+              className="invert"
+            />
           </button>
         </div>
-        <p className="text-l text-gray-500">
-          {str}
-        </p>
       </div>
     );
   }

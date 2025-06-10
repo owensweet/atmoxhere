@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
-import Firestore from '../../../lib/firebase/Firestore'
-import { BackButton } from '../../../lib/backButton/backbutton';
+import Firestore from '@/lib/firebase/Firestore'
+import { BackButton } from '@/lib/backButton/backbutton';
 import { useRouter } from 'next/navigation';
 import { useParams } from 'next/navigation';
+import './public/styles/globals.css';
 
 
 
@@ -63,7 +64,7 @@ export default function CollectionPage() {
   return (
     <div className="pt-16">
       <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
-        <div className="w-full h-full text-green-400 opacity-30 text-m leading-tight break-all whitespace-pre-wrap p-2">
+        <div className="w-full h-full text-teal-700 opacity-30 text-m leading-tight break-all whitespace-pre-wrap p-2">
           {chars}
         </div>
       </div>
@@ -96,14 +97,20 @@ function Card({ name, slug, desc, price, stock }) {
 
   return (
     <div onClick={handleClick} className="rounded overflow-hidden shadow-md border-2 max-w-[300px] w-full mx-auto">
-      <div className="aspect-square relative w-full">
-        <Image
-          src={`/images/${slug}1.png`}
-          alt={name}
-          fill
-          className="object-cover rounded-t z-10"
-        />
-      </div>
+      <div className="aspect-square relative w-full rounded-lg overflow-hidden">
+    
+    {/* Blurred Background Layer */}
+    <div className="absolute inset-0 bg-black/10 backdrop-blur-xs z-10" />
+
+    {/* Image Layer */}
+    <Image
+      src={`/images/${slug}1.png`}
+      alt={name}
+      fill
+      className="object-cover rounded-t z-10 pointer-events-none"
+      style={{ filter: 'drop-shadow(0 0 15px rgba(0, 0, 0, 1))' }}
+    />
+  </div>
       <div className="p-4 text-white bg-black">
         <h2 className="text-lg font-semibold">{name}</h2>
         <p className="text-md">${price}</p>
