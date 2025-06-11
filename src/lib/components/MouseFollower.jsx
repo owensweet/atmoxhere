@@ -94,16 +94,16 @@ export default function MouseFollower() {
       document.removeEventListener('mousemove', handleMove)
       document.removeEventListener('mousedown', handleMouseDown)
       document.removeEventListener('mouseup', handleMouseUp)
-      document.removeEventListener('touchmove', handleMove)
-      document.removeEventListener('touchstart', handleTouchStart)
-      document.removeEventListener('touchend', handleTouchEnd)
+      document.removeEventListener('touchmove', handleMove, { passive: true })
+      document.removeEventListener('touchstart', handleTouchStart, { passive: true })
+      document.removeEventListener('touchend', handleTouchEnd, { passive: true })
     }
   }, [])
 
   return (
     <div
       ref={followerRef}
-      className={`fixed top-0 left-0 w-20 h-20 rounded-full z-50 pointer-events-none flex items-center justify-center relative transition-opacity duration-300 ease-in-out ${
+      className={`fixed top-0 left-0 w-20 h-20 rounded-full z-50 pointer-events-none flex items-center justify-center transition-opacity duration-300 ease-in-out ${
         isTouching ? 'opacity-100' : 'opacity-0'
       }`}
     >
