@@ -12,6 +12,9 @@ export default function MouseFollower() {
     let mouseY = 0
     let currentX = 0
     let currentY = 0
+    let showTimeout = null
+let hideTimeout = null
+
 
     const handleMove = (e) => {
 
@@ -36,16 +39,12 @@ export default function MouseFollower() {
         follower.style.transform = `translate(${currentX}px, ${currentY}px)`
       }
 
-      clearTimeout(hideTimeout)
-      clearTimeout(showTimeout)
-      
-      showTimeout = setTimeout(() => {
-        setIsTouching(true)
+       clearTimeout(showTimeout)
+  clearTimeout(hideTimeout)
 
-        hideTimeout = setTimeout(() => {
-            setIsTouching(false)
-        }, 250)
-      }, 50)
+  showTimeout = setTimeout(() => {
+    setIsTouching(true)
+  }, 20) // short delay just to avoid race condition
     }
 
     const handleMouseDown = (e) => {
@@ -64,7 +63,11 @@ export default function MouseFollower() {
     }
 
     const handleTouchEnd = () => {
-      setIsTouching(false)
+      clearTimeout(showTimeout)
+
+  hideTimeout = setTimeout(() => {
+    setIsTouching(false)
+  }, 1000) // slight fade-out delay
     }
 
     const handleMouseUp = () => {
@@ -106,8 +109,6 @@ export default function MouseFollower() {
       document.removeEventListener('touchmove', handleMove, { passive: true })
       document.removeEventListener('touchstart', handleTouchStart, { passive: true })
       document.removeEventListener('touchend', handleTouchEnd, { passive: true })
-      clearTimeout(showTimeout)
-      clearTimeout(hideTimeout)
     }
   }, [])
 
