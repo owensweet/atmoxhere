@@ -79,9 +79,9 @@ export default function MouseFollower() {
     }
 
     // Mouse events
-    document.addEventListener('mousemove', handleMove)
-    document.addEventListener('mousedown', handleMouseDown)
-    document.addEventListener('mouseup', handleMouseUp)
+    document.addEventListener('mousemove', handleMove, { passive: true })
+    document.addEventListener('mousedown', handleMouseDown, { passive: true })
+    document.addEventListener('mouseup', handleMouseUp, { passive: true })
 
     // Touch events
     document.addEventListener('touchmove', handleMove, { passive: true })
@@ -91,9 +91,9 @@ export default function MouseFollower() {
     requestAnimationFrame(animate)
 
     return () => {
-      document.removeEventListener('mousemove', handleMove)
-      document.removeEventListener('mousedown', handleMouseDown)
-      document.removeEventListener('mouseup', handleMouseUp)
+      document.removeEventListener('mousemove', handleMove, { passive: true })
+      document.removeEventListener('mousedown', handleMouseDown, { passive: true })
+      document.removeEventListener('mouseup', handleMouseUp,{ passive: true })
       document.removeEventListener('touchmove', handleMove, { passive: true })
       document.removeEventListener('touchstart', handleTouchStart, { passive: true })
       document.removeEventListener('touchend', handleTouchEnd, { passive: true })
@@ -103,7 +103,7 @@ export default function MouseFollower() {
   return (
     <div
       ref={followerRef}
-      className={`fixed top-0 left-0 w-20 h-20 rounded-full z-50 pointer-events-none flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+      className={`fixed top-0 left-0 w-20 h-20 rounded-full z-50 pointer-events-none flex items-center justify-center relative transition-opacity duration-300 ease-in-out ${
         isTouching ? 'opacity-100' : 'opacity-0'
       }`}
     >

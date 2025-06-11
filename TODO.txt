@@ -4,6 +4,7 @@
 
 # ISSUES
 
+- CRT EFFECT DOESNT EXTEND UP THE TOP AND BOTTOM
 - text offset for the logo
 - Image fetching weirdness, viewed on termite jeans slug page
 - Scroll issue
