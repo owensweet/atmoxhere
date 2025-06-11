@@ -103,7 +103,7 @@ export default function MouseFollower() {
   return (
     <div
       ref={followerRef}
-      className={`fixed top-0 left-0 w-20 h-20 rounded-full z-50 pointer-events-none flex items-center justify-center relative transition-opacity duration-300 ease-in-out ${
+      className={`top-0 left-0 w-20 h-20 rounded-full z-50 pointer-events-none flex items-center justify-center relative transition-opacity duration-300 ease-in-out ${
         isTouching ? 'opacity-100' : 'opacity-0'
       }`}
     >
