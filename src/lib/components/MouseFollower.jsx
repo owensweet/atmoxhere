@@ -63,7 +63,7 @@ let hideTimeout = null
     }
 
     const handleTouchEnd = () => {
-      clearTimeout(showTimeout)
+    //   clearTimeout(showTimeout)
 
   hideTimeout = setTimeout(() => {
     setIsTouching(false)
