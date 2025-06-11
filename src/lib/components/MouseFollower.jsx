@@ -84,9 +84,9 @@ export default function MouseFollower() {
     document.addEventListener('mouseup', handleMouseUp)
 
     // Touch events
-    document.addEventListener('touchmove', handleMove)
-    document.addEventListener('touchstart', handleTouchStart)
-    document.addEventListener('touchend', handleTouchEnd)
+    document.addEventListener('touchmove', handleMove, { passive: true })
+    document.addEventListener('touchstart', handleTouchStart, { passive: true })
+    document.addEventListener('touchend', handleTouchEnd, { passive: true })
 
     requestAnimationFrame(animate)
 
