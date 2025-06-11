@@ -107,7 +107,7 @@ export default function MouseFollower() {
         isTouching ? 'opacity-100' : 'opacity-0'
       }`}
     >
-        <div className='pointer-events-none'>
+        <div className='relative w-full h-full pointer-events-none'>
             <Image
                 src={`/images/test2.png`}
                 alt="test2"
