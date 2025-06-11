@@ -10,7 +10,7 @@ import '@/styles/globals.css';
 
 export default function ShopHome() 
 {
-  const collections = ["mutant", "tsiri", "termite", "z220x11", "bijou_pod_pulsers", "agora_market"];
+  const collections = ["mutant", "tsiri synthesis", "termite", "z220x11", "bijou_pod_pulsers", "agora_market"];
 
   return (
     <div className="text-center pt-16">
