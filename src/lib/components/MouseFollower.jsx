@@ -44,7 +44,7 @@ let hideTimeout = null
 
   showTimeout = setTimeout(() => {
     setIsTouching(true)
-  }, 20) // short delay just to avoid race condition
+  }, 100) // short delay just to avoid race condition
     }
 
     const handleMouseDown = (e) => {
@@ -67,7 +67,7 @@ let hideTimeout = null
 
   hideTimeout = setTimeout(() => {
     setIsTouching(false)
-  }, 1000) // slight fade-out delay
+  }, 250) // slight fade-out delay
     }
 
     const handleMouseUp = () => {
