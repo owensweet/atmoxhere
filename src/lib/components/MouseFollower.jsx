@@ -91,14 +91,10 @@ export default function MouseFollower() {
     }
 
     // Mouse events
-    document.addEventListener('mousemove', handleMove, { passive: true })
-    document.addEventListener('mousedown', handleMouseDown, { passive: true })
-    document.addEventListener('mouseup', handleMouseUp, { passive: true })
+    document.addEventListener('pointerdown', handleMouseDown, { passive: true })
+document.addEventListener('pointermove', handleMove, { passive: true })
+document.addEventListener('pointerup', handleMouseUp, { passive: true })
 
-    // Touch events
-    document.addEventListener('touchmove', handleMove, { passive: true })
-    document.addEventListener('touchstart', handleTouchStart, { passive: true })
-    document.addEventListener('touchend', handleTouchEnd, { passive: true })
 
     requestAnimationFrame(animate)
 
