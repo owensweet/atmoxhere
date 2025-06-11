@@ -24,6 +24,7 @@ export default function MouseFollower() {
 
      // Immediately position the follower for touch and click, and flag isTouching
     const handleTouchStart = (e) => {
+        console.log(touch)
       const x = e.touches[0].pageX
       const y = e.touches[0].pageY
       mouseX = x
@@ -42,6 +43,7 @@ export default function MouseFollower() {
     }
 
     const handleMouseDown = (e) => {
+        console.log('mouse down')
       const x = e.pageX
       const y = e.pageY
       mouseX = x
@@ -107,7 +109,7 @@ export default function MouseFollower() {
   return (
     <div
       ref={followerRef}
-      className={`top-0 left-0 w-20 h-20 rounded-full z-50 pointer-events-none flex items-center justify-center relative transition-opacity duration-0 ease-in-out ${
+      className={`top-0 left-0 w-20 h-20 rounded-full z-50 pointer-events-none flex items-center justify-center relative transition-opacity duration-300 elastic ${
         isTouching ? 'opacity-100' : 'opacity-0'
       }`}
     >
