@@ -61,11 +61,20 @@ export default function MouseFollower() {
     const handleTouchEnd = () => {
       setTimeout(() => {
           setIsTouching(false)
-      },200)
-      handleMouseDown({
-        pageX: e.touches[0].pageX,
-        pageY: e.touches[0].pageY
+
+          const touch = e.changedTouches?.[0]
+    if (touch) {
+      const virtualClick = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+        clientX: touch.clientX,
+        clientY: touch.clientY,
       })
+
+      document.elementFromPoint(touch.clientX, touch.clientY)?.dispatchEvent(virtualClick)
+    }
+      },200)
     }
 
     const handleMouseUp = () => {
@@ -91,10 +100,14 @@ export default function MouseFollower() {
     }
 
     // Mouse events
-    document.addEventListener('pointerdown', handleMouseDown, { passive: true })
-document.addEventListener('pointermove', handleMove, { passive: true })
-document.addEventListener('pointerup', handleMouseUp, { passive: true })
+    document.addEventListener('mousemove', handleMove, { passive: true })
+    document.addEventListener('mousedown', handleMouseDown, { passive: true })
+    document.addEventListener('mouseup', handleMouseUp, { passive: true })
 
+    // Touch events
+    document.addEventListener('touchmove', handleMove, { passive: true })
+    document.addEventListener('touchstart', handleTouchStart, { passive: true })
+    document.addEventListener('touchend', handleTouchEnd, { passive: true })
 
     requestAnimationFrame(animate)
 
