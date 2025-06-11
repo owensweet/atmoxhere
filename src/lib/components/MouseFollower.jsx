@@ -62,6 +62,10 @@ export default function MouseFollower() {
       setTimeout(() => {
           setIsTouching(false)
       },200)
+      handleMouseDown({
+        pageX: e.touches[0].pageX,
+        pageY: e.touches[0].pageY
+      })
     }
 
     const handleMouseUp = () => {
