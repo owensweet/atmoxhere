@@ -24,7 +24,6 @@ export default function MouseFollower() {
 
      // Immediately position the follower for touch and click, and flag isTouching
     const handleTouchStart = (e) => {
-        console.log('touch')
       const x = e.touches[0].pageX
       const y = e.touches[0].pageY
       mouseX = x
@@ -43,7 +42,6 @@ export default function MouseFollower() {
     }
 
     const handleMouseDown = (e) => {
-        console.log('mouse')
       const x = e.pageX
       const y = e.pageY
       mouseX = x
@@ -65,9 +63,7 @@ export default function MouseFollower() {
     }
 
     const handleMouseUp = () => {
-      setTimeout(() => {
-          setIsTouching(false)
-      },200)
+      setIsTouching(false)
     }
 
     const animate = () => {
