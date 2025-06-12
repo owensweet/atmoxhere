@@ -38,7 +38,7 @@ export default function MouseFollower() {
 
       setTimeout(() => {
         setIsTouching(true)
-      }, 50)
+      }, 150)
     }
 
     const handleMouseDown = (e) => {

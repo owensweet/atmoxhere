@@ -1,9 +1,11 @@
 - background pixel animation stuff or ascii art
 - fuck round wiht the sigilism shit
+- language toggle
 
 
 # ISSUES
 
+- BACKBUTTON AND TITLE IS SPACED WEIRD
 - CRT EFFECT DOESNT EXTEND UP THE TOP AND BOTTOM
 - text offset for the logo
 - Image fetching weirdness, viewed on termite jeans slug page
@@ -11,8 +13,6 @@
 - add buy button and stripe connection, on mee6 is login
 - try the 3d shit tmrw with the chatgpt instance
 - vignette streches with body, should just cover the viewport
-
-- UPLOAD ALL THE PRODUCTS
 
 - Magnifying glass effect for slug page?
 
