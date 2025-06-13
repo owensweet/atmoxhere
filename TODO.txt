@@ -2,6 +2,7 @@
 - fuck round wiht the sigilism shit
 - language toggle
 - sizes?
+- add colors and sizes onto the database for each entry and add the new ones
 
 
 # ISSUES
