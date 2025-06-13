@@ -7,7 +7,7 @@ export function BackButton() {
         <button
         onClick={() => {router.back();
             console.log("clicked");}}
-       className="absolute top-4 left-4 z-[1] text-white border-2 px-4 py-1 rounded"
+       className="absolute top-4 left-4 z-[1] text-white border-2 py-1 rounded w-11 text-center"
         >
         &lt;&lt;
         </button>

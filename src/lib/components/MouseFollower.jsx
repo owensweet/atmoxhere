@@ -59,19 +59,6 @@ export default function MouseFollower() {
     const handleTouchEnd = () => {
       setTimeout(() => {
           setIsTouching(false)
-
-          const touch = e.changedTouches?.[0]
-    if (touch) {
-      const virtualClick = new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-        view: window,
-        clientX: touch.clientX,
-        clientY: touch.clientY,
-      })
-
-      document.elementFromPoint(touch.clientX, touch.clientY)?.dispatchEvent(virtualClick)
-    }
       },200)
     }
 

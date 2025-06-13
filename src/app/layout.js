@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
 	    />
 	  </head>
         <body
-          className={kodeMono.className + " crt overflow-x-hidden"}
+          className={kodeMono.className + " crt overflow-x-hidden overscroll-none"}
         >
           <div className="scanlines"></div>
           {/* add header code here instead perhaps */}
