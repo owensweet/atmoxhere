@@ -1,6 +1,7 @@
 import { Kode_Mono } from 'next/font/google';
 import "./globals.css";
-import ClientWrapper from "@/app/ClientWrapper"
+import ClientWrapper from "@/app/ClientWrapper";
+import Image from "next/image";
 
 const kodeMono = Kode_Mono({
 	subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
           {/* add header code here instead perhaps */}
           <ClientWrapper>{children}</ClientWrapper>
           <div className="scanlines2"></div>
+          
         </body>
     </html>
   );

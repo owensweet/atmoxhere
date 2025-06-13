@@ -16,7 +16,7 @@ export default function CollectionPage() {
   const [products, setProducts] = useState([]);
   const firestore = new Firestore();
 
-  const charLength = 12000;
+  const charLength = 10000;
   const [chars, setChars] = useState('');
   const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ'
 
@@ -99,18 +99,15 @@ function Card({ name, slug, desc, price, stock }) {
     <div onClick={handleClick} className="rounded overflow-hidden shadow-md border-2 max-w-[300px] w-full mx-auto">
       <div className="aspect-square relative w-full rounded-lg overflow-hidden">
     
-    {/* Blurred Background Layer */}
-    <div className="absolute inset-0 bg-black/10 backdrop-blur-xs z-10" />
-
-    {/* Image Layer */}
-    <Image
-      src={`/images/${slug}1.png`}
-      alt={name}
-      fill
-      className="object-cover rounded-t z-10 pointer-events-none"
-      style={{ filter: 'drop-shadow(0 0 15px rgba(0, 0, 0, 1))' }}
-    />
-  </div>
+      <div className="absolute inset-0 bg-black/10 backdrop-blur-xs z-10" />
+      <Image
+        src={`/images/${slug}1.png`}
+        alt={name}
+        fill
+        className="object-cover rounded-t z-10 pointer-events-none"
+        style={{ filter: 'drop-shadow(0 0 15px rgba(0, 0, 0, 1))' }}
+      />
+      </div>
       <div className="p-4 text-white bg-black">
         <h2 className="text-lg font-semibold">{name}</h2>
         <p className="text-md">${price}</p>

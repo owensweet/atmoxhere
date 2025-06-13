@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react'; 
 import { BackButton } from '@/lib/backButton/backbutton';
 import '@/styles/globals.css'
+import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 
 
 class Product {
@@ -59,8 +60,9 @@ function ProductInfo({ name, slug, description, price, stock }) {
             <ImageGallery slug={slug} />
             <h1 className="text-4xl">{name}</h1>
             <p className="text-center text-gray-400">{description}</p>
-            <div id='buy-button-=palcehodler'>[placeholder]Purchase</div>
-            <h2>${price} USD</h2>
+            <h3 className="text-xl">${price} USD</h3>
+            <div className="rounded-lg text-center bg-black w-40 mx-auto h-10 items-center flex justify-center">
+              Purchase <ShoppingCartIcon className="w-5 h-5 mx-2" /></div>
             <p>Stock: [{stock}]</p>
         </div>
       </div>

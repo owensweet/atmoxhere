@@ -1,7 +1,7 @@
 - background pixel animation stuff or ascii art
 - fuck round wiht the sigilism shit
 - language toggle
-- back button is trash
+- sizes?
 
 
 # ISSUES
@@ -9,7 +9,6 @@
 - text offset for the logo
 - add buy button and stripe connection, on mee6 is login
 - try the 3d shit tmrw with the chatgpt instance
-- vignette streches with body, should just cover the viewport
 
 - Magnifying glass effect for slug page?
 

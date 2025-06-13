@@ -101,7 +101,7 @@
     content: "";
     transform: translateZ(0);
     pointer-events: none;
-    opacity: 0.5;
+    opacity: 0.6;
     mix-blend-mode: overlay;
     position: absolute;
     height: 100%;
