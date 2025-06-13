@@ -1,6 +1,7 @@
 - background pixel animation stuff or ascii art
 - fuck round wiht the sigilism shit
 - language toggle
+- back button is trash
 
 
 # ISSUES

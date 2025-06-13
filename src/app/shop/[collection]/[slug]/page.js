@@ -51,7 +51,7 @@ export default function Info() {
 
 function ProductInfo({ name, slug, description, price, stock }) {
     return (
-      <div className="pt-16">
+      <div className="pt-0">
         <BackButton />
         <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">ATMOXHERE SHOP</h1>
         <hr className="border-t-2 my-4 mx-auto w-3/4 py-3" />
