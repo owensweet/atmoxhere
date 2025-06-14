@@ -30,6 +30,9 @@ body {
   min-height: 100vh;
   height: auto;
   margin-top: 0px;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
   
 }
 
