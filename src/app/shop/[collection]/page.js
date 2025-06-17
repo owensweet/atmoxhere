@@ -108,7 +108,7 @@ function Card({ name, slug, desc, price, stock }) {
         style={{ filter: 'drop-shadow(0 0 15px rgba(0, 0, 0, 1))' }}
       />
       </div>
-      <div className="p-4 text-white bg-black">
+      <div className="p-4 text-white bg-black h-full">
         <h2 className="text-lg font-semibold">{name}</h2>
         <p className="text-md">${price}</p>
         <p className="text-xs">stock: [{stock}]</p>
