@@ -144,7 +144,7 @@ function ProductInfo({ name, slug, description, price, stock }) {
           width={300}
           height={300}
           className="rounded border z-10"
-          style={{ filter: 'drop-shadow(0 0 15px rgba(0, 0, 0, 1))' }}
+          style={{ filter: 'drop-shadow(0 0 10px rgba(180, 140, 280, 0.2))' }}
         />
         <div className="flex gap-4">
           <button

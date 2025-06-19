@@ -16,7 +16,7 @@ export default function CollectionPage() {
   const [products, setProducts] = useState([]);
   const firestore = new Firestore();
 
-  const charLength = 10000;
+  const charLength = 12000;
   const [chars, setChars] = useState('');
   const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ'
 
@@ -105,7 +105,7 @@ function Card({ name, slug, desc, price, stock }) {
         alt={name}
         fill
         className="object-cover rounded-t z-10 pointer-events-none"
-        style={{ filter: 'drop-shadow(0 0 15px rgba(0, 0, 0, 1))' }}
+        style={{ filter: 'drop-shadow(0 0 15px rgba(180, 140, 280, 0.4))' }}
       />
       </div>
       <div className="p-4 text-white bg-black h-full">
