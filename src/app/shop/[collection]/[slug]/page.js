@@ -1,6 +1,6 @@
 'use client';
 import Firestore from '@/lib/firebase/Firestore';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react'; 
 import { BackButton } from '@/lib/backButton/backbutton';
@@ -8,17 +8,26 @@ import '@/styles/globals.css'
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 
 
-class Product {
-    constructor(name, slug, descript) {
+// class Product {
+//     constructor(name, slug, description, priceUSD, collection, stock) {
 
-    }
-}
+//     }
+// }
 
 export default function Info() {
+    const searchParams = useSearchParams();
     const params = useParams();
     const firebase = new Firestore();
     const [product, setProduct] = useState()
     
+    const canceled = searchParams.get('canceled');
+
+    useEffect(() => {
+      if (canceled) {
+        console.log('Order Canceled -- you are returned to the page, checkout when ready')
+      }
+    }, [canceled]);
+      
     useEffect(() => {
         const fetchData = async () => {
           const data = await firebase.getProductByName(params.slug);
@@ -42,6 +51,7 @@ export default function Info() {
               description={product.description}
               price={product.priceUSD}
               stock={product.stock}
+              priceID={product.priceID}
             />
           ) : (
             <p className="text-center mt-10 text-gray-500">Loading product...</p>
@@ -50,7 +60,7 @@ export default function Info() {
           )
 }
 
-function ProductInfo({ name, slug, description, price, stock }) {
+function ProductInfo({ name, slug, description, price, stock, priceID }) {
     return (
       <div className="pt-0">
         <BackButton />
@@ -61,8 +71,15 @@ function ProductInfo({ name, slug, description, price, stock }) {
             <h1 className="text-4xl">{name}</h1>
             <p className="text-center text-gray-400">{description}</p>
             <h3 className="text-xl">${price} USD</h3>
-            <div className="rounded-lg text-center bg-black w-40 mx-auto h-10 items-center flex justify-center">
-              Purchase <ShoppingCartIcon className="w-5 h-5 mx-2" /></div>
+            <form action="/api/checkout_sessions" method="POST">
+              <input type="hidden" name="priceID" value={priceID} />
+              <button 
+                type="submit" 
+                role="link"
+                className='appearance-none outline-none rounded-lg text-center bg-black w-40 mx-auto h-10 items-center flex justify-center'>
+                <p className='crt'>Purchase</p> <ShoppingCartIcon className="w-5 h-5 mx-2" />
+              </button>
+            </form>
             <p>Stock: [{stock}]</p>
         </div>
       </div>

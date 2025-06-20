@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@stripe/stripe-js": "^7.3.1",
     "firebase": "^11.6.1",
-    "next": "^15.3.1",
+    "next": "^15.3.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "stripe": "^18.2.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
