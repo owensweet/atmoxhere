@@ -76,7 +76,8 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
               <button 
                 type="submit" 
                 role="link"
-                className='appearance-none outline-none rounded-lg text-center bg-black w-40 mx-auto h-10 items-center flex justify-center'>
+                className='appearance-none outline-none rounded-lg text-center bg-black w-40 mx-auto h-10 items-center flex justify-center
+                          transition transform active:scale-95 duration-100 ease-in-out'>
                 <p className='crt'>Purchase</p> <ShoppingCartIcon className="w-5 h-5 mx-2" />
               </button>
             </form>
@@ -166,7 +167,8 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
         <div className="flex gap-4">
           <button
             onClick={handlePrev}
-            className="bg-black/40 px-4 py-2 rounded hover:bg-gray-300 text-black my-auto h-10"
+            className="bg-black/40 px-4 py-2 rounded hover:bg-gray-700 text-black my-auto h-10
+                      transition transform active:scale-90 duration-100 ease-in-out"
           >
             <Image
               src="/images/arrow_icon.png"
@@ -181,7 +183,8 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
           </p>
           <button
             onClick={handleNext}
-            className="bg-black/40 px-4 py-2 rounded hover:bg-gray-300 text-black my-auto h-10"
+            className="bg-black/40 px-4 py-2 rounded hover:bg-gray-700 text-black my-auto h-10
+                      transition transform active:scale-90 duration-100 ease-in-out"
           >
             <Image
               src="/images/arrow_icon.png"

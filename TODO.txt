@@ -2,6 +2,7 @@
 - fuck round wiht the sigilism shit
 - language toggle
 - sizes?
+- terminal for only first time loading it
 - add colors and sizes onto the database for each entry and add the new ones
 - better card border shape
 
@@ -18,3 +19,5 @@
 - THINK ABOUT HOW TO IMPLEMENT MANGA / LORE
 
 - HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos)
+
+- change gimpedit to webp if lag persists
