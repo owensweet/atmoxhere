@@ -1,3 +1,13 @@
+export default function Bruh () {
+    return (
+        <div>
+            Successful purchase bitch!!!!!
+        </div>
+    )
+}
+
+
+
 // import { redirect } from 'next/navigation'
 
 // import { stripe } from '../../lib/stripe'

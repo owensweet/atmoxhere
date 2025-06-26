@@ -1,14 +1,15 @@
 - background pixel animation stuff or ascii art
-- fuck round wiht the sigilism shit
 - language toggle
 - sizes?
 - terminal for only first time loading it
 - add colors and sizes onto the database for each entry and add the new ones
 - better card border shape
+- basic crud app to add products
 
 
 # ISSUES
 
+- images loading (can i preload the images?)
 - text offset for the logo
 - try the 3d shit tmrw with the chatgpt instance
 
@@ -18,6 +19,6 @@
 
 - THINK ABOUT HOW TO IMPLEMENT MANGA / LORE
 
-- HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos)
+- HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos?)
 
 - change gimpedit to webp if lag persists
