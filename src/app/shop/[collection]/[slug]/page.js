@@ -81,7 +81,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
                 <p className='crt'>Purchase</p> <ShoppingCartIcon className="w-5 h-5 mx-2" />
               </button>
             </form>
-            <p>Stock: [{stock}]</p>
+            <p>[{stock > 0 ? "available" : "SUPPLY_LOCKED] [dropping soon"}]</p>
         </div>
       </div>
     );
