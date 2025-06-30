@@ -4,8 +4,8 @@ import { useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react'; 
 import { BackButton } from '@/lib/backButton/backbutton';
-import '@/styles/globals.css'
-import { ShoppingCartIcon } from '@heroicons/react/24/solid'
+import '@/styles/globals.css';
+import { ShoppingCartIcon } from '@heroicons/react/24/solid';
 
 
 // class Product {
