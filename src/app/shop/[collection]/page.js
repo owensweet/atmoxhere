@@ -110,8 +110,8 @@ function Card({ name, slug, desc, price, stock }) {
       </div>
       <div className="p-4 text-white bg-black h-full">
         <h2 className="text-lg font-semibold">{name}</h2>
-        <p className="text-md">${price}</p>
-        <p className="text-xs">stock: [{stock}]</p>
+        <p className="text-md">{stock > 0 ? `$${price}` : "???"}</p>
+        <p className="text-xs">[{stock > 0 ? "available" : "SUPPLY_LOCKED"}]</p>
       </div>
     </div>
 
