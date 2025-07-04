@@ -71,7 +71,7 @@ export default function CollectionPage() {
       <BackButton />
       <h1 className="text-4xl flex items-center justify-center mt-0 font-extrabold py-0">{ params.collection }</h1>
       <hr className="border-t-2 my-4 mx-auto w-3/4 py-7" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-8">
         {filtered.map(product => (
           <Card
             key={product.id}
@@ -87,34 +87,45 @@ export default function CollectionPage() {
   );
 }
 
-function Card({ name, slug, desc, price, stock }) {
-
+export function Card({ name, slug, desc, price, stock }) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/shop/all/${slug}`)
-  }
+    router.push(`/shop/all/${slug}`);
+  };
 
   return (
-    <div onClick={handleClick} className="rounded overflow-hidden shadow-md border-2 max-w-[300px] w-full mx-auto">
-      <div className="aspect-square relative w-full rounded-lg overflow-hidden">
-    
-      <div className="absolute inset-0 bg-black/10 backdrop-blur-xs z-10" />
+    <div
+      onClick={handleClick}
+      className="relative max-w-[380px] min-h-[420px] w-full mx-auto rounded p-5 overflow-hidden shadow-md"
+    >
+      {/* BORDER IMAGE - slightly scaled taller on Y axis */}
       <Image
-        src={`/images/${slug}1.png`}
-        alt={name}
+        src="/images/Borders/border2 thin fadde.png"
+        alt="Border"
         fill
-        className="object-cover rounded-t z-10 pointer-events-none"
-        style={{ filter: 'drop-shadow(0 0 15px rgba(180, 140, 280, 0.4))' }}
+        className="pointer-events-none z-11 crt"
+        style={{ transform: 'scale(1.05, 1.05)' }}
       />
+
+      {/* CARD IMAGE */}
+      <div className="aspect-square relative w-full rounded-lg overflow-hidden z-10">
+        <div className="absolute inset-0 bg-black/10 backdrop-blur-xs" />
+        <Image
+          src={`/images/${slug}1.png`}
+          alt={name}
+          fill
+          className="object-cover rounded-t pointer-events-none scale-[0.9]"
+          style={{ filter: 'drop-shadow(0 0 15px rgba(180, 140, 280, 0.4))' }}
+        />
       </div>
-      <div className="p-4 text-white bg-black h-full">
+
+      {/* TEXT */}
+      <div className="p-4 text-white bg-black relative z-0">
         <h2 className="text-lg font-semibold">{name}</h2>
-        <p className="text-md">{stock > 0 ? `$${price}` : "???"}</p>
-        <p className="text-xs">[{stock > 0 ? "available" : "SUPPLY_LOCKED"}]</p>
+        <p className="text-md">{stock > 0 ? `$${price}` : '???'}</p>
+        <p className="text-xs">[{stock > 0 ? 'available' : 'SUPPLY_LOCKED'}]</p>
       </div>
     </div>
-
-    
   );
 }

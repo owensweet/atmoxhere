@@ -13,6 +13,7 @@ export default function ClientWrapper({ children }) {
           fill
           className="object-fill opacity-40"
           priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <div className="fixed top-0 left-0 h-full w-[50%] z-[-10] pointer-events-none">
@@ -22,6 +23,7 @@ export default function ClientWrapper({ children }) {
           fill
           className="object-fill opacity-40"
           priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <MouseFollower />
