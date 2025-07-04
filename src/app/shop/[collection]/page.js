@@ -97,25 +97,25 @@ export function Card({ name, slug, desc, price, stock }) {
   return (
     <div
       onClick={handleClick}
-      className="relative max-w-[380px] min-h-[420px] w-full mx-auto rounded p-5 overflow-hidden shadow-md"
+      className="relative max-w-[380px] min-h-[440px] w-full mx-auto rounded p-5 overflow-hidden shadow-md"
     >
       {/* BORDER IMAGE - slightly scaled taller on Y axis */}
       <Image
         src="/images/Borders/border2 thin fadde.png"
         alt="Border"
         fill
-        className="pointer-events-none z-11 crt"
+        className="pointer-events-none z-5"
         style={{ transform: 'scale(1.05, 1.05)' }}
       />
 
       {/* CARD IMAGE */}
-      <div className="aspect-square relative w-full rounded-lg overflow-hidden z-10">
+      <div className="aspect-square relative w-full rounded-lg overflow-hidden z-4 translate-y-[10px] mix-blend-normal">
         <div className="absolute inset-0 bg-black/10 backdrop-blur-xs" />
         <Image
           src={`/images/${slug}1.png`}
           alt={name}
           fill
-          className="object-cover rounded-t pointer-events-none scale-[0.9]"
+          className="object-cover rounded-t pointer-events-none scale-[0.9] z-10"
           style={{ filter: 'drop-shadow(0 0 15px rgba(180, 140, 280, 0.4))' }}
         />
       </div>
