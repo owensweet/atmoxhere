@@ -97,7 +97,7 @@ export function Card({ name, slug, desc, price, stock }) {
   return (
     <div
       onClick={handleClick}
-      className="relative max-w-[380px] min-h-[440px] w-full mx-auto rounded p-5 overflow-hidden shadow-md"
+      className="relative max-w-[380px] min-h-[100px] w-full h-full mx-auto rounded p-5 overflow-hidden shadow-md"
     >
       {/* BORDER IMAGE - slightly scaled taller on Y axis */}
       <Image
