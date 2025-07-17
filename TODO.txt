@@ -21,8 +21,4 @@
 
 - HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos?)
 
-- change gimpedit to webp if lag persists
-
 - how to put the right products at the top and highlight the ones that are dropped!!!!
-
-- shit is bugged with the border sizes on the medium and large viewport

@@ -121,7 +121,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
 
       const checkImages = async () => {
         while(true) {
-          const url = `/images/${slug}${index}.png`;
+          const url = `/images/${slug}${index}.webp`;
           try {
             const res = await fetch(url);
             if (res.ok) {
@@ -162,7 +162,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
           width={300}
           height={300}
           className="rounded border z-10"
-          style={{ filter: 'drop-shadow(0 0 10px rgba(180, 140, 280, 0.2))' }}
+          style={{ filter: 'drop-shadow(0 0 16px rgba(180, 140, 280, 0.2))' }}
         />
         <div className="flex gap-4">
           <button
