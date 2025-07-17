@@ -71,7 +71,9 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
             <h1 className="text-4xl">{name}</h1>
             <p className="text-center text-gray-400">{description}</p>
             <h3 className="text-xl">${price} USD</h3>
-            <form action="/api/checkout_sessions" method="POST">
+
+            {/* Only show purchase button is stock is available */}
+            { stock > 0 && (<form action="/api/checkout_sessions" method="POST">
               <input type="hidden" name="priceID" value={priceID} />
               <button 
                 type="submit" 
@@ -80,7 +82,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
                           transition transform active:scale-95 duration-100 ease-in-out'>
                 <p className='crt'>Purchase</p> <ShoppingCartIcon className="w-5 h-5 mx-2" />
               </button>
-            </form>
+            </form>)}
             <p>[{stock > 0 ? "available" : "SUPPLY_LOCKED] [dropping soon"}]</p>
         </div>
       </div>
