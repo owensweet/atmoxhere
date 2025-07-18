@@ -39,6 +39,8 @@ export default function CollectionPage() {
     filtered = products.filter((product) => product.collection === params.collection)
   }
 
+  filtered.sort((a, b) => b.stock - a.stock)
+
   useEffect(() => {
     const generateChars = () => {
       let result = '';
