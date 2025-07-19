@@ -42,6 +42,8 @@ export default function Info() {
         fetchData();
       }, [])
 
+      const shippingCountry = localStorage.getItem("shipping_country")
+
     return (
         <div>
           {product ? (
@@ -52,6 +54,7 @@ export default function Info() {
               price={product.priceUSD}
               stock={product.stock}
               priceID={product.priceID}
+              shippingCountry={shippingCountry}
             />
           ) : (
             <p className="text-center mt-10 text-gray-500">Loading product...</p>
@@ -60,7 +63,8 @@ export default function Info() {
           )
 }
 
-function ProductInfo({ name, slug, description, price, stock, priceID }) {
+function ProductInfo({ name, slug, description, price, stock, priceID, shippingCountry }) {
+  const [showError, setShowError] = useState(false)
     return (
       <div className="pt-0">
         <BackButton />
@@ -73,8 +77,17 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
             <h3 className="text-xl">${price} USD</h3>
 
             {/* Only show purchase button is stock is available */}
-            { stock > 0 && (<form action="/api/checkout_sessions" method="POST">
+            { stock > 0 && (<form action="/api/checkout_sessions" method="POST"
+            onSubmit={(e) => {
+              const country = localStorage.getItem("shipping_country");
+              if(!country)
+                {
+                  e.preventDefault();
+                  setShowError(true);
+                }
+            }}>
               <input type="hidden" name="priceID" value={priceID} />
+              <input type='hidden' name="shippingCountry" value={shippingCountry} />
               <button 
                 type="submit" 
                 role="link"
@@ -82,8 +95,24 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
                           transition transform active:scale-95 duration-100 ease-in-out'>
                 <p className='crt'>Purchase</p> <ShoppingCartIcon className="w-5 h-5 mx-2" />
               </button>
+
+              {showError && (
+                <p className="text-red-600 text-md mt-2 text-center">
+                  Select your shipping country first
+                </p>
+              )}
             </form>)}
             <p>[{stock > 0 ? "available" : "SUPPLY_LOCKED] [dropping soon"}]</p>
+
+            <div className="relative w-full h-300">
+              <Image
+              src="/images/size chart mutant blackstroke thick border.png"
+              fill
+              alt="size chart"
+              className="pointer-events-none"
+              
+              />
+            </div>
         </div>
       </div>
     );

@@ -1,9 +1,16 @@
 'use client'
 
 import MouseFollower from '@/lib/components/MouseFollower'
+import CountryButton from '@/lib/components/CountryButton'
 import Image from 'next/image'
 
 export default function ClientWrapper({ children }) {
+
+  const handleCountry = (countryCode) => {
+    console.log("country = ", countryCode)
+    localStorage.setItem("shipping_country", countryCode)
+  }
+
   return (
     <div className='overscroll-none overflow-y-scroll'>
       <div className="fixed top-0 right-0 h-full w-[50%] z-[-10] pointer-events-none">
@@ -27,6 +34,7 @@ export default function ClientWrapper({ children }) {
         />
       </div>
       <MouseFollower />
+      <CountryButton onCountrySelect={handleCountry} className='absolute top-4 right-4' />
       {children}
     </div>
   )
