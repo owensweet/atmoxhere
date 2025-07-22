@@ -21,3 +21,14 @@
 - HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos?)
 
 kaomoji thing
+
+
+///////////////////Ranch Changes
+Important:
+Filter on Homepage is gone - Re add it 
+Like on Homepage add Space for the footer for all pages
+Add pages listed, About/Vault/Contact/Manga/Lore/Privacy Policy/ TOS Etc
+
+
+Next Steps
+Try to have spinning globe interface, Add images 
