@@ -13,7 +13,7 @@ export default function ShopHome()
   const collections = ["mutant", "tsiri_synthesis", "termite", "z220x11", "bijou_pod_pulsers", "agora_market"];
 
   return (
-    <div className="text-center pt-6">
+    <div className="text-center pt-16 mb-32">
       
       <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">ATMOXHERE SHOP</h1>
       <hr className="border-t-2 my-4 mx-auto w-3/4 py-7" />
