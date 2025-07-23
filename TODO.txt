@@ -26,8 +26,9 @@ kaomoji thing
 ///////////////////Ranch Changes
 Important:
 Filter on Homepage is gone - Re add it 
-Like on Homepage add Space for the footer for all pages
-Add pages listed, About/Vault/Contact/Manga/Lore/Privacy Policy/ TOS Etc
+Fill in these pages and get rid of the black background
+- About/Vault/Contact/Manga/Lore/Privacy Policy/TOS Etc
+
 
 
 Next Steps
