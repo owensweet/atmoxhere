@@ -10,7 +10,6 @@
 
 - images loading (can i preload the images?)
 - text offset for the logo
-- try the 3d shit tmrw with the chatgpt instance
 
 - Floating divs for more spaceyness?
 
