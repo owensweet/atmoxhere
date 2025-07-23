@@ -37,7 +37,7 @@ function RotatingLinks() {
               width: '200px'
             }}
           >
-            <div className="relative w-[100px] h-[1px] flex items-center justify-center">
+            <div className="relative w-[200px] h-[1px] flex items-center justify-center">
               <Image 
                 src="/images/borders/border4.png"
                 width={100}
@@ -64,7 +64,7 @@ function RotatingLinks() {
 function WireframeSphere() {
   return (
     <mesh>
-      <sphereGeometry args={[2, 10, 10]} />
+      <sphereGeometry args={[1.6, 10, 10]} />
       <meshBasicMaterial color="white" wireframe />\
       {/* Just to make it a bit thicker */}
       <Edges 
