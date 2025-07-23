@@ -37,10 +37,11 @@ function RotatingLinks() {
               width: '200px'
             }}
           >
-            <div className="relative w-[200px] h-[100px] flex items-center justify-center">
+            <div className="relative w-[100px] h-[1px] flex items-center justify-center">
               <Image 
                 src="/images/borders/border4.png"
-                fill
+                width={100}
+                height={100}
                 alt="border image"
                 className="object-contain scale-x-220 scale-y-159"
               />
