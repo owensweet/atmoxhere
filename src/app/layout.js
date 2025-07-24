@@ -10,11 +10,21 @@ const kodeMono = Kode_Mono({
   display: 'swap',
 });
 
+export const metadata = {
+  title: "Atmoxhere",
+  description: "Website for Atmoxhere",
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* You can add additional head content here if needed */}
+        <meta charSet="UTF-8" />
+        <meta name="darkreader-lock" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+	    />
       </head>
       <body className={`${kodeMono.className} crt overflow-x-hidden overscroll-none min-h-screen flex flex-col`}>
         {/* fix background below content */}
