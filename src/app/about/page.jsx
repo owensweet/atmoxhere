@@ -11,15 +11,15 @@ export default function AboutPage() {
         
         <div style={{ lineHeight: '1.6', fontSize: '1.1rem' }}>
           <p style={{ marginBottom: '1.5rem' }}>
-            Replace with description
+            All items are manufactured on the AXH Space Station just outside the Serran Quadrant, our locations on Earth move around from country to country so the shipping is always calculated in checkout. See the vision through our clothing, join us on the mission, join ATMOXHERE
           </p>
           
           <p style={{ marginBottom: '1.5rem' }}>
-            Another Example Line 
+             
           </p>
           
           <p>
-            Third Example line about Atmoxhere
+            
           </p>
         </div>
       </div>
