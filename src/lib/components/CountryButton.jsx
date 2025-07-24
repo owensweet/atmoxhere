@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { GlobeAltIcon } from '@heroicons/react/24/solid';
 
 const COUNTRIES = [
   { code: "US", name: "United States", flag: "🇺🇸" },
@@ -25,8 +26,6 @@ const COUNTRIES = [
   { code: "IN", name: "India", flag: "🇮🇳" },
 ];
 
-
-const GLOBE_ICON = "🌐";
 
 export default function CountrySelectButton({ onCountrySelect }) {
   const [selected, setSelected] = useState("");
@@ -57,7 +56,8 @@ export default function CountrySelectButton({ onCountrySelect }) {
           onClick={() => setOpen(true)}
           className="w-11 h-9 rounded-sm text-white border-2 text-2xl flex items-center justify-center shadow-md z-[1]"
         >
-          {selectedCountry ? selectedCountry.flag : GLOBE_ICON}
+          {selectedCountry ? selectedCountry.flag : <GlobeAltIcon className="w-6 h-6 text-white" />}
+
         </button>
       </div>
 

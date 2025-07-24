@@ -28,16 +28,16 @@ function RotatingLinks() {
             key={name}
             position={[x, y, z]}
             // transform
-            distanceFactor={4}
+            distanceFactor={6}
             style={{
               color: 'white',
               fontSize: '1rem',
               textDecoration: 'none',
               transition: 'transform 0.2s',
-              width: '200px'
+              width: '0px'
             }}
           >
-            <div className="relative w-[200px] h-[1px] flex items-center justify-center">
+            <div className="relative flex items-center justify-center z-1">
               <Image 
                 src="/images/borders/border4.png"
                 width={100}
@@ -47,7 +47,7 @@ function RotatingLinks() {
               />
               <Link 
                 href={`/shop/${name}`} 
-                className="absolute text-white text-center font-bold text-xl"
+                className="absolute text-white text-center font-bold text-xl whitespace-nowrap"
               >
                 ⧼ {name} ⧽
               </Link>
