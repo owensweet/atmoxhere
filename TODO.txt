@@ -10,7 +10,6 @@
 
 - images loading (can i preload the images?)
 - text offset for the logo
-- try the 3d shit tmrw with the chatgpt instance
 
 - Floating divs for more spaceyness?
 
@@ -19,6 +18,8 @@
 - THINK ABOUT HOW TO IMPLEMENT MANGA / LORE
 
 - HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos?)
+
+- jashin gets an email with order info and shipping info (sandbox check?)
 
 kaomoji thing
 
