@@ -15,7 +15,7 @@ export default function ClientWrapper({ children }) {
     <div className='overscroll-none overflow-y-scroll'>
       <div className="fixed top-0 right-0 h-full w-[50%] z-[-10] pointer-events-none">
         <Image
-          src="/images/gimpedit 1.png"
+          src="/images/gimpedit 3.webp"
           alt="sigil"
           fill
           className="object-fill opacity-40"
@@ -25,7 +25,7 @@ export default function ClientWrapper({ children }) {
       </div>
       <div className="fixed top-0 left-0 h-full w-[50%] z-[-10] pointer-events-none">
         <Image
-          src="/images/gimpedit 2.png"
+          src="/images/gimpedit 4.webp"
           alt="sigil"
           fill
           className="object-fill opacity-40"
