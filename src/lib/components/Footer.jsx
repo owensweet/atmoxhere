@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <h2 className="text-2xl font-bold mb-4 tracking-wider">ATMOXHERE</h2>
             <p className="text-gray-400 mb-6 max-w-md">
-              Placeholder Description
+               Year 2077 AXH Spacesuit Factory
             </p>
             
             {/* Social Media Links */}
@@ -45,6 +45,22 @@ export default function Footer() {
                 </svg>
               </a>
 
+              <a
+                href="https://x.com/atmoxhere"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition-colors duration-300"
+                aria-label="X"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path d="M17.53 3H21l-6.78 7.29L22.5 21h-4.95l-5.29-6.55L6.21 21H2l7.26-7.83L1.5 3h5.01l4.79 6.17L17.53 3z" />
+              </svg>
+            </a>   
               {/* Placeholder for additional social media */}
               <div className="bg-gray-800 p-3 rounded-full opacity-50">
                 <div className="w-5 h-5 bg-gray-600 rounded"></div>
@@ -74,6 +90,11 @@ export default function Footer() {
               <li>
                 <Link href="/contact" className="text-gray-400 hover:text-white transition-colors duration-300">
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/lore" className="text-gray-400 hover:text-white transition-colors duration-300">
+                  Lore/Manga Placholder
                 </Link>
               </li>
             </ul>
