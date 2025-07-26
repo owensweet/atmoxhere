@@ -22,3 +22,15 @@
 - jashin gets an email with order info and shipping info (sandbox check?)
 
 kaomoji thing
+
+
+///////////////////Ranch Changes
+Important:
+Filter on Homepage is gone - Re add it 
+Fill in these pages and get rid of the black background
+- About/Vault/Contact/Manga/Lore/Privacy Policy/TOS Etc
+
+
+
+Next Steps
+Try to have spinning globe interface, Add images 
