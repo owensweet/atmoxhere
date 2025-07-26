@@ -29,12 +29,13 @@ function RotatingLinks() {
             position={[x, y, z]}
             // transform
             distanceFactor={6}
+            zIndexRange={[0, 0]}
             style={{
               color: 'white',
               fontSize: '1rem',
               textDecoration: 'none',
               transition: 'transform 0.2s',
-              width: '0px'
+              width: '0px',
             }}
           >
             <div className="relative flex items-center justify-center z-1">

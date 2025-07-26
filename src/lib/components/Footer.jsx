@@ -14,11 +14,6 @@ export default function Footer() {
           
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
-            <h2 className="text-2xl font-bold mb-4 tracking-wider">ATMOXHERE</h2>
-            <p className="text-gray-400 mb-6 max-w-md">
-              Placeholder Description
-            </p>
-            
             {/* Social Media Links */}
             <div className="flex space-x-4">
               <a 

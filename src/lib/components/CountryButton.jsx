@@ -63,7 +63,7 @@ export default function CountrySelectButton({ onCountrySelect }) {
 
       {/* Fullscreen modal */}
       {open && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex flex-col items-center justify-center z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-black bg-opacity-99 backdrop-blur-sm flex flex-col items-center justify-center z-50 animate-fade-in overflow-y-auto">
           <h2 className="text-white text-xl mb-6">Select your country</h2>
           <div className="grid grid-cols-3 gap-4 max-w-sm w-full px-4">
             {COUNTRIES.map((c) => (
