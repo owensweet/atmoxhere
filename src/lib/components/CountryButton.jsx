@@ -70,7 +70,7 @@ export default function CountrySelectButton({ onCountrySelect }) {
               <button
                 key={c.code}
                 onClick={() => handleSelect(c.code)}
-                className="border-2 text-white bg-black w-full py-2 rounded-lg flex flex-col items-center justify-center gap-0 text-lg hover:bg-gray-100 transition"
+                className="border-2 text-white bg-black w-full py-1 rounded-lg flex flex-col items-center justify-center gap-0 text-lg hover:bg-gray-100 transition"
               >
                 <span className="text-2xl text-white">{c.flag}</span>
                 <span className="text-sm text-gray-500 font-extrabold">{c.name}</span>
