@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { GlobeAltIcon } from '@heroicons/react/24/solid';
+import { GlobeAltIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 const COUNTRIES = [
   { code: "US", name: "United States", flag: "🇺🇸" },
@@ -48,7 +48,7 @@ export default function CountrySelectButton({ onCountrySelect }) {
 
   const selectedCountry = COUNTRIES.find((c) => c.code === selected);
 
-  return (
+return (
     <>
       {/* Globe/flag button */}
       <div className="absolute top-4 right-4 z-1">
@@ -57,34 +57,40 @@ export default function CountrySelectButton({ onCountrySelect }) {
           className="w-11 h-9 rounded-sm text-white border-2 text-2xl flex items-center justify-center shadow-md z-[1]"
         >
           {selectedCountry ? selectedCountry.flag : <GlobeAltIcon className="w-6 h-6 text-white" />}
-
         </button>
       </div>
 
       {/* Fullscreen modal */}
-      {open && (
-        <div className="fixed inset-0 bg-black bg-opacity-99 backdrop-blur-sm flex flex-col items-center justify-center z-50 animate-fade-in overflow-y-auto">
-          <h2 className="text-white text-xl mb-6">Select your country</h2>
-          <div className="grid grid-cols-3 gap-4 max-w-sm w-full px-4">
-            {COUNTRIES.map((c) => (
-              <button
-                key={c.code}
-                onClick={() => handleSelect(c.code)}
-                className="border-2 text-white bg-black w-full py-1 rounded-lg flex flex-col items-center justify-center gap-0 text-lg hover:bg-gray-100 transition"
-              >
-                <span className="text-2xl text-white">{c.flag}</span>
-                <span className="text-sm text-gray-500 font-extrabold">{c.name}</span>
-              </button>
-            ))}
-          </div>
+     {open && (
+  <div className="fixed inset-0 z-50 bg-black bg-opacity-95 backdrop-blur-sm overflow-y-auto">
+    <div className="min-h-screen relative flex flex-col items-center py-10 px-4">
+      {/* X button */}
+      <button
+        onClick={() => setOpen(false)}
+        className="absolute top-4 right-4 text-white hover:text-gray-300"
+        aria-label="Close"
+      >
+        <XMarkIcon className="h-8 w-8" />
+      </button>
+
+      <h2 className="text-white text-xl mb-6 mt-8">Select your country</h2>
+
+      <div className="grid grid-cols-3 gap-4 max-w-sm w-full">
+        {COUNTRIES.map((c) => (
           <button
-            onClick={() => setOpen(false)}
-            className="mt-10 text-white underline hover:text-gray-300"
+            key={c.code}
+            onClick={() => handleSelect(c.code)}
+            className="border-2 text-white bg-black w-full py-1 rounded-lg flex flex-col items-center justify-center gap-0 text-lg hover:bg-gray-100 transition"
           >
-            Cancel
+            <span className="text-2xl text-white">{c.flag}</span>
+            <span className="text-sm text-gray-500 font-extrabold">{c.name}</span>
           </button>
-        </div>
-      )}
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+
     </>
   );
 }
