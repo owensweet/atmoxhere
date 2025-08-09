@@ -1,19 +1,80 @@
-'use client';
+'use client'
 
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, Html } from '@react-three/drei'
-import { useRef } from 'react'
-import Link from 'next/link'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { OrbitControls, Text } from '@react-three/drei'
+import { useRef, useMemo, useState, useEffect } from 'react'
 import * as THREE from 'three'
 import { Edges } from '@react-three/drei'
+import { useRouter } from 'next/navigation'
 import '@/styles/globals.css'
 import '@/app/globals.css'
-import Image from "next/image";
 
-const collections = ["mutant", "tsiri_synthesis", "termite", "z220x11", "bijou_pod_pulsers", "agora_market"]
+const collections = [
+  'mutant',
+  'tsiri_synthesis',
+  'termite',
+  'z220x11',
+  'bijou_pod_pulsers',
+  'agora_market'
+]
+
+const colors = {
+  mutant: "black",
+  tsiri_synthesis: "green",
+  termite: "orange",
+  z220x11: "grey",
+  bijou_pod_pulsers: "white",
+  agora_market: "cyan",
+}
+
+const spotlightImages = {
+  mutant: [
+    "/images/defiant_tee4.webp",
+    "/images/sister_alma_tee9.webp",
+    "/images/tsiri_tee1.webp",
+  ],
+  tsiri_synthesis: [
+    "/images/transmute_neck_mutation4.webp",
+    "/images/suffix_neck_mutation5.webp",
+  ],
+  termite: [
+    "/images/termite_sweater6.webp",
+    "/images/termite_arm_flesh4.webp",
+  ],
+  z220x11: [
+    "/images/pilot_boots1.webp",
+    "/images/pilot_boots3.webp",
+  ],
+  bijou_pod_pulsers: [
+    "/images/bijou_pod_pulsers5.webp",
+    "/images/bijou_pod_pulsers6.webp",
+  ],
+  agora_market: [
+    "/images/n_root_respirator1.webp",
+  ]
+}
 
 function RotatingLinks() {
   const radius = 2.5
+  const groupRefs = useRef([])
+  const { camera } = useThree()
+  const router = useRouter()
+
+  // Preload texture once
+  const borderTexture = useMemo(() => {
+    const loader = new THREE.TextureLoader()
+    const tex = loader.load('/images/borders/border3.webp')
+    tex.colorSpace = THREE.SRGBColorSpace
+    return tex
+  }, [])
+
+  useFrame(() => {
+    groupRefs.current.forEach((ref) => {
+      if (ref) {
+        ref.lookAt(camera.position)
+      }
+    })
+  })
 
   return (
     <>
@@ -21,58 +82,56 @@ function RotatingLinks() {
         const angle = (index / collections.length) * Math.PI * 2
         const x = radius * Math.cos(angle)
         const z = radius * Math.sin(angle)
-        const y = 0 // or vary if you want vertical offset
+        const y = 0
 
         return (
-          <Html
+          <group
             key={name}
             position={[x, y, z]}
-            // transform
-            distanceFactor={6}
-            zIndexRange={[0, 0]}
-            style={{
-              color: 'white',
-              fontSize: '1rem',
-              textDecoration: 'none',
-              transition: 'transform 0.2s',
-              width: '0px',
-            }}
+            ref={(el) => (groupRefs.current[index] = el)}
           >
-            <div className="relative flex items-center justify-center z-1">
-              <Image 
-                src="/images/borders/border4.png"
-                width={100}
-                height={100}
-                alt="border image"
-                className="object-contain scale-x-220 scale-y-159"
+            {/* Border image as plane */}
+            <mesh
+              onClick={() => router.push(`/shop/${name}`)}
+              onPointerOver={(e) => (document.body.style.cursor = 'pointer')}
+              onPointerOut={(e) => (document.body.style.cursor = 'default')}
+            >
+              <planeGeometry args={[2.2, 1.6]} />
+              <meshBasicMaterial
+                map={borderTexture}
+                transparent
+                color={colors[name] || "white"}
               />
-              <Link 
-                href={`/shop/${name}`} 
-                className="absolute text-white text-center font-bold text-xl whitespace-nowrap"
-              >
-                ⧼ {name} ⧽
-              </Link>
-            </div>
+            </mesh>
 
-          </Html>
+            {/* Text label */}
+            <Text
+              position={[0, 0, 0.01]} // tiny offset so it doesn't z-fight with the plane
+              fontSize={0.2}
+              fontWeight={700}
+              font="/fonts/Kode_Mono/static/KodeMono-Bold.ttf"
+              outlineWidth={0.005}
+              outlineColor="white"
+              color="white"
+              anchorX="center"
+              anchorY="middle"
+              onClick={() => router.push(`/shop/${name}`)}
+            >
+              ⧼ {name} ⧽
+            </Text>
+          </group>
         )
       })}
     </>
   )
 }
 
-
 function WireframeSphere() {
   return (
     <mesh>
       <sphereGeometry args={[1.6, 10, 10]} />
-      <meshBasicMaterial color="white" wireframe />\
-      {/* Just to make it a bit thicker */}
-      <Edges 
-        scale={1.01}
-        threshold={15}
-        color="white"
-      />
+      <meshBasicMaterial color="white" wireframe />
+      <Edges scale={1.01} threshold={15} color="white" />
     </mesh>
   )
 }
@@ -82,16 +141,18 @@ export default function ShopHome() {
     <div className="w-screen h-screen text-white flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold mb-4">ATMOXHERE SHOP</h1>
       <div className="w-full h-[500px]">
-        <Canvas camera={{ position: [0, 0, 6] }}>
+        <Canvas camera={{ position: [0, 2, 5.5] }}>
           <ambientLight intensity={0.5} />
           <WireframeSphere />
           <RotatingLinks />
-          <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            autoRotate
+            autoRotateSpeed={0.5}
+          />
         </Canvas>
       </div>
-      <Link href="/shop/all" className="text-white mt-6 underline">
-        shop_all
-      </Link>
     </div>
-)
+  )
 }
