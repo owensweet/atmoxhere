@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { GlobeAltIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import '@/styles/globals.css'
 
 const COUNTRIES = [
   { code: "US", name: "United States", flag: "🇺🇸" },
@@ -51,10 +52,10 @@ export default function CountrySelectButton({ onCountrySelect }) {
 return (
     <>
       {/* Globe/flag button */}
-      <div className="absolute top-4 right-4 z-1">
+      <div className="absolute top-4 right-4">
         <button
           onClick={() => setOpen(true)}
-          className="w-11 h-9 rounded-sm text-white border-2 text-2xl flex items-center justify-center shadow-md z-[1]"
+          className="w-11 h-9 rounded-sm text-white border-2 text-2xl flex items-center justify-center shadow-md z-[0] crt"
         >
           {selectedCountry ? selectedCountry.flag : <GlobeAltIcon className="w-6 h-6 text-white" />}
         </button>
