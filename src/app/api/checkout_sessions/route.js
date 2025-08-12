@@ -30,6 +30,7 @@ export async function POST(request) {
         });
         return NextResponse.redirect(session.url, 303)
     } catch (err) {
+        // Change to just reloading page when finished
         return NextResponse.json(
             { error: err.message },
             { status: err.statusCode || 500 }
