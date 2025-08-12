@@ -63,12 +63,12 @@ return (
 
       {/* Fullscreen modal */}
       {open && (
-          <div className="fixed inset-0 z-50 bg-black bg-opacity-95 backdrop-blur-sm overflow-y-auto">
+          <div className="fixed inset-0 z-1 bg-black bg-opacity-95 backdrop-blur-sm overflow-y-auto">
             <div className="min-h-screen relative flex flex-col items-center py-10 px-4">
               {/* X button */}
               <button
                 onClick={() => setOpen(false)}
-                className="absolute top-4 right-4 text-white hover:text-gray-300"
+                className="absolute top-4 right-4 text-white hover:text-gray-400"
                 aria-label="Close"
               >
                 <XMarkIcon className="h-8 w-8" />
@@ -81,10 +81,10 @@ return (
                   <button
                     key={c.code}
                     onClick={() => handleSelect(c.code)}
-                    className="border-2 text-white bg-black w-full py-1 rounded-lg flex flex-col items-center justify-center gap-0 text-lg hover:bg-gray-100 transition"
+                    className="border-2 text-white bg-black w-full py-1 rounded-lg flex flex-col items-center justify-center gap-0 text-lg hover:bg-gray-500 transition"
                   >
                     <span className="text-2xl text-white">{c.flag}</span>
-                    <span className="text-sm text-gray-500 font-extrabold">{c.name}</span>
+                    <span className="text-sm text-gray-400 font-extrabold">{c.name}</span>
                   </button>
                 ))}
               </div>
