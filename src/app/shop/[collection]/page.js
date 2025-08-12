@@ -39,6 +39,8 @@ export default function CollectionPage() {
     filtered = products.filter((product) => product.collection === params.collection)
   }
 
+  filtered.sort((a, b) => b.stock - a.stock)
+
   useEffect(() => {
     const generateChars = () => {
       let result = '';
@@ -97,11 +99,11 @@ export function Card({ name, slug, desc, price, stock }) {
   return (
     <div
       onClick={handleClick}
-      className="relative max-w-[380px] min-h-[440px] w-full mx-auto rounded p-5 overflow-hidden shadow-md"
+      className="relative max-w-[380px] min-h-[100px] w-full h-full mx-auto rounded p-5 overflow-hidden shadow-md"
     >
       {/* BORDER IMAGE - slightly scaled taller on Y axis */}
       <Image
-        src="/images/Borders/border2 thin fadde.png"
+        src="/images/Borders/border2 thin fadde.webp"
         alt="Border"
         fill
         className="pointer-events-none z-5"
@@ -112,16 +114,17 @@ export function Card({ name, slug, desc, price, stock }) {
       <div className="aspect-square relative w-full rounded-lg overflow-hidden z-4 translate-y-[10px] mix-blend-normal">
         <div className="absolute inset-0 bg-black/10 backdrop-blur-xs" />
         <Image
-          src={`/images/${slug}1.png`}
+          src={`/images/${slug}1.webp`}
           alt={name}
-          fill
           className="object-cover rounded-t pointer-events-none scale-[0.9] z-10"
+          fill
+          sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
           style={{ filter: 'drop-shadow(0 0 15px rgba(180, 140, 280, 0.4))' }}
         />
       </div>
 
       {/* TEXT */}
-      <div className="p-4 text-white bg-black relative z-0">
+      <div className="p-4 py-6 pt-2 text-white bg-black relative z-0">
         <h2 className="text-lg font-semibold">{name}</h2>
         <p className="text-md">{stock > 0 ? `$${price}` : '???'}</p>
         <p className="text-xs">[{stock > 0 ? 'available' : 'SUPPLY_LOCKED'}]</p>

@@ -1,12 +1,13 @@
 import { Kode_Mono } from 'next/font/google';
-import "./globals.css";
-import ClientWrapper from "@/app/ClientWrapper";
-import Image from "next/image";
+import './globals.css';
+import ClientWrapper from '@/app/ClientWrapper';
+import Footer from '@/lib/components/Footer';
+import Image from 'next/image';
 
 const kodeMono = Kode_Mono({
-	subsets: ['latin'],
-	weight: ['400', '700'],
-	display: 'swap',
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
 });
 
 export const metadata = {
@@ -24,16 +25,16 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
 	    />
-	  </head>
-        <body
-          className={kodeMono.className + " crt overflow-x-hidden overscroll-none"}
-        >
-          <div className="scanlines"></div>
-          {/* add header code here instead perhaps */}
+      </head>
+      
+      <body className={`${kodeMono.className} crt overflow-x-hidden overscroll-none min-h-screen flex flex-col`}>
+        <div className="scanlines"></div>
+        <main className="flex-grow"> {/*dont know what flew-grow is for and if it works with the footer properly */}
           <ClientWrapper>{children}</ClientWrapper>
-          <div className="scanlines2"></div>
-          
-        </body>
+        </main>
+        <Footer />
+        <div className="scanlines2"></div>
+      </body>
     </html>
   );
 }

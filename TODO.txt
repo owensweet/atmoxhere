@@ -1,5 +1,4 @@
 - background pixel animation stuff or ascii art
-- language toggle
 - sizes?
 - terminal for only first time loading it
 - add colors and sizes onto the database for each entry and add the new ones
@@ -11,7 +10,6 @@
 
 - images loading (can i preload the images?)
 - text offset for the logo
-- try the 3d shit tmrw with the chatgpt instance
 
 - Floating divs for more spaceyness?
 
@@ -21,8 +19,13 @@
 
 - HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos?)
 
-- change gimpedit to webp if lag persists
+- jashin gets an email with order info and shipping info (sandbox check?)
 
+kaomoji thing
+
+
+///////////////////Ranch Changes
+Content on pages (Lore/Manga, About) + making the pages look good
 - how to put the right products at the top and highlight the ones that are dropped!!!!
 
 - ADD SIZES PROPS TO SPEED UP IMAGE LOADING MF
