@@ -6,7 +6,7 @@ export default async function Success({ searchParams }) {
   const { session_id } = await searchParams
 
   if (!session_id) {
-    throw new Error('missing session_id')  
+    throw new Error('missing stripe checkout session_id')  
   }
 
   const session = await stripe.checkout.sessions.retrieve(session_id, {
@@ -17,6 +17,7 @@ export default async function Success({ searchParams }) {
   const customerEmail = session.customer_details?.email
   const lineItems = session.line_items?.data || []
   const productName = lineItems[0]?.description || 'your product'
+  // get shipping details here
 
   if (status === 'open') {
     return redirect('/')
