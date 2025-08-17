@@ -5,6 +5,9 @@
 - better card border shape
 - basic crud app to add products
 
+- mouse circle bugged on agora_market (covered by footer mt?)
+-
+
 
 # ISSUES
 
