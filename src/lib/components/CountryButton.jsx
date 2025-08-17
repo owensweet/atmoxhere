@@ -63,7 +63,7 @@ return (
 
       {/* Fullscreen modal */}
       {open && (
-          <div className="fixed inset-0 z-1 bg-black bg-opacity-95 backdrop-blur-sm overflow-y-auto">
+          <div className="fixed inset-0 z-2000 bg-black bg-opacity-95 backdrop-blur-sm overflow-y-auto">
             <div className="min-h-screen relative flex flex-col items-center py-10 px-4">
               {/* X button */}
               <button
