@@ -106,7 +106,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID, shippingC
 
             <div className="relative w-full h-300">
               <Image
-              src="/images/size chart mutant blackstroke thick border.png"
+              src="/images/size chart mutant blackstroke thick border.webp"
               fill
               alt="size chart"
               className="pointer-events-none"
@@ -202,7 +202,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID, shippingC
                       transition transform active:scale-90 duration-100 ease-in-out"
           >
             <Image
-              src="/images/arrow_icon.png"
+              src="/images/arrow_icon.webp"
               alt="Previous"
               width={24}
               height={24}
@@ -218,7 +218,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID, shippingC
                       transition transform active:scale-90 duration-100 ease-in-out"
           >
             <Image
-              src="/images/arrow_icon.png"
+              src="/images/arrow_icon.webp"
               alt="Previous"
               width={24}
               height={24}

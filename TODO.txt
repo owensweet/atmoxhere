@@ -2,7 +2,6 @@
 - sizes?
 - terminal for only first time loading it
 - add colors and sizes onto the database for each entry and add the new ones
-- better card border shape
 - basic crud app to add products
 
 - mouse circle bugged on agora_market (covered by footer mt?)
@@ -11,10 +10,11 @@
 
 # ISSUES
 
-- images loading (can i preload the images?)
+- fix the size guide image or make it better idk
+
 - text offset for the logo
 
-- Floating divs for more spaceyness?
+- Floating divs for more spaceyness? (can be done with framer but possible performance hit)
 
 - Make sure stripe post and get requests are secure (maybe csrf token?)
 
@@ -24,7 +24,7 @@
 
 - jashin gets an email with order info and shipping info (sandbox check?)
 
-kaomoji thing
+- how to put the right products at the top and highlight the ones that are dropped!!!!
 
 
 ///////////////////Ranch Changes

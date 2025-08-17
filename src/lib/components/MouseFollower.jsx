@@ -112,14 +112,14 @@ export default function MouseFollower() {
       }`}
     >
         <Image
-            src={`/images/test2.png`}
+            src={`/images/test2.webp`}
             alt="test2"
             width={180}
             height={180}
             className="absolute inset-0 animate-[spin_4s_linear_infinite] brightness-125 drop-shadow-[0_0_10px_rgba(0,200,90,0.6)] pointer-events-none"
         />
         <Image
-            src={`/images/test1.png`}
+            src={`/images/test1.webp`}
             alt="test1"
             width={60}
             height={60}
