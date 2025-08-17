@@ -63,7 +63,7 @@ function RotatingLinks() {
   // Preload texture once
   const borderTexture = useMemo(() => {
     const loader = new THREE.TextureLoader()
-    const tex = loader.load('/images/borders/border3.webp')
+    const tex = loader.load('/images/Borders/border3.webp')
     tex.colorSpace = THREE.SRGBColorSpace
     return tex
   }, [])
