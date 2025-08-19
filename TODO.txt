@@ -1,11 +1,11 @@
 - background pixel animation stuff or ascii art
 - sizes?
-- terminal for only first time loading it
 - add colors and sizes onto the database for each entry and add the new ones
 - basic crud app to add products
 
 - mouse circle bugged on agora_market (covered by footer mt?)
--
+
+- finalize footer (finish links and blur and remove redundancy)
 
 
 # ISSUES

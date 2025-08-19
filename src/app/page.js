@@ -150,6 +150,8 @@ export default function ShopHome() {
             enablePan={false}
             autoRotate
             autoRotateSpeed={0.5}
+            minPolarAngle={Math.PI / 3}
+            maxPolarAngle={Math.PI / 3}
           />
         </Canvas>
       </div>
