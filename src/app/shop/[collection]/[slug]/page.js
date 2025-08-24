@@ -8,118 +8,126 @@
   import { ShoppingCartIcon } from '@heroicons/react/24/solid';
 
   export default function Info() {
-      const searchParams = useSearchParams();
-      const params = useParams();
-      const firebase = new Firestore();
-      const [product, setProduct] = useState()
-      const [shippingCountry, setShippingCountry] = useState(localStorage.getItem("shipping_country") || '');
-      
-      const canceled = searchParams.get('canceled');
+  const searchParams = useSearchParams();
+  const params = useParams();
+  const firebase = new Firestore();
+  const [product, setProduct] = useState(null);
+  const [shippingCountry, setShippingCountry] = useState('');
 
-      useEffect(() => {
-        if (canceled) {
-          console.log('Order Canceled -- you are returned to the page, checkout when ready')
-        }
-      }, [canceled]);
-        
-      useEffect(() => {
-          const fetchData = async () => {
-            const data = await firebase.getProductByName(params.slug);
+  const canceled = searchParams.get('canceled');
 
-            if (data) {
-              setProduct(data);
-            } else {
-              console.log("No matching product found for slug:", params.slug);
-            }
-          };
-      
-          fetchData();
-        }, [])
-
-
-        useEffect(() => {
-          const handleStorageChange = () => {
-            const country = localStorage.getItem("shipping_country") || '';
-            setShippingCountry(country);
-          };
-
-          window.addEventListener("storage", handleStorageChange);
-          return () => window.removeEventListener("storage", handleStorageChange);
-        }, []);
-
-      return (
-          <div>
-            {product ? (
-              <ProductInfo 
-                name={product.name}
-                slug={product.slug}
-                description={product.description}
-                price={product.priceUSD}
-                stock={product.stock}
-                priceID={product.priceID}
-                shippingCountry={shippingCountry}
-              />
-            ) : (
-              <p className="text-center mt-10 text-gray-500">Loading product...</p>
-            )}
-          </div>
-            )
-  }
-
-  function ProductInfo({ name, slug, description, price, stock, priceID, shippingCountry }) {
-    const [showError, setShowError] = useState(false)
-      return (
-        <div className="pt-0">
-          <BackButton />
-          <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">ATMOXHERE SHOP</h1>
-          <hr className="border-t-2 my-4 mx-auto w-3/4 py-3" />
-          <div className="flex flex-col overflow-hidden w-full h-300 text-center py-0 px-10 gap-5">
-              <ImageGallery slug={slug} />
-              <h1 className="text-4xl">{name}</h1>
-              <p className="text-center text-gray-400">{description}</p>
-              <h3 className="text-xl">${price} USD</h3>
-
-              {/* Only show purchase button is stock is available */}
-              { stock > 0 && (<form action="/api/checkout_sessions" method="POST"
-              onSubmit={(e) => {
-                const country = localStorage.getItem("shipping_country");
-                if(!country)
-                  {
-                    e.preventDefault();
-                    setShowError(true);
-                  }
-              }}>
-                <input type="hidden" name="priceID" value={priceID} />
-                <input type='hidden' name="shippingCountry" value={shippingCountry} />
-                <button 
-                  type="submit" 
-                  role="link"
-                  className='appearance-none outline-none rounded-lg text-center bg-black w-40 mx-auto h-10 items-center flex justify-center
-                            transition transform active:scale-95 duration-100 ease-in-out'>
-                  <p className='crt'>Purchase</p> <ShoppingCartIcon className="w-5 h-5 mx-2" />
-                </button>
-
-                {showError && (
-                  <p className="text-red-600 text-md mt-2 text-center">
-                    Select your shipping country first
-                  </p>
-                )}
-              </form>)}
-              <p>[{stock > 0 ? "available" : "SUPPLY_LOCKED] [dropping soon"}]</p>
-
-              <div className="relative w-full h-300">
-                <Image
-                src="/images/size chart mutant blackstroke thick border.webp"
-                fill
-                alt="size chart"
-                className="pointer-events-none"
-                
-                />
-              </div>
-          </div>
-        </div>
-      );
+  // Log canceled orders
+  useEffect(() => {
+    if (canceled) {
+      console.log('Order Canceled -- you are returned to the page, checkout when ready');
     }
+  }, [canceled]);
+
+  // Fetch product data
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await firebase.getProductByName(params.slug);
+      if (data) setProduct(data);
+      else console.log("No matching product found for slug:", params.slug);
+    };
+    fetchData();
+  }, [params.slug]);
+
+  // Keep shipping country in sync with localStorage
+  useEffect(() => {
+    const storedCountry = localStorage.getItem("shipping_country") || '';
+    setShippingCountry(storedCountry);
+
+    const handleStorageChange = () => {
+      const updated = localStorage.getItem("shipping_country") || '';
+      setShippingCountry(updated);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  return (
+    <div>
+      {product ? (
+        <ProductInfo
+          name={product.name}
+          slug={product.slug}
+          description={product.description}
+          price={product.priceUSD}
+          stock={product.stock}
+          priceID={product.priceID}
+          shippingCountry={shippingCountry}
+        />
+      ) : (
+        <p className="text-center mt-10 text-gray-500">Loading product...</p>
+      )}
+    </div>
+  );
+}
+
+function ProductInfo({ name, slug, description, price, stock, priceID, shippingCountry }) {
+  const [showError, setShowError] = useState(false);
+
+  const handleSubmit = (e) => {
+    if (!shippingCountry) {
+      e.preventDefault();
+      setShowError(true);
+    }
+  };
+
+  return (
+    <div className="pt-0">
+      <BackButton />
+      <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">ATMOXHERE SHOP</h1>
+      <hr className="border-t-2 my-4 mx-auto w-3/4 py-3" />
+      <div className="flex flex-col overflow-hidden w-full h-300 text-center py-0 px-10 gap-5">
+        <ImageGallery slug={slug} />
+        <h1 className="text-4xl">{name}</h1>
+        <p className="text-center text-gray-400">{description}</p>
+        <h3 className="text-xl">${price} USD</h3>
+
+        {stock > 0 && (
+          <form 
+            action="/api/checkout_sessions" 
+            method="POST"
+            onSubmit={handleSubmit}
+          >
+            <input type="hidden" name="priceID" value={priceID} />
+            <input type="hidden" name="shippingCountry" value={shippingCountry} />
+
+            <button 
+              type="submit" 
+              role="link"
+              className='appearance-none outline-none rounded-lg text-center bg-black w-40 mx-auto h-10 items-center flex justify-center
+                        transition transform active:scale-95 duration-100 ease-in-out'
+            >
+              <p className='crt'>Purchase</p>
+              <ShoppingCartIcon className="w-5 h-5 mx-2" />
+            </button>
+
+            {showError && (
+              <p className="text-red-600 text-md mt-2 text-center">
+                Select your shipping country first
+              </p>
+            )}
+          </form>
+        )}
+        <p>[{stock > 0 ? "available" : "SUPPLY_LOCKED] [dropping soon"}]</p>
+
+        <div className="relative w-full h-300">
+          <Image
+            src="/images/size chart mutant blackstroke thick border.webp"
+            fill
+            alt="size chart"
+            className="pointer-events-none"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
     
     function ImageGallery({ slug }) {
       const [images, setImages] = useState([]);
