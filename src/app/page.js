@@ -3,6 +3,7 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Text, Line } from '@react-three/drei'
 import { useRef, useMemo, useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useSprings, a } from '@react-spring/three' 
 import * as THREE from 'three'
 import { Edges } from '@react-three/drei'
@@ -172,7 +173,7 @@ function RotatingLinks() {
 
   // Billboarding + distance-based fade (for image) and shrink (for border)
   useFrame(() => {
-    const threshold = 5
+    const threshold = 4.5
     const lerpSpeed = 0.08
 
     groupRefs.current.forEach((ref, i) => {
@@ -290,12 +291,42 @@ function WireframeSphere() {
   )
 }
 
+function SwipeHint ({ hasSwiped }) {
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    if (hasSwiped) {
+      setVisible(false)
+      return
+    }
+
+    const interval = setInterval(() => {
+      setVisible((v) => !v) // Toggle on and off
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [hasSwiped])
+
+  return (
+    <img
+      src="/swipe_icon.svg"
+      alt="Swipe"
+      className={`absolute left-1/2 -translate-x-1/2 transition-all duration-700
+        ${visible ? 'opacity-100 translate-x-0' : '-translate-x-10 opacity-0'}`}
+      style={{ bottom: '-60px', width: '70px', height: '70px' }}
+    />
+  )
+}
+
 export default function ShopHome() {
+
+  const [hasSwiped, setHasSwiped] = useState(false)
+
   return (
     <div className="w-screen h-screen text-white flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-4">ATMOXHERE SHOP</h1>
-      <div className="w-full h-[500px]">
-        <Canvas camera={{ position: [0, 2, 5.5] }}>
+      <h1 className="text-5xl font-bold mb-4">atmoxhere.</h1>
+      <div className="w-full h-[500px] relative">
+        <Canvas camera={{ position: [0, 2, 5.5] }} onPointerDown={() => setHasSwiped(true)}>
           <ambientLight intensity={0.5} />
           <WireframeSphere />
           <RotatingLinks />
@@ -308,6 +339,8 @@ export default function ShopHome() {
             maxPolarAngle={Math.PI / 3}
           />
         </Canvas>
+        <SwipeHint hasSwiped={hasSwiped} />
+
       </div>
     </div>
   )
