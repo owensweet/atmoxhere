@@ -48,7 +48,7 @@
                 price={product.priceUSD}
                 stock={product.stock}
                 priceID={product.priceID}
-                shippingCountry={shippingCountry}
+                shippingCountry={country}
               />
             ) : (
               <p className="text-center mt-10 text-gray-500">Loading product...</p>
