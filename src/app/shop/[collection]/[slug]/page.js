@@ -12,6 +12,7 @@
       const params = useParams();
       const firebase = new Firestore();
       const [product, setProduct] = useState()
+      const [shippingCountry, setShippingCountry] = useState(localStorage.getItem("shipping_country") || '');
       
       const canceled = searchParams.get('canceled');
 
@@ -36,7 +37,15 @@
         }, [])
 
 
-        const country = localStorage.getItem("shipping_country");
+        useEffect(() => {
+          const handleStorageChange = () => {
+            const country = localStorage.getItem("shipping_country") || '';
+            setShippingCountry(country);
+          };
+
+          window.addEventListener("storage", handleStorageChange);
+          return () => window.removeEventListener("storage", handleStorageChange);
+        }, []);
 
       return (
           <div>
@@ -48,7 +57,7 @@
                 price={product.priceUSD}
                 stock={product.stock}
                 priceID={product.priceID}
-                shippingCountry={country}
+                shippingCountry={shippingCountry}
               />
             ) : (
               <p className="text-center mt-10 text-gray-500">Loading product...</p>
@@ -81,7 +90,7 @@
                   }
               }}>
                 <input type="hidden" name="priceID" value={priceID} />
-                <input type='hidden' name="shippingCountry" value={localStorage.getItem("shipping_country") || ''} />
+                <input type='hidden' name="shippingCountry" value={shippingCountry} />
                 <button 
                   type="submit" 
                   role="link"
