@@ -12,7 +12,6 @@
       const params = useParams();
       const firebase = new Firestore();
       const [product, setProduct] = useState()
-      const [shippingCountry, setShippingCountry] = useState(null);
       
       const canceled = searchParams.get('canceled');
 
@@ -37,10 +36,7 @@
         }, [])
 
 
-        useEffect(() => {
-          const country = localStorage.getItem("shipping_country");
-          setShippingCountry(country);
-        }, []);
+        const country = localStorage.getItem("shipping_country");
 
       return (
           <div>
@@ -85,7 +81,7 @@
                   }
               }}>
                 <input type="hidden" name="priceID" value={priceID} />
-                <input type='hidden' name="shippingCountry" value={shippingCountry || ''} />
+                <input type='hidden' name="shippingCountry" value={localStorage.getItem("shipping_country") || ''} />
                 <button 
                   type="submit" 
                   role="link"
