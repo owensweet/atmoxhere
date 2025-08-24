@@ -38,7 +38,7 @@ export async function POST(request) {
         const shippingCountry = formData.get('shippingCountry')
 
         if (!priceID) {
-            return NextResponse.json({ error: 'Missing priceID' }, { status: 400 });
+            return NextResponse.json({ error: `Missing priceID`}, { status: 400 });
         }
 
         const shippingPriceUSD = SHIPPING_RATES[shippingCountry]
@@ -92,7 +92,8 @@ export async function POST(request) {
             }],
             line_items: [
                 {
-                    price: priceID,
+                    //change back to priceID after localstorage debug
+                    price: shippingCountry,
                     quantity: 1,
                 },
             ],

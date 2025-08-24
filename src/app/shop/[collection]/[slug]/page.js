@@ -2,7 +2,7 @@
   import Firestore from '@/lib/firebase/Firestore';
   import { useParams, useSearchParams } from 'next/navigation';
   import Image from 'next/image';
-  import { useState, useEffect } from 'react'; 
+  import { useState, useEffect, useRef } from 'react'; 
   import { BackButton } from '@/lib/backButton/backbutton';
   import '@/styles/globals.css';
   import { ShoppingCartIcon } from '@heroicons/react/24/solid';
@@ -12,7 +12,6 @@
   const params = useParams();
   const firebase = new Firestore();
   const [product, setProduct] = useState(null);
-  const [shippingCountry, setShippingCountry] = useState('');
 
   const canceled = searchParams.get('canceled');
 
@@ -33,20 +32,6 @@
     fetchData();
   }, [params.slug]);
 
-  // Keep shipping country in sync with localStorage
-  useEffect(() => {
-    const storedCountry = localStorage.getItem("shipping_country") || '';
-    setShippingCountry(storedCountry);
-
-    const handleStorageChange = () => {
-      const updated = localStorage.getItem("shipping_country") || '';
-      setShippingCountry(updated);
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
-
   return (
     <div>
       {product ? (
@@ -57,7 +42,6 @@
           price={product.priceUSD}
           stock={product.stock}
           priceID={product.priceID}
-          shippingCountry={shippingCountry}
         />
       ) : (
         <p className="text-center mt-10 text-gray-500">Loading product...</p>
@@ -66,14 +50,26 @@
   );
 }
 
-function ProductInfo({ name, slug, description, price, stock, priceID, shippingCountry }) {
+function ProductInfo({ name, slug, description, price, stock, priceID }) {
   const [showError, setShowError] = useState(false);
+  const shippingInputRef = useRef(null)
 
   const handleSubmit = (e) => {
-    if (!shippingCountry) {
+    const currentCountry = localStorage.getItem("shipping_country") || '';
+
+    if (!currentCountry) {
       e.preventDefault();
       setShowError(true);
+      console.log("Form blocked: shipping_country not set");
+      return;
     }
+
+    // Update the hidden input right before submission
+    if (shippingInputRef.current) {
+      shippingInputRef.current.value = currentCountry;
+    }
+
+    console.log("Submitting form with shippingCountry:", currentCountry);
   };
 
   return (
@@ -94,7 +90,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID, shippingC
             onSubmit={handleSubmit}
           >
             <input type="hidden" name="priceID" value={priceID} />
-            <input type="hidden" name="shippingCountry" value={shippingCountry} />
+            <input type="hidden" name="shippingCountry" ref={shippingInputRef} />
 
             <button 
               type="submit" 
