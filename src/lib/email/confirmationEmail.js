@@ -42,4 +42,6 @@ export async function confirmationEmail({ to, productName }) {
     })
 }
 
-export async function jashinEmail{{}}
+export async function jashinEmail({}) {
+    
+}
