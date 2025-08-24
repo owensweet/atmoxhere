@@ -35,7 +35,13 @@ export default function Info() {
         fetchData();
       }, [])
 
-      const shippingCountry = localStorage.getItem("shipping_country")
+      const [shippingCountry, setShippingCountry] = useState(null);
+
+      useEffect(() => {
+        // this only runs in the browser
+        const country = localStorage.getItem("shipping_country");
+        setShippingCountry(country);
+      }, []);
 
     return (
         <div>

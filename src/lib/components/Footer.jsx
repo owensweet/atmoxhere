@@ -134,13 +134,13 @@ export default function Footer() {
           </p>
           
           <div className="flex space-x-6 text-sm">
-            <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors duration-300">
+            <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors duration-300">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-gray-400 hover:text-white transition-colors duration-300">
+            <Link href="/terms" className="text-gray-300 hover:text-white transition-colors duration-300">
               Terms of Service
             </Link>
-            <Link href="/shipping" className="text-gray-400 hover:text-white transition-colors duration-300">
+            <Link href="/shipping" className="text-gray-300 hover:text-white transition-colors duration-300">
               Shipping Info
             </Link>
           </div>

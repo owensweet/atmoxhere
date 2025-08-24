@@ -43,6 +43,7 @@ export default function CountrySelectButton({ onCountrySelect }) {
   const handleSelect = (code) => {
     setSelected(code);
     localStorage.setItem("shipping_country", code);
+    console.log("selected country: ", code)
     onCountrySelect(code);
     setOpen(false);
   };
