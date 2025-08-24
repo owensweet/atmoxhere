@@ -1,8 +1,9 @@
 'use client'
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, Text } from '@react-three/drei'
+import { OrbitControls, Text, Line } from '@react-three/drei'
 import { useRef, useMemo, useState, useEffect } from 'react'
+import { useSprings, a } from '@react-spring/three' 
 import * as THREE from 'three'
 import { Edges } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
@@ -54,13 +55,114 @@ const spotlightImages = {
   ]
 }
 
+function ConnectingLines({ linkPositions, sphereRadius = 1.3 }) {
+  const lineRefs = useRef([])
+
+  const lineData = useMemo(() => {
+    return linkPositions.map((linkPos, index) => {
+      // Calculate the point on the sphere's surface closest to the link
+      const linkVector = new THREE.Vector3(linkPos.x, linkPos.y, linkPos.z)
+      const spherePoint = linkVector.clone().normalize().multiplyScalar(sphereRadius)
+      const startPoint = new THREE.Vector3(0, -sphereRadius, 0)
+      
+      // Create 2D angular path: down -> straight -> up
+      // Point 1: Go down from sphere
+      const downPoint = new THREE.Vector3(
+        spherePoint.x,
+        spherePoint.y - 2.5, // Go down
+        spherePoint.z
+      )
+      
+      // Point 2: Move horizontally towards link while staying low
+      const straightPoint = new THREE.Vector3(
+        linkPos.x,
+        spherePoint.y - 1.8, // Stay at same low height
+        linkPos.z
+      )
+      
+      // Point 3: Go up to link position
+      const linkPoint = new THREE.Vector3(linkPos.x, linkPos.y - 1, linkPos.z)
+
+      return {
+        points: [startPoint, downPoint, straightPoint, linkPoint],
+        color: "white"
+      }
+    })
+  }, [linkPositions, sphereRadius])
+
+  return (
+    <>
+      {lineData.map((line, index) => (
+        <Line
+          key={index}
+          points={line.points}
+          color={line.color}
+          lineWidth={2}
+          // transparent
+          opacity={0.8}
+        />
+      ))}
+    </>
+  )
+}
+
 function RotatingLinks() {
   const radius = 2.5
   const groupRefs = useRef([])
+  const borderRefs = useRef([])
+  const imageRefs = useRef([])
   const { camera } = useThree()
   const router = useRouter()
 
-  // Preload texture once
+  // Track current spotlight image index for each collection
+  const [currentIndices, setCurrentIndices] = useState(
+    collections.reduce((acc, name) => {
+      acc[name] = 0
+      return acc
+    }, {})
+  )
+
+  // Preload spotlight textures once
+  const spotlightTextures = useMemo(() => {
+    const loader = new THREE.TextureLoader()
+    const loaded = {}
+    for (const name of collections) {
+      loaded[name] = spotlightImages[name].map((path) => {
+        const tex = loader.load(path)
+        tex.colorSpace = THREE.SRGBColorSpace
+        return tex
+      })
+    }
+    return loaded
+  }, [])
+
+  // Image open/close animation
+  const [springs, api] = useSprings(collections.length, () => ({
+    scaleY: 1,
+    config: { duration: 800 },
+  }))
+
+  // Cycle images
+  useEffect(() => {
+    const intervals = collections.map((name, index) => {
+      return setInterval(() => {
+        setCurrentIndices((prev) => {
+          const next = (prev[name] + 1) % spotlightTextures[name].length
+          return { ...prev, [name]: next }
+        })
+
+        // animate scaleY "closing then opening"
+        api.start((i) =>
+          i === index
+            ? [{ scaleY: 0 }, { scaleY: 1 }]
+            : {}
+        )
+      }, 3000 + index * 400)
+    })
+    return () => intervals.forEach(clearInterval)
+  }, [spotlightTextures, api])
+
+  // Border texture
   const borderTexture = useMemo(() => {
     const loader = new THREE.TextureLoader()
     const tex = loader.load('/images/Borders/border3.webp')
@@ -68,21 +170,59 @@ function RotatingLinks() {
     return tex
   }, [])
 
+  // Billboarding + distance-based fade (for image) and shrink (for border)
   useFrame(() => {
-    groupRefs.current.forEach((ref) => {
-      if (ref) {
-        ref.lookAt(camera.position)
+    const threshold = 5
+    const lerpSpeed = 0.08
+
+    groupRefs.current.forEach((ref, i) => {
+      if (!ref) return
+      ref.lookAt(camera.position)
+
+      const dist = camera.position.distanceTo(ref.position)
+      const targetFade = dist > threshold ? 0 : 1
+      const targetBorderY = dist > threshold ? 0.4 : 1
+
+      // Smooth fade for image opacity
+      const image = imageRefs.current[i]
+      if (image) {
+        if (!image.userData.fade) image.userData.fade = 1
+        image.userData.fade = THREE.MathUtils.lerp(
+          image.userData.fade,
+          targetFade,
+          lerpSpeed
+        )
+        image.material.opacity = image.userData.fade
+      }
+
+      // Smooth shrink for border Y
+      const border = borderRefs.current[i]
+      if (border) {
+        border.scale.y = THREE.MathUtils.lerp(
+          border.scale.y,
+          targetBorderY,
+          lerpSpeed
+        )
       }
     })
   })
 
+  // Link positions
+  const linkPositions = useMemo(() => {
+    return collections.map((_, index) => {
+      const angle = (index / collections.length) * Math.PI * 2
+      return { x: radius * Math.cos(angle), y: 0, z: radius * Math.sin(angle) }
+    })
+  }, [radius])
+
   return (
     <>
+      <ConnectingLines linkPositions={linkPositions} />
+
       {collections.map((name, index) => {
-        const angle = (index / collections.length) * Math.PI * 2
-        const x = radius * Math.cos(angle)
-        const z = radius * Math.sin(angle)
-        const y = 0
+        const { x, y, z } = linkPositions[index]
+        const texArray = spotlightTextures[name]
+        const currentTex = texArray[currentIndices[name]]
 
         return (
           <group
@@ -90,23 +230,35 @@ function RotatingLinks() {
             position={[x, y, z]}
             ref={(el) => (groupRefs.current[index] = el)}
           >
-            {/* Border image as plane */}
-            <mesh
-              onClick={() => router.push(`/shop/${name}`)}
-              onPointerOver={(e) => (document.body.style.cursor = 'pointer')}
-              onPointerOut={(e) => (document.body.style.cursor = 'default')}
+            {/* Spotlight image */}
+            <a.mesh
+              scale-y={springs[index].scaleY}
+              ref={(el) => (imageRefs.current[index] = el)}
             >
-              <planeGeometry args={[2.2, 1.6]} />
+              <planeGeometry args={[2.2, 2.2]} />
+              <a.meshBasicMaterial
+                map={currentTex}
+                transparent
+                opacity={1} // controlled by useFrame fade
+              />
+            </a.mesh>
+
+            {/* Border overlay */}
+            <mesh
+              position={[0, 0, 0.01]}
+              ref={(el) => (borderRefs.current[index] = el)}
+            >
+              <planeGeometry args={[2.3, 2.3]} />
               <meshBasicMaterial
                 map={borderTexture}
                 transparent
-                color={colors[name] || "white"}
+                color={'white'}
               />
             </mesh>
 
             {/* Text label */}
             <Text
-              position={[0, 0, 0.01]} // tiny offset so it doesn't z-fight with the plane
+              position={[0, 0, 0.02]}
               fontSize={0.2}
               fontWeight={700}
               font="/fonts/Kode_Mono/static/KodeMono-Bold.ttf"
@@ -126,11 +278,13 @@ function RotatingLinks() {
   )
 }
 
+
+
 function WireframeSphere() {
   return (
     <mesh>
-      <sphereGeometry args={[1.6, 10, 10]} />
-      <meshBasicMaterial color="white" wireframe />
+      <sphereGeometry args={[1.3, 10, 10]} />
+      <meshBasicMaterial color="white" wireframe/>
       <Edges scale={1.01} threshold={15} color="white" />
     </mesh>
   )

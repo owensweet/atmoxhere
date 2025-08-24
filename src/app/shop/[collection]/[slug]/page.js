@@ -7,13 +7,6 @@ import { BackButton } from '@/lib/backButton/backbutton';
 import '@/styles/globals.css';
 import { ShoppingCartIcon } from '@heroicons/react/24/solid';
 
-
-// class Product {
-//     constructor(name, slug, description, priceUSD, collection, stock) {
-
-//     }
-// }
-
 export default function Info() {
     const searchParams = useSearchParams();
     const params = useParams();
