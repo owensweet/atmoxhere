@@ -92,8 +92,7 @@ export async function POST(request) {
             }],
             line_items: [
                 {
-                    //change back to priceID after localstorage debug
-                    price: shippingCountry,
+                    price: priceID,
                     quantity: 1,
                 },
             ],
