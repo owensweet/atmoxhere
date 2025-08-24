@@ -323,8 +323,8 @@ export default function ShopHome() {
   const [hasSwiped, setHasSwiped] = useState(false)
 
   return (
-    <div className="w-screen h-screen text-white flex flex-col items-center justify-center">
-      <h1 className="text-5xl font-bold mb-4">atmoxhere.</h1>
+    <div className="w-screen h-screen text-white flex flex-col items-center justify-start">
+      <h1 className="text-5xl font-bold mb-2">atmoxhere.</h1>
       <div className="w-full h-[500px] relative">
         <Canvas camera={{ position: [0, 2, 5.5] }} onPointerDown={() => setHasSwiped(true)}>
           <ambientLight intensity={0.5} />

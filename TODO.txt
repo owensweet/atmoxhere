@@ -7,7 +7,6 @@
 
 - finalize footer (finish links and blur and remove redundancy)
 
-images only show when closest to the camera?::?
 # ISSUES
 
 - fix the size guide image or make it better idk
