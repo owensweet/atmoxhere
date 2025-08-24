@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 import '@/styles/globals.css'
 import '@/app/globals.css'
 
-const collections = [
+export const collections = [
   'mutant',
   'tsiri_synthesis',
   'termite',

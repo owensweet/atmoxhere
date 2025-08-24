@@ -12,7 +12,7 @@ export default function ClientWrapper({ children }) {
   }
 
   return (
-    <div className='overscroll-none overflow-y-scroll'>
+    <div className='overscroll-none hide-scrollbar'>
       <div className="fixed top-0 right-0 h-full w-[50%] z-[-10] pointer-events-none">
         <Image
           src="/images/gimpedit 3.webp"

@@ -160,4 +160,14 @@
   animation: reverse-spin 4s linear infinite;
 }
 
+.hide-scrollbar {
+  overflow-y: auto; /* or scroll */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 

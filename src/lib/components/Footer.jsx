@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { collections } from '@/app/page.js'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -104,26 +105,24 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4 text-lg">Collections</h3>
             <ul className="space-y-3">
-              <li>
-                <Link href="/shop/mutant" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  Mutant
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop/tsiri_synthesis" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  Tsiri Synthesis
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop/termite" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  Termite
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop/z220x11" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  Z220X11
-                </Link>
-              </li>
+              {collections.map((slug) => {
+                // Convert slug to display name: 'tsiri_synthesis' → 'Tsiri Synthesis'
+                const displayName = slug
+                  .split('_')
+                  .map(word => word[0].toUpperCase() + word.slice(1))
+                  .join(' ');
+
+                return (
+                  <li key={slug}>
+                    <Link
+                      href={`/shop/${slug}`}
+                      className="text-gray-400 hover:text-white transition-colors duration-300"
+                    >
+                      {displayName}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
