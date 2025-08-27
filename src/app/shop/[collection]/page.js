@@ -108,6 +108,7 @@ export function Card({ name, slug, desc, price, stock }) {
         fill
         className="pointer-events-none z-5"
         style={{ transform: 'scale(1.05, 1.05)' }}
+        loading="eager"
       />
 
       {/* CARD IMAGE */}
