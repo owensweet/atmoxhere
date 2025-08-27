@@ -29,8 +29,8 @@ export default function RootLayout({ children }) {
       
       <body className={`${kodeMono.className} crt overflow-x-hidden overscroll-none min-h-screen flex flex-col`}>
         <div className="scanlines"></div>
-        <main className="flex-grow">
-          <ClientWrapper>{children}<div className="h-82 pointer-events-none z-0" /></ClientWrapper>
+        <main className="flex-grow"> {/*dont know what flew-grow is for and if it works with the footer properly */}
+          <ClientWrapper>{children}<div className="h-152 pointer-events-none z-0" /></ClientWrapper>
           
         </main>
         <Footer />
