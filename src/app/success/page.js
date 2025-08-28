@@ -1,9 +1,11 @@
 import { redirect } from 'next/navigation'
 import { stripe } from '@/lib/stripe/stripe.js'
 import { confirmationEmail } from '@/lib/email/confirmationEmail'
+import Firestore from '@/lib/firebase/Firestore';
 
 export default async function Success({ searchParams }) {
   const { session_id } = await searchParams
+  const firebase = new Firestore()
 
   if (!session_id) {
     throw new Error('missing stripe checkout session_id')  
@@ -24,14 +26,30 @@ export default async function Success({ searchParams }) {
   }
 
   if (status === 'complete' && customerEmail) {
+    const orderData = {
+      customerEmail,
+      sessionID: session.id,
+      amountTotal: session.amount_total,
+      currency: session.currency,
+      lineItems: lineItems.map((item) => ({
+        name: item.description,
+        quantity: item.quantity,
+        price: item.price?.unit_amount,
+        currency: item.price?.currency,
+      })),
+      shipping: session.customer_details?.address || null,
+      paymentStatus: session.payment_status,
+  };
+
+    await firebase.addOrder(orderData)
+    
     await confirmationEmail({
-        to: customerEmail,
-        productName: productName,
+      to: customerEmail,
+      productName: productName,
     })
     // await jashinEmail({
-        // to: customerEmail,   // going to need customer info, order info, shipping stuff, size, color all that
-    // })
-
+      // to: customerEmail,   // going to need customer info, order info, shipping stuff, size, color all that
+      // })
 
     return (
       <section id="success">
