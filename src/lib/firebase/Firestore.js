@@ -1,5 +1,6 @@
+import { Truculenta } from 'next/font/google';
 import { db } from './config';
-import { collection, getDocs, addDoc, query, where, limit } from 'firebase/firestore'
+import { collection, getDocs, addDoc, query, where, limit, updateDoc, doc } from 'firebase/firestore'
 
 class Firestore {
     constructor() {
@@ -73,6 +74,21 @@ class Firestore {
             return docRef.id;
         } catch (error) {
             console.error('Error adding product:', error);
+            throw error;
+        }
+    }
+
+    // Update product
+    async updateProduct(id, updates) {
+        try {
+            const docRef = doc(this.productsCollection, id)
+            await updateDoc(docRef, {
+                ...updates,
+                updatedAt: new Date()
+            });
+            return true;
+        } catch (err) {
+            console.error('Error updating product:', err);
             throw error;
         }
     }
