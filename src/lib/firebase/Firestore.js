@@ -1,30 +1,95 @@
 import { db } from './config';
-import { collection, getDocs, addDoc } from 'firebase/firestore'
+import { collection, getDocs, addDoc, query, where, limit } from 'firebase/firestore'
 
 class Firestore {
     constructor() {
         this.productsCollection = collection(db, 'products');
-        this.ordersCollections = collection(db, 'orders');
+        this.ordersCollection = collection(db, 'orders');
     }
 
     async getAllProducts() {
-        const snapshot =  await getDocs(this.productsCollection);
-        return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        try {
+            const snapshot = await getDocs(this.productsCollection);
+            return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        } catch (error) {
+            console.error('Error fetching all products:', error);
+            throw error;
+        }
     }
 
     async getAllOrders() {
-        const snapshot = await getDocs(this.ordersCollection);
-        return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        try {
+            const snapshot = await getDocs(this.ordersCollection);
+            return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        } catch (error) {
+            console.error('Error fetching all orders:', error);
+            throw error;
+        }
     }
 
-    async getProductByName(slug) {
-        const snapshot = await getDocs(this.productsCollection);
-        const product = snapshot.docs.find(doc => doc.data().slug === slug);
-        return product ? {id: product.id, ...product.data() } : null;
+    // Use query to search
+    async getProductBySlug(slug) {
+        try {
+            const q = query(
+                this.productsCollection,
+                where('slug', '==', slug),
+                limit(1)
+            );
+            const snapshot = await getDocs(q);
+            
+            if (snapshot.empty) {
+                return null;
+            }
+            
+            return { id: snapshot.docs[0].id, ...snapshot.docs[0].data() };
+        } catch (error) {
+            console.error('Error fetching product by slug:', error);
+            throw error;
+        }
     }
 
-    //other crud methods add here
-    //filtered product methods could go here (filter using params?)
+    // Get all products from a specific collection
+    async getProductsByCollection(collection) {
+        try {
+            const q = query(
+                this.productsCollection,
+                where('collection', '==', collection)
+            );
+            const snapshot = await getDocs(q);
+            return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        } catch (error) {
+            console.error('Error fetching products by collection:', error);
+            throw error;
+        }
+    }
+
+    // Add product
+    async addProduct(productData) {
+        try {
+            const docRef = await addDoc(this.productsCollection, {
+                ...productData,
+                createdAt: new Date()
+            });
+            return docRef.id;
+        } catch (error) {
+            console.error('Error adding product:', error);
+            throw error;
+        }
+    }
+
+    // Add order
+    async addOrder(orderData) {
+        try {
+            const docRef = await addDoc(this.ordersCollection, {
+                ...orderData,
+                createdAt: new Date()
+            });
+            return docRef.id;
+        } catch (error) {
+            console.error('Error adding order:', error);
+            throw error;
+        }
+    }
 }
 
-export default Firestore
+export default Firestore;

@@ -25,7 +25,7 @@
   // Fetch product data
   useEffect(() => {
     const fetchData = async () => {
-      const data = await firebase.getProductByName(params.slug);
+      const data = await firebase.getProductBySlug(params.slug);
       if (data) setProduct(data);
       else console.log("No matching product found for slug:", params.slug);
     };

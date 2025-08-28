@@ -15,6 +15,8 @@ export default function CollectionPage() {
   const params = useParams();
   const [products, setProducts] = useState([]);
   const firestore = new Firestore();
+  const [loading, setLoading] = useState(true);
+  
 
   const charLength = 12000;
   const [chars, setChars] = useState('');
@@ -22,25 +24,28 @@ export default function CollectionPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await firestore.getAllProducts();
-      setProducts(data);
+      try {
+        setLoading(true);
+        let data;
+        let collection = params.collection
+        if (collection == 'all') {
+          data = await firestore.getAllProducts();
+        } else {
+          data = await firestore.getProductsByCollection(collection)
+        }
+        data.sort((a, b) => b.stock - a.stock)
+        setProducts(data);
+      } catch (err) {
+        console.log("Error getting products from firestore")
+      } finally {
+        setLoading(false)
+      }
     };
 
     fetchData();
-  }, [])
+  }, [params.collection])
 
-  let filtered = [];
-
-  if (params.collection === 'all')
-  {
-    filtered = products
-  } else
-  {
-    filtered = products.filter((product) => product.collection === params.collection)
-  }
-
-  filtered.sort((a, b) => b.stock - a.stock)
-
+  // For matrix effect
   useEffect(() => {
     const generateChars = () => {
       let result = '';
@@ -74,16 +79,16 @@ export default function CollectionPage() {
       <h1 className="text-4xl flex items-center justify-center mt-0 font-extrabold py-0">{ params.collection }</h1>
       <hr className="border-t-2 my-4 mx-auto w-3/4 py-7" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-8">
-        {filtered.map(product => (
-          <Card
-            key={product.id}
-            name={product.name}
-            slug={product.slug}
-            desc={product.description}
-            price={product.priceUSD}
-            stock={product.stock}
-          />
-        ))} 
+        {products.map(product => (
+            <Card
+              key={product.id}
+              name={product.name}
+              slug={product.slug}
+              desc={product.description}
+              price={product.priceUSD}
+              stock={product.stock}
+            />
+          ))}
       </div>
     </div>
   );
