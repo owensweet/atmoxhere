@@ -5,13 +5,22 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <section className="min-h-screen bg-black text-white py-16 px-8">
-      <h1 className="text-4xl font-bold mb-4">About Atmoxhere</h1>
-      <p className="text-gray-300 max-w-xl leading-relaxed">
-        All items are manufactured on the AXH Space Station just outside the Serran Quadrant, our locations on Earth move around from country to country so the shipping is always calculated in checkout. See the vision through our clothing, join us on the mission, join ATMOXHERE.
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontWeight: '1000' }}>About Atmoxhere</h1>
 
-        For any questions about shipping, washing, or general inquires contact our earth support agents at atmoxhere@gmail.com
-      </p>
-    </section>
+        <div style={{ lineHeight: '1.6', fontSize: '1.1rem' }}>
+          <p style={{ marginBottom: '1.5rem' }}>
+            All items are manufactured on the AXH Space Station just outside the Serran Quadrant, our locations on Earth move around from country to country so the shipping is always calculated in checkout. See the vision through our clothing, join us on the mission, join ATMOXHERE
+          </p>
+
+          <p style={{ marginBottom: '1.5rem' }}>
+
+          </p>
+
+          <p>
+
+          </p>
+        </div>
+    </div>
   );
 }

@@ -27,4 +27,4 @@
 
 
 ///////////////////Ranch Changes
-Content on pages (Lore/Manga, About) + making the pages look good
+Background for pages (Green band / Black part). Center the text nicely. 
