@@ -19,7 +19,7 @@ export default function TermsPage() {
           <p>All clothing items are custom-made and feature unique variations, making each piece one-of-a-kind. Prices are listed in USD and are subject to change without notice. We reserve the right to modify or discontinue products at any time.</p>
           
           <h2 style={{ marginTop: '2rem', marginBottom: '1rem', fontSize: '1.5rem' }}>3. Orders and Payment</h2>
-          <p>All orders are subject to availability and acceptance. Payment must be received in full before order processing begins. We accept major credit cards and other payment methods as displayed at checkout.</p>
+          <p>All orders are subject to availability and acceptance. Payment must be received in full before order processing begins. We accept major credit cards and other payment methods as displayed at checkout. All sales are final. </p>
           
           <h2 style={{ marginTop: '2rem', marginBottom: '1rem', fontSize: '1.5rem' }}>4. Custom Orders</h2>
           <p>Due to the custom nature of our products, all sales are final. Each piece is made to order with slight variations that make them unique. Production time varies but typically ranges from 2-4 weeks.</p>
