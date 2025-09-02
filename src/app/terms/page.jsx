@@ -5,7 +5,7 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <div style={{ backgroundColor: 'black', minHeight: '100vh', color: 'white', padding: '2rem' }}>
+    <div style={{ minHeight: '100vh', color: 'white', padding: '2rem' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem', fontWeight: '1000' }}>Terms of Service</h1>
         

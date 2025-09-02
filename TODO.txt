@@ -27,4 +27,4 @@
 
 
 ///////////////////Ranch Changes
-Background for pages (Green band / Black part). Center the text nicely. 
+Center the text nicely. 
