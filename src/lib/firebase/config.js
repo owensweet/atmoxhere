@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
@@ -13,5 +14,6 @@ const firebaseConfig = {
   
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  export const auth = getAuth(app);
 
-  export { db };
+  export { db, signInWithEmailAndPassword, signOut, onAuthStateChanged };
