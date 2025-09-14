@@ -40,8 +40,8 @@ const spotlightImages = {
     "/images/suffix_neck_mutation1.webp",
   ],
   termite: [
+    "/images/termite_jeans1.webp",
     "/images/termite_sweater1.webp",
-    "/images/termite_arm_flesh1.webp",
   ],
   z220x11: [
     "/images/pilot_boots1.webp",
@@ -50,10 +50,12 @@ const spotlightImages = {
   ],
   bijou_pod_pulsers: [
     "/images/bijou_pod_pulsers1.webp",
-    "/images/bijou_pod_pulsers2.webp",
+    "/images/bijou_pod_pulsers3.webp",
+    "/images/bijou_pod_pulsers2.webp"
   ],
   agora_market: [
     "/images/n_root_respirator1.webp",
+    "/images/n_root_respirator2.webp",
   ]
 }
 
