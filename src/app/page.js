@@ -31,25 +31,26 @@ const colors = {
 
 const spotlightImages = {
   mutant: [
-    "/images/defiant_tee4.webp",
-    "/images/sister_alma_tee9.webp",
+    "/images/defiant_tee1.webp",
+    "/images/sister_alma_tee1.webp",
     "/images/tsiri_tee1.webp",
   ],
   tsiri_synthesis: [
-    "/images/transmute_neck_mutation4.webp",
-    "/images/suffix_neck_mutation5.webp",
+    "/images/transmute_neck_mutation1.webp",
+    "/images/suffix_neck_mutation1.webp",
   ],
   termite: [
-    "/images/termite_sweater6.webp",
-    "/images/termite_arm_flesh4.webp",
+    "/images/termite_sweater1.webp",
+    "/images/termite_arm_flesh1.webp",
   ],
   z220x11: [
     "/images/pilot_boots1.webp",
     "/images/pilot_boots3.webp",
+    "/images/pilot_boots4.webp",
   ],
   bijou_pod_pulsers: [
-    "/images/bijou_pod_pulsers5.webp",
-    "/images/bijou_pod_pulsers6.webp",
+    "/images/bijou_pod_pulsers1.webp",
+    "/images/bijou_pod_pulsers2.webp",
   ],
   agora_market: [
     "/images/n_root_respirator1.webp",
@@ -112,6 +113,7 @@ function RotatingLinks() {
   const groupRefs = useRef([])
   const borderRefs = useRef([])
   const imageRefs = useRef([])
+  const textRefs = useRef([])
   const { camera } = useThree()
   const router = useRouter()
 
@@ -140,6 +142,7 @@ function RotatingLinks() {
   // Image open/close animation
   const [springs, api] = useSprings(collections.length, () => ({
     scaleY: 1,
+    textY: 0,
     config: { duration: 800 },
   }))
 
@@ -152,10 +155,15 @@ function RotatingLinks() {
           return { ...prev, [name]: next }
         })
 
-        // animate scaleY "closing then opening"
+        // Animate scaleY "closing then opening" with text movement
         api.start((i) =>
           i === index
-            ? [{ scaleY: 0 }, { scaleY: 1 }]
+            ? [
+                // First: scale down and move text down
+                { scaleY: 0, textY: -0.3 },
+                // Then: scale up and move text back up
+                { scaleY: 1, textY: 0 }
+              ]
             : {}
         )
       }, 3000 + index * 400)
@@ -183,6 +191,8 @@ function RotatingLinks() {
       const dist = camera.position.distanceTo(ref.position)
       const targetFade = dist > threshold ? 0 : 1
       const targetBorderY = dist > threshold ? 0.4 : 1
+      const targetBorderOpacity = dist > threshold ? 1 : 0
+      const targetTextY = dist > threshold ? 0 : -0.75
 
       // Smooth fade for image opacity
       const image = imageRefs.current[i]
@@ -204,6 +214,23 @@ function RotatingLinks() {
           targetBorderY,
           lerpSpeed
         )
+        border.material.opacity = THREE.MathUtils.lerp(
+          border.material.opacity,
+          targetBorderOpacity,
+          lerpSpeed
+        )
+      }
+
+      // Smooth text position movement
+      const textGroup = textRefs.current[i]
+      if (textGroup) {
+        if (!textGroup.userData.targetY) textGroup.userData.targetY = 0
+        textGroup.userData.targetY = THREE.MathUtils.lerp(
+          textGroup.userData.targetY,
+          targetTextY,
+          lerpSpeed
+        )
+        textGroup.position.y = textGroup.userData.targetY
       }
     })
   })
@@ -257,29 +284,32 @@ function RotatingLinks() {
               />
             </mesh>
 
-            {/* Text label */}
-            <Text
-              position={[0, 0, 0.02]}
-              fontSize={0.2}
-              fontWeight={700}
-              font="/fonts/Kode_Mono/static/KodeMono-Bold.ttf"
-              outlineWidth={0.005}
-              outlineColor="white"
-              color="white"
-              anchorX="center"
-              anchorY="middle"
-              onClick={() => router.push(`/shop/${name}`)}
+            {/* Text label with animated position */}
+            <a.group 
+              position-y={springs[index].textY}
+              ref={(el) => (textRefs.current[index] = el)}
             >
-              ⧼ {name} ⧽
-            </Text>
+              <Text
+                position={[0, 0, 0.02]}
+                fontSize={0.2}
+                fontWeight={700}
+                font="/fonts/Kode_Mono/static/KodeMono-Bold.ttf"
+                outlineWidth={0.005}
+                outlineColor="white"
+                color="white"
+                anchorX="center"
+                anchorY="middle"
+                onClick={() => router.push(`/shop/${name}`)}
+              >
+                ⧼ {name} ⧽
+              </Text>
+            </a.group>
           </group>
         )
       })}
     </>
   )
 }
-
-
 
 function WireframeSphere() {
   return (
@@ -335,8 +365,8 @@ export default function ShopHome() {
             enablePan={false}
             autoRotate
             autoRotateSpeed={0.5}
-            minPolarAngle={Math.PI / 3}
-            maxPolarAngle={Math.PI / 3}
+            // minPolarAngle={Math.PI / 3}
+            // maxPolarAngle={Math.PI / 3}
           />
         </Canvas>
         <SwipeHint hasSwiped={hasSwiped} />

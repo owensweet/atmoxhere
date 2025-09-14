@@ -28,7 +28,7 @@ export default async function Success({ searchParams }) {
   if (status === 'complete' && customerEmail) {
     const orderData = {
       customerEmail,
-      sessionID: session.id,
+      sessionI: session.id,
       amountTotal: session.amount_total,
       currency: session.currency,
       lineItems: lineItems.map((item) => ({
