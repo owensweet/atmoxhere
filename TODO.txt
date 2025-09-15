@@ -1,31 +1,34 @@
 - background pixel animation stuff or ascii art
-- sizes?
-- add colors and sizes onto the database for each entry and add the new ones
-- basic crud app to add products
-
+- add colors and sizes onto the database for each entry and add the new ones\
 - mouse circle bugged on agora_market (covered by footer mt?)
 
 - finalize footer (finish links and blur and remove redundancy)
 
 - old ios fruitigiar aero button for shop all
 
+- track sizes
+
 # ISSUES
+
+- Check ranch pr
+
+- NEED TO CHANGE ORDER SO THAT TERMITE DOESNT COME UP FIRST
 
 - fix the size guide image or make it better idk
 
-- text offset for the logo
-
-- Floating divs for more spaceyness? (can be done with framer but possible performance hit)
+- jashin gets an email with order info and shipping info (sandbox check?)
 
 - Make sure stripe post and get requests are secure (maybe csrf token?)
 
-- THINK ABOUT HOW TO IMPLEMENT MANGA / LORE
-
 - HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos?)
 
-- jashin gets an email with order info and shipping info (sandbox check?)
+# STRETCH FEAUTURES
 
-- how to put the right products at the top and highlight the ones that are dropped!!!!
+- text offset for the logo
+- Floating divs for more spaceyness? (can be done with framer but possible performance hit)
+
+
+
 
 
 ///////////////////Ranch Changes
