@@ -10,7 +10,7 @@
 
 # ISSUES
 
-- Check ranch pr
+- add simple loading animation to the loading for the initial page
 
 - NEED TO CHANGE ORDER SO THAT TERMITE DOESNT COME UP FIRST
 
