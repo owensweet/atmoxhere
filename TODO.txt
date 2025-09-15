@@ -32,4 +32,4 @@
 
 
 ///////////////////Ranch Changes
-Content on pages (Lore/Manga, About) + making the pages look good
+Center the text nicely. 

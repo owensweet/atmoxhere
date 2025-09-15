@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@react-spring/three": "^10.0.1",
     "@react-three/drei": "^10.5.2",
     "@react-three/fiber": "^9.2.0",
     "@stripe/stripe-js": "^7.3.1",
