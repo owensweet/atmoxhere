@@ -3,6 +3,7 @@ import './globals.css';
 import ClientWrapper from '@/app/ClientWrapper';
 import Footer from '@/lib/components/Footer';
 import Image from 'next/image';
+import Script from 'next/script';
 
 const kodeMono = Kode_Mono({
   subsets: ['latin'],
@@ -25,15 +26,19 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
 	    />
-      {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-S2E36N7VVC"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments)};
-          gtag('js', new Date());
-
-          gtag('config', 'G-S2E36N7VVC');
-        </script>
+      {/* Google Analytics Scripts */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-S2E36N7VVC"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-S2E36N7VVC');
+          `}
+        </Script>
       </head>
       
       <body className={`${kodeMono.className} crt overflow-x-hidden overscroll-none min-h-screen flex flex-col`}>
