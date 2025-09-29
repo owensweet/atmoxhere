@@ -1,18 +1,18 @@
+# IMMEDIATE CHANGES
+- MAKE ALL CLOHTES IMAGES CLICKABLE NOT JUST LINK
+- shop all button (fruitiger aero?)
+- add simple loading animation to the loading for the initial page
+- NEED TO CHANGE ORDER SO THAT TERMITE DOESNT COME UP FIRST
+
+# ideas / bugs
 - background pixel animation stuff or ascii art
 - add colors and sizes onto the database for each entry and add the new ones\
-- mouse circle bugged on agora_market (covered by footer mt?)
 
 - finalize footer (finish links and blur and remove redundancy)
-
-- old ios fruitigiar aero button for shop all
 
 - track sizes
 
 # ISSUES
-
-- add simple loading animation to the loading for the initial page
-
-- NEED TO CHANGE ORDER SO THAT TERMITE DOESNT COME UP FIRST
 
 - fix the size guide image or make it better idk
 
