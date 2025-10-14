@@ -22,6 +22,8 @@
 
 - HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos?)
 
+- custom cursor
+
 # STRETCH FEAUTURES
 
 - text offset for the logo
