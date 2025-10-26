@@ -12,10 +12,10 @@ import '@/styles/globals.css'
 import '@/app/globals.css'
 
 export const collections = [
-  'mutant',
   'tsiri_synthesis',
-  'termite',
   'z220x11',
+  'mutant',
+  'termite',
   'bijou_pod_pulsers',
   'agora_market'
 ]
@@ -40,8 +40,8 @@ const spotlightImages = {
     "/images/suffix_neck_mutation1.webp",
   ],
   termite: [
-    "/images/termite_jeans1.webp",
     "/images/termite_sweater1.webp",
+    "/images/termite_jeans1.webp",
   ],
   z220x11: [
     "/images/pilot_boots1.webp",
@@ -374,6 +374,7 @@ export default function ShopHome() {
         <SwipeHint hasSwiped={hasSwiped} />
 
       </div>
+      <a className="mt-24" href="/shop/all">&gt;&gt; view all &lt;&lt;</a>
     </div>
   )
 }

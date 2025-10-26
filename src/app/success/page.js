@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { stripe } from '@/lib/stripe/stripe.js'
 import { confirmationEmail } from '@/lib/email/confirmationEmail'
 import Firestore from '@/lib/firebase/Firestore';
+import { FieldValue } from 'firebase-admin/firestore'
 
 export default async function Success({ searchParams }) {
   const { session_id } = await searchParams
@@ -42,6 +43,25 @@ export default async function Success({ searchParams }) {
   };
 
     await firebase.addOrder(orderData)
+
+    for (const item of lineItems) {
+      const priceId = item.price?.id
+      const quantity = item.quantity ?? 1
+
+      if (priceId) {
+        const productsRef = firebase.db.collection('products')
+        const snapshot = await productsRef.where('priceId', '==', priceId).get()
+
+        if (!snapshot.empty) {
+          const productDoc = snapshot.docs[0]
+          await productDoc.ref.update({
+            stock: FieldValue.increment(-quantity)
+          })
+        } else {
+          console.warn(`No product found for priceId: ${priceId}`)
+        }
+      }
+    }
     
     await confirmationEmail({
       to: customerEmail,
