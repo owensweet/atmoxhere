@@ -49,17 +49,7 @@ export default async function Success({ searchParams }) {
       const quantity = item.quantity ?? 1
 
       if (priceId) {
-        const productsRef = firebase.db.collection('products')
-        const snapshot = await productsRef.where('priceId', '==', priceId).get()
-
-        if (!snapshot.empty) {
-          const productDoc = snapshot.docs[0]
-          await productDoc.ref.update({
-            stock: increment(-quantity)
-          })
-        } else {
-          console.warn(`No product found for priceId: ${priceId}`)
-        }
+        await firebase.decrementStock(priceId, quantity)
       }
     }
     

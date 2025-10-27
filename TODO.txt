@@ -7,6 +7,8 @@
 - background pixel animation stuff or ascii art
 - add colors and sizes onto the database for each entry and add the new ones\
 
+- route.js line 106
+
 - finalize footer (finish links and blur and remove redundancy)
 
 - track sizes

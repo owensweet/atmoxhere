@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Text, Line } from '@react-three/drei'
-import { useRef, useMemo, useState, useEffect } from 'react'
+import { useRef, useMemo, useState, useEffect, Suspense } from 'react'
 import Image from 'next/image'
 import { useSprings, a } from '@react-spring/three' 
 import * as THREE from 'three'
@@ -10,6 +10,7 @@ import { Edges } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 import '@/styles/globals.css'
 import '@/app/globals.css'
+import Loader from '@/lib/components/Loader';
 
 export const collections = [
   'tsiri_synthesis',
@@ -359,17 +360,19 @@ export default function ShopHome() {
       <h1 className="text-5xl font-bold mb-2">atmoxhere.</h1>
       <div className="w-full h-[500px] relative">
         <Canvas camera={{ position: [0, 2, 5.5] }} onPointerDown={() => setHasSwiped(true)}>
-          <ambientLight intensity={0.5} />
-          <WireframeSphere />
-          <RotatingLinks />
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            autoRotate
-            autoRotateSpeed={0.5}
-            // minPolarAngle={Math.PI / 3}
-            // maxPolarAngle={Math.PI / 3}
-          />
+          <Suspense fallback={<Loader />}>
+            <ambientLight intensity={0.5} />
+            <WireframeSphere />
+            <RotatingLinks />
+            <OrbitControls
+              enableZoom={false}
+              enablePan={false}
+              autoRotate
+              autoRotateSpeed={0.5}
+              // minPolarAngle={Math.PI / 3}
+              // maxPolarAngle={Math.PI / 3}
+            />
+          </Suspense>
         </Canvas>
         <SwipeHint hasSwiped={hasSwiped} />
 
