@@ -1,17 +1,15 @@
 # IMMEDIATE CHANGES
 - MAKE ALL CLOHTES IMAGES CLICKABLE NOT JUST LINK
 - shop all button (fruitiger aero?)
-- add simple loading animation to the loading for the initial page
 
 # ideas / bugs
 - background pixel animation stuff or ascii art
-- add colors and sizes onto the database for each entry and add the new ones\
 
 - route.js line 106
 
 - finalize footer (finish links and blur and remove redundancy)
 
-- track sizes
+- add sizes 1 2 3 4 for amount/availability of each size into firestore and then 
 
 # ISSUES
 

@@ -377,7 +377,7 @@ export default function ShopHome() {
         <SwipeHint hasSwiped={hasSwiped} />
 
       </div>
-      <a className="mt-24" href="/shop/all">&gt;&gt; view all &lt;&lt;</a>
+      <a className="inline-block hover:scale-105 mt-24 border-4 border-white/70 p-2 rounded-3xl bg-gradient-to-b from-emerald-700 to-black-300 transition-all duration-300 ease-out " href="/shop/all">&gt;&gt; view all &lt;&lt;</a>
     </div>
   )
 }
