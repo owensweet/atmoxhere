@@ -2,7 +2,6 @@
 - MAKE ALL CLOHTES IMAGES CLICKABLE NOT JUST LINK
 - shop all button (fruitiger aero?)
 - add simple loading animation to the loading for the initial page
-- NEED TO CHANGE ORDER SO THAT TERMITE DOESNT COME UP FIRST
 
 # ideas / bugs
 - background pixel animation stuff or ascii art
