@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import { stripe } from '@/lib/stripe/stripe.js'
 import { confirmationEmail } from '@/lib/email/confirmationEmail'
 import Firestore from '@/lib/firebase/Firestore';
-import { FieldValue } from 'firebase-admin/firestore'
+import { increment } from 'firebase/firestore'
 
 export default async function Success({ searchParams }) {
   const { session_id } = await searchParams
@@ -55,7 +55,7 @@ export default async function Success({ searchParams }) {
         if (!snapshot.empty) {
           const productDoc = snapshot.docs[0]
           await productDoc.ref.update({
-            stock: FieldValue.increment(-quantity)
+            stock: increment(-quantity)
           })
         } else {
           console.warn(`No product found for priceId: ${priceId}`)
