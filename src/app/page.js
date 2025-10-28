@@ -358,6 +358,7 @@ export default function ShopHome() {
   return (
     <div className="w-screen h-screen text-white flex flex-col items-center justify-start">
       <h1 className="text-5xl font-bold mb-2">atmoxhere.</h1>
+      <img src="/images/cyber_line.png" className="w-100 max-w-[90%]"/>
       <div className="w-full h-[500px] relative">
         <Canvas camera={{ position: [0, 2, 5.5] }} onPointerDown={() => setHasSwiped(true)}>
           <Suspense fallback={<Loader />}>

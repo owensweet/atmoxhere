@@ -1,7 +1,7 @@
 # IMMEDIATE CHANGES
 - MAKE ALL CLOHTES IMAGES CLICKABLE NOT JUST LINK
-- shop all button (fruitiger aero?)
-
+- JASHIN email
+- ADMIN PAGE  NEEDS TO BE ABLE TO UPLOAD VAULT PHOTOS AND ALSO FULFILL/DELETE THE ORDERS ON THE PAGE
 # ideas / bugs
 - background pixel animation stuff or ascii art
 
