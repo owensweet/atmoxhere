@@ -318,7 +318,7 @@ function RotatingLinks() {
               >
                 ⧼ {name} ⧽
               </Text>
-              <mesh position={[0, -0.7, 0.02]} onClick={() => router.push(`/shop/${name}`)}>
+              <mesh position={[0, -0.5, 0.02]} onClick={() => router.push(`/shop/${name}`)}>
                 <planeGeometry args={[0.6, 0.6]} />
                 <meshBasicMaterial 
                   map={iconTextures[name]} 
@@ -366,7 +366,7 @@ function SwipeHint ({ hasSwiped }) {
       alt="Swipe"
       className={`absolute left-1/2 -translate-x-1/2 transition-all duration-700
         ${visible ? 'opacity-100 translate-x-0' : '-translate-x-10 opacity-0'}`}
-      style={{ bottom: '-60px', width: '70px', height: '70px' }}
+      style={{ bottom: '-40px', width: '70px', height: '70px' }}
     />
   )
 }
@@ -398,7 +398,7 @@ export default function ShopHome() {
         <SwipeHint hasSwiped={hasSwiped} />
 
       </div>
-      <a className="inline-block hover:scale-105 mt-24 border-4 border-white/70 p-2 rounded-3xl bg-gradient-to-b from-emerald-700 to-black-300 transition-all duration-300 ease-out " href="/shop/all">&gt;&gt; view all &lt;&lt;</a>
+      <a className="inline-block hover:scale-105 mt-14 border-4 border-white/70 p-2 rounded-3xl bg-gradient-to-b from-emerald-700 to-black-300 transition-all duration-300 ease-out " href="/shop/all">&gt;&gt; view all &lt;&lt;</a>
     </div>
   )
 }
