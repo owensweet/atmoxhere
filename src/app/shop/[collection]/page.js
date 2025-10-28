@@ -77,6 +77,13 @@ export default function CollectionPage() {
       </div>
       <BackButton />
       <h1 className="text-4xl flex items-center justify-center mt-0 font-extrabold py-0">{ params.collection }</h1>
+      <div className="flex flex-col items-center justify-center mt-4">
+        <img 
+          src={`/images/icons/${params.collection}.png`} 
+          alt={params.collection}
+          className="w-18 h-18 mb-2 mt-0"
+        />
+      </div>
       <img src="/images/cyber_line.png" className="w-160 mx-auto my-8 mt-3 max-w-[90%]"/>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-8">
         {products.map(product => (

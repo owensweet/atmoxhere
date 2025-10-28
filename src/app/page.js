@@ -142,6 +142,18 @@ function RotatingLinks() {
     return loaded
   }, [])
 
+  // Preload icons textures once
+  const iconTextures = useMemo(() => {
+    const loader = new THREE.TextureLoader()
+    const loaded = {}
+    for (const name of collections) {
+      const tex = loader.load(`/images/icons/${name}.png`)
+      tex.colorSpace = THREE.SRGBColorSpace
+      loaded[name] = tex
+    }
+    return loaded
+  }, [])
+
   // Image open/close animation
   const [springs, api] = useSprings(collections.length, () => ({
     scaleY: 1,
@@ -248,7 +260,7 @@ function RotatingLinks() {
 
   return (
     <>
-      <ConnectingLines linkPositions={linkPositions} />
+      {/* <ConnectingLines linkPositions={linkPositions} /> */}
 
       {collections.map((name, index) => {
         const { x, y, z } = linkPositions[index]
@@ -306,6 +318,14 @@ function RotatingLinks() {
               >
                 ⧼ {name} ⧽
               </Text>
+              <mesh position={[0, -0.7, 0.02]} onClick={() => router.push(`/shop/${name}`)}>
+                <planeGeometry args={[0.6, 0.6]} />
+                <meshBasicMaterial 
+                  map={iconTextures[name]} 
+                  transparent
+                />
+                
+            </mesh>
             </a.group>
           </group>
         )
