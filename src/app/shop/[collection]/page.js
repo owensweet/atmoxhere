@@ -79,7 +79,7 @@ export default function CollectionPage() {
       <h1 className="text-4xl flex items-center justify-center mt-0 font-extrabold py-0">{ params.collection }</h1>
       <div className="flex flex-col items-center justify-center mt-4">
         <img 
-          src={`/images/icons/${params.collection}.png`} 
+          src={`/images/Icons/${params.collection}.png`} 
           alt={params.collection}
           className="w-18 h-18 mb-2 mt-0"
         />
