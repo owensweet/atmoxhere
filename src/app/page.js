@@ -147,7 +147,7 @@ function RotatingLinks() {
     const loader = new THREE.TextureLoader()
     const loaded = {}
     for (const name of collections) {
-      const tex = loader.load(`/images/icons/${name}.png`)
+      const tex = loader.load(`/images/Icons/${name}.png`)
       tex.colorSpace = THREE.SRGBColorSpace
       loaded[name] = tex
     }
