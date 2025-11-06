@@ -34,7 +34,7 @@ export default function ClientWrapper({ children }) {
         />
       </div>
       <MouseFollower />
-      <CountryButton onCountrySelect={handleCountry} className='absolute top-4 right-4' />
+      {/* <CountryButton onCountrySelect={handleCountry} className='absolute top-4 right-4' /> */}
       {children}
     </div>
   )

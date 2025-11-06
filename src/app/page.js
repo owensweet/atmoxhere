@@ -21,15 +21,6 @@ export const collections = [
   'agora_market'
 ]
 
-const colors = {
-  mutant: "black",
-  tsiri_synthesis: "green",
-  termite: "orange",
-  z220x11: "grey",
-  bijou_pod_pulsers: "white",
-  agora_market: "cyan",
-}
-
 const spotlightImages = {
   mutant: [
     "/images/defiant_tee1.webp",
@@ -128,19 +119,23 @@ function RotatingLinks() {
     }, {})
   )
 
+  const [glitchingIndex, setGlitchingIndex] = useState(null)
+  const [glitchFrame, setGlitchFrame] = useState(0)
+
   // Preload spotlight textures once
   const spotlightTextures = useMemo(() => {
-    const loader = new THREE.TextureLoader()
-    const loaded = {}
-    for (const name of collections) {
-      loaded[name] = spotlightImages[name].map((path) => {
-        const tex = loader.load(path)
-        tex.colorSpace = THREE.SRGBColorSpace
-        return tex
-      })
-    }
-    return loaded
-  }, [])
+  const loaded = {}
+  for (const name of collections) {
+    loaded[name] = spotlightImages[name].map((path) => {
+      const tex = new THREE.TextureLoader().load(path)
+      tex.colorSpace = THREE.SRGBColorSpace
+      tex.minFilter = THREE.LinearFilter
+      tex.magFilter = THREE.LinearFilter
+      return tex
+    })
+  }
+  return loaded
+}, [])
 
   // Preload icons textures once
   const iconTextures = useMemo(() => {
@@ -165,11 +160,10 @@ function RotatingLinks() {
   useEffect(() => {
     const intervals = collections.map((name, index) => {
       return setInterval(() => {
-        setCurrentIndices((prev) => {
-          const next = (prev[name] + 1) % spotlightTextures[name].length
-          return { ...prev, [name]: next }
-        })
-
+        // Start glitch
+        setGlitchingIndex(index)
+        setGlitchFrame(0)
+        
         // Animate scaleY "closing then opening" with text movement
         api.start((i) =>
           i === index
@@ -181,10 +175,31 @@ function RotatingLinks() {
               ]
             : {}
         )
+
+        // Change image after brief delay
+        setTimeout(() => {
+          setCurrentIndices((prev) => {
+            const next = (prev[name] + 1) % spotlightTextures[name].length
+            return { ...prev, [name]: next }
+          })
+        }, 150)
+        
+        // End glitch
+        setTimeout(() => {
+          setGlitchingIndex(null)
+        }, 400)
+        
       }, 3000 + index * 400)
     })
     return () => intervals.forEach(clearInterval)
   }, [spotlightTextures, api])
+
+  //animate glitch frames
+  useFrame(() => {
+    if (glitchingIndex !== null) {
+      setGlitchFrame(prev => prev + 1)
+    }
+  })
 
   // Border texture
   const borderTexture = useMemo(() => {
@@ -266,6 +281,15 @@ function RotatingLinks() {
         const { x, y, z } = linkPositions[index]
         const texArray = spotlightTextures[name]
         const currentTex = texArray[currentIndices[name]]
+        const isGlitching = glitchingIndex === index
+
+        // Generate glitch parameters
+        const glitchScaleX = isGlitching ? Math.random() * 0.3 + 0.9 : 1
+        const glitchPosX = isGlitching ? (Math.random() - 0.5) * 0.1 : 0
+        const glitchOpacity = isGlitching ? Math.random() * 0.3 + 0.7 : 1
+        const glitchColor = isGlitching && Math.random() > 0.5 
+          ? (Math.random() > 0.5 ? '#ff00ff' : '#00ffff') 
+          : 'white'
 
         return (
           <group
@@ -276,13 +300,16 @@ function RotatingLinks() {
             {/* Spotlight image */}
             <a.mesh
               scale-y={springs[index].scaleY}
+              scale-x={glitchScaleX}
+              position-x={glitchPosX}
               ref={(el) => (imageRefs.current[index] = el)}
             >
               <planeGeometry args={[2.2, 2.2]} />
               <a.meshBasicMaterial
                 map={currentTex}
                 transparent
-                opacity={1} // controlled by useFrame fade
+                opacity={glitchOpacity}
+                color={glitchColor}
               />
             </a.mesh>
 

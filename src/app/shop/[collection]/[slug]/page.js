@@ -55,7 +55,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
   const shippingInputRef = useRef(null)
 
   const handleSubmit = (e) => {
-    const currentCountry = localStorage.getItem("shipping_country") || '';
+    // const currentCountry = localStorage.getItem("shipping_country") || '';
 
     if (!currentCountry) {
       e.preventDefault();
