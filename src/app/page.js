@@ -204,7 +204,7 @@ function RotatingLinks() {
         // End glitch - very quick blink
         setTimeout(() => {
           setGlitchingIndex(null)
-        }, 120)
+        }, 80)
         
       }, 3000 + index * 400)
     })
@@ -228,19 +228,23 @@ function RotatingLinks() {
       // Update glitch parameters every frame for the glitching item
       const params = glitchParams.current[glitchingIndex]
       params.scaleX = Math.random() * 0.3 + 0.9
-      params.posX = (Math.random() - 0.5) * 0.1
+      params.posX = (Math.random() - 0.8) * 0.1
       params.opacity = 0.85 + Math.random() * 0.15
       
       // Randomize color every frame
       const rand = Math.random()
-      if (rand > 0.85) {
-        params.color = '#e0e0e0'
-      } else if (rand > 0.7) {
-        params.color = '#ffd0d0'
-      } else if (rand > 0.55) {
-        params.color = '#d0f0ff'
+      if (rand > 0.9) {
+        params.color = '#000fff' // bright cyan
+      } else if (rand > 0.75) {
+        params.color = '#f000ff' // neon magenta
+      } else if (rand > 0.6) {
+        params.color = '#9000ff' // deep purple
+      } else if (rand > 0.45) {
+        params.color = '#00e5ff' // softer cyan
+      } else if (rand > 0.3) {
+        params.color = '#f066cc' // pink highlight
       } else {
-        params.color = 'white'
+        params.color = 'white' // normal frame
       }
     }
 
@@ -275,17 +279,17 @@ function RotatingLinks() {
         image.material.opacity = image.userData.fade
         
         // Apply glitch effects directly to mesh
-        // const isGlitching = glitchingIndex === i && isVisible
-        // if (isGlitching) {
-        //   const params = glitchParams.current[i]
-        //   image.scale.x = params.scaleX
-        //   image.position.x = params.posX
-        //   image.material.color.set(params.color)
-        // } else {
-        //   image.scale.x = 1
-        //   image.position.x = 0
-        //   image.material.color.set('white')
-        // }
+        const isGlitching = glitchingIndex === i && isVisible
+        if (isGlitching) {
+          const params = glitchParams.current[i]
+          image.scale.x = params.scaleX
+          image.position.x = params.posX
+          image.material.color.set(params.color)
+        } else {
+          image.scale.x = 1
+          image.position.x = 0
+          image.material.color.set('white')
+        }
       }
 
       // Smooth shrink for border Y
