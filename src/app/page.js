@@ -120,29 +120,34 @@ function RotatingLinks() {
   )
 
   const [glitchingIndex, setGlitchingIndex] = useState(null)
-  const [glitchFrame, setGlitchFrame] = useState(0)
+  // Use ref instead of state for glitchFrame to avoid re-renders every frame
+  const glitchFrameRef = useRef(0)
+  
+  // Track which items are visible (close to camera)
+  const visibilityRefs = useRef(collections.map(() => ({ isVisible: false, distance: 999 })))
 
-  // Preload spotlight textures once
+  // Preload spotlight textures once - single loader instance
   const spotlightTextures = useMemo(() => {
-  const loaded = {}
-  for (const name of collections) {
-    loaded[name] = spotlightImages[name].map((path) => {
-      const tex = new THREE.TextureLoader().load(path)
-      tex.colorSpace = THREE.SRGBColorSpace
-      tex.minFilter = THREE.LinearFilter
-      tex.magFilter = THREE.LinearFilter
-      return tex
-    })
-  }
-  return loaded
-}, [])
+    const loader = new THREE.TextureLoader()
+    const loaded = {}
+    for (const name of collections) {
+      loaded[name] = spotlightImages[name].map((path) => {
+        const tex = loader.load(path)
+        tex.colorSpace = THREE.SRGBColorSpace
+        tex.minFilter = THREE.LinearFilter
+        tex.magFilter = THREE.LinearFilter
+        return tex
+      })
+    }
+    return loaded
+  }, [])
 
   // Preload icons textures once
   const iconTextures = useMemo(() => {
     const loader = new THREE.TextureLoader()
     const loaded = {}
     for (const name of collections) {
-      const tex = loader.load(`/images/Icons/${name}.png`)
+      const tex = loader.load(`/images/Icons/${name}.webp`)
       tex.colorSpace = THREE.SRGBColorSpace
       loaded[name] = tex
     }
@@ -153,16 +158,20 @@ function RotatingLinks() {
   const [springs, api] = useSprings(collections.length, () => ({
     scaleY: 1,
     textY: 0,
-    config: { duration: 800 },
+    config: { tension: 300, friction: 30 },
   }))
 
-  // Cycle images
+  // Cycle images - only animate visible items
   useEffect(() => {
     const intervals = collections.map((name, index) => {
       return setInterval(() => {
+        // Only animate if item is visible (close to camera)
+        const visibility = visibilityRefs.current[index]
+        if (!visibility.isVisible) return
+        
         // Start glitch
         setGlitchingIndex(index)
-        setGlitchFrame(0)
+        glitchFrameRef.current = 0
         
         // Animate scaleY "closing then opening" with text movement
         api.start((i) =>
@@ -182,24 +191,17 @@ function RotatingLinks() {
             const next = (prev[name] + 1) % spotlightTextures[name].length
             return { ...prev, [name]: next }
           })
-        }, 150)
+        }, 80)
         
         // End glitch
         setTimeout(() => {
           setGlitchingIndex(null)
-        }, 400)
+        }, 200)
         
       }, 3000 + index * 400)
     })
     return () => intervals.forEach(clearInterval)
   }, [spotlightTextures, api])
-
-  //animate glitch frames
-  useFrame(() => {
-    if (glitchingIndex !== null) {
-      setGlitchFrame(prev => prev + 1)
-    }
-  })
 
   // Border texture
   const borderTexture = useMemo(() => {
@@ -209,8 +211,13 @@ function RotatingLinks() {
     return tex
   }, [])
 
-  // Billboarding + distance-based fade (for image) and shrink (for border)
+  // Single useFrame for all animations - no state updates!
   useFrame(() => {
+    // Increment glitch frame using ref instead of state
+    if (glitchingIndex !== null) {
+      glitchFrameRef.current += 1
+    }
+
     const threshold = 4.5
     const lerpSpeed = 0.08
 
@@ -219,10 +226,16 @@ function RotatingLinks() {
       ref.lookAt(camera.position)
 
       const dist = camera.position.distanceTo(ref.position)
-      const targetFade = dist > threshold ? 0 : 1
-      const targetBorderY = dist > threshold ? 0.4 : 1
-      const targetBorderOpacity = dist > threshold ? 1 : 0
-      const targetTextY = dist > threshold ? 0 : -0.75
+      
+      // Update visibility tracking
+      const isVisible = dist <= threshold
+      visibilityRefs.current[i].isVisible = isVisible
+      visibilityRefs.current[i].distance = dist
+      
+      const targetFade = isVisible ? 1 : 0
+      const targetBorderY = isVisible ? 1 : 0.4
+      const targetBorderOpacity = isVisible ? 0 : 1
+      const targetTextY = isVisible ? -0.75 : 0
 
       // Smooth fade for image opacity
       const image = imageRefs.current[i]
@@ -282,12 +295,14 @@ function RotatingLinks() {
         const texArray = spotlightTextures[name]
         const currentTex = texArray[currentIndices[name]]
         const isGlitching = glitchingIndex === index
+        const visibility = visibilityRefs.current[index]
 
-        // Generate glitch parameters
-        const glitchScaleX = isGlitching ? Math.random() * 0.3 + 0.9 : 1
-        const glitchPosX = isGlitching ? (Math.random() - 0.5) * 0.1 : 0
-        const glitchOpacity = isGlitching ? Math.random() * 0.3 + 0.7 : 1
-        const glitchColor = isGlitching && Math.random() > 0.5 
+        // Only generate glitch parameters if item is visible AND glitching
+        const shouldGlitch = isGlitching && visibility.isVisible
+        const glitchScaleX = shouldGlitch ? Math.random() * 0.3 + 0.9 : 1
+        const glitchPosX = shouldGlitch ? (Math.random() - 0.5) * 0.1 : 0
+        const glitchOpacity = shouldGlitch ? Math.random() * 0.3 + 0.7 : 1
+        const glitchColor = shouldGlitch && Math.random() > 0.5 
           ? (Math.random() > 0.5 ? '#ff00ff' : '#00ffff') 
           : 'white'
 
@@ -386,6 +401,8 @@ function SwipeHint ({ hasSwiped }) {
 
     return () => clearInterval(interval)
   }, [hasSwiped])
+
+  if (hasSwiped) return null
 
   return (
     <img

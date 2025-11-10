@@ -107,7 +107,7 @@ export function Card({ name, slug, price, stock, collection }) {
       className="relative max-w-[380px] min-h-[100px] w-full h-full mx-auto rounded p-5 overflow-hidden shadow-md"
     >
       <Image 
-        src={`/images/Icons/${collection}.png`}
+        src={`/images/Icons/${collection}.webp`}
         alt="Cool looking icon"
         width={70}
         height={70}
