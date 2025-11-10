@@ -155,7 +155,7 @@ function RotatingLinks() {
     const loader = new THREE.TextureLoader()
     const loaded = {}
     for (const name of collections) {
-      const tex = loader.load(`/images/Icons/${name}.png`)
+      const tex = loader.load(`/images/Icons/${name}.webp`)
       tex.colorSpace = THREE.SRGBColorSpace
       loaded[name] = tex
     }
@@ -275,17 +275,17 @@ function RotatingLinks() {
         image.material.opacity = image.userData.fade
         
         // Apply glitch effects directly to mesh
-        const isGlitching = glitchingIndex === i && isVisible
-        if (isGlitching) {
-          const params = glitchParams.current[i]
-          image.scale.x = params.scaleX
-          image.position.x = params.posX
-          image.material.color.set(params.color)
-        } else {
-          image.scale.x = 1
-          image.position.x = 0
-          image.material.color.set('white')
-        }
+        // const isGlitching = glitchingIndex === i && isVisible
+        // if (isGlitching) {
+        //   const params = glitchParams.current[i]
+        //   image.scale.x = params.scaleX
+        //   image.position.x = params.posX
+        //   image.material.color.set(params.color)
+        // } else {
+        //   image.scale.x = 1
+        //   image.position.x = 0
+        //   image.material.color.set('white')
+        // }
       }
 
       // Smooth shrink for border Y
