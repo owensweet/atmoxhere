@@ -123,6 +123,14 @@ function RotatingLinks() {
   // Use ref instead of state for glitchFrame to avoid re-renders every frame
   const glitchFrameRef = useRef(0)
   
+  // Store glitch parameters in ref to update them every frame
+  const glitchParams = useRef(collections.map(() => ({
+    scaleX: 1,
+    posX: 0,
+    opacity: 1,
+    color: 'white'
+  })))
+  
   // Track which items are visible (close to camera)
   const visibilityRefs = useRef(collections.map(() => ({ isVisible: false, distance: 999 })))
 
@@ -147,7 +155,7 @@ function RotatingLinks() {
     const loader = new THREE.TextureLoader()
     const loaded = {}
     for (const name of collections) {
-      const tex = loader.load(`/images/Icons/${name}.webp`)
+      const tex = loader.load(`/images/Icons/${name}.png`)
       tex.colorSpace = THREE.SRGBColorSpace
       loaded[name] = tex
     }
@@ -158,7 +166,7 @@ function RotatingLinks() {
   const [springs, api] = useSprings(collections.length, () => ({
     scaleY: 1,
     textY: 0,
-    config: { tension: 300, friction: 30 },
+    config: { duration: 800 },
   }))
 
   // Cycle images - only animate visible items
@@ -191,12 +199,12 @@ function RotatingLinks() {
             const next = (prev[name] + 1) % spotlightTextures[name].length
             return { ...prev, [name]: next }
           })
-        }, 80)
+        }, 100)
         
-        // End glitch
+        // End glitch - very quick blink
         setTimeout(() => {
           setGlitchingIndex(null)
-        }, 200)
+        }, 120)
         
       }, 3000 + index * 400)
     })
@@ -216,6 +224,24 @@ function RotatingLinks() {
     // Increment glitch frame using ref instead of state
     if (glitchingIndex !== null) {
       glitchFrameRef.current += 1
+      
+      // Update glitch parameters every frame for the glitching item
+      const params = glitchParams.current[glitchingIndex]
+      params.scaleX = Math.random() * 0.3 + 0.9
+      params.posX = (Math.random() - 0.5) * 0.1
+      params.opacity = 0.85 + Math.random() * 0.15
+      
+      // Randomize color every frame
+      const rand = Math.random()
+      if (rand > 0.85) {
+        params.color = '#e0e0e0'
+      } else if (rand > 0.7) {
+        params.color = '#ffd0d0'
+      } else if (rand > 0.55) {
+        params.color = '#d0f0ff'
+      } else {
+        params.color = 'white'
+      }
     }
 
     const threshold = 4.5
@@ -247,6 +273,19 @@ function RotatingLinks() {
           lerpSpeed
         )
         image.material.opacity = image.userData.fade
+        
+        // Apply glitch effects directly to mesh
+        const isGlitching = glitchingIndex === i && isVisible
+        if (isGlitching) {
+          const params = glitchParams.current[i]
+          image.scale.x = params.scaleX
+          image.position.x = params.posX
+          image.material.color.set(params.color)
+        } else {
+          image.scale.x = 1
+          image.position.x = 0
+          image.material.color.set('white')
+        }
       }
 
       // Smooth shrink for border Y
@@ -294,17 +333,6 @@ function RotatingLinks() {
         const { x, y, z } = linkPositions[index]
         const texArray = spotlightTextures[name]
         const currentTex = texArray[currentIndices[name]]
-        const isGlitching = glitchingIndex === index
-        const visibility = visibilityRefs.current[index]
-
-        // Only generate glitch parameters if item is visible AND glitching
-        const shouldGlitch = isGlitching && visibility.isVisible
-        const glitchScaleX = shouldGlitch ? Math.random() * 0.3 + 0.9 : 1
-        const glitchPosX = shouldGlitch ? (Math.random() - 0.5) * 0.1 : 0
-        const glitchOpacity = shouldGlitch ? Math.random() * 0.3 + 0.7 : 1
-        const glitchColor = shouldGlitch && Math.random() > 0.5 
-          ? (Math.random() > 0.5 ? '#ff00ff' : '#00ffff') 
-          : 'white'
 
         return (
           <group
@@ -315,16 +343,12 @@ function RotatingLinks() {
             {/* Spotlight image */}
             <a.mesh
               scale-y={springs[index].scaleY}
-              scale-x={glitchScaleX}
-              position-x={glitchPosX}
               ref={(el) => (imageRefs.current[index] = el)}
             >
               <planeGeometry args={[2.2, 2.2]} />
               <a.meshBasicMaterial
                 map={currentTex}
                 transparent
-                opacity={glitchOpacity}
-                color={glitchColor}
               />
             </a.mesh>
 
