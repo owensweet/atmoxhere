@@ -388,14 +388,14 @@ function RotatingLinks() {
               >
                 ⧼ {name} ⧽
               </Text>
-              <mesh position={[0, -0.5, 0.02]} onClick={() => router.push(`/shop/${name}`)}>
+              {/* <mesh position={[0, -0.5, 0.02]} onClick={() => router.push(`/shop/${name}`)}>
                 <planeGeometry args={[0.6, 0.6]} />
                 <meshBasicMaterial 
                   map={iconTextures[name]} 
                   transparent
                 />
                 
-            </mesh>
+            </mesh> */}
             </a.group>
           </group>
         )
