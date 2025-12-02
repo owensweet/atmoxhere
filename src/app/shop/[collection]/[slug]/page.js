@@ -128,30 +128,6 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
     function ImageGallery({ slug }) {
       const [images, setImages] = useState([]);
       const [currentIndex, setCurrentIndex] = useState(0);
-      
-    
-      // useEffect(() => {
-      //   let index = 1;
-      //   let urls = [];
-    
-      //   const checkNext = async () => {
-      //     const url = `/images/${slug}${index}.png`; // hardcoded to only read png
-      //     try {
-      //       const res = await fetch(url);
-      //       if (res.ok) {
-      //         urls.push(url);
-      //         index++;
-      //         checkNext(); // keep loading
-      //       } else {
-      //         setImages(urls);
-      //       }
-      //     } catch {
-      //       setImages(urls);
-      //     }
-      //   };
-    
-      //   checkNext();
-      // }, [slug]);
 
       useEffect(() => {
         let index = 1;
@@ -199,7 +175,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
             alt={`${slug} image ${currentIndex + 1}`}
             width={300}
             height={300}
-            className="rounded border z-10"
+            className="rounded border z-30"
             style={{ filter: 'drop-shadow(0 0 16px rgba(180, 140, 280, 0.2))' }}
           />
           <div className="flex gap-4">

@@ -95,7 +95,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/lore" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  Lore/Manga Placeholder
+                  Lore
                 </Link>
               </li>
             </ul>

@@ -33,16 +33,20 @@ export default function CountrySelectButton({ onCountrySelect }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("shipping_country");
-    if(saved) {
-      setSelected(saved);
-      onCountrySelect(saved);
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem("shipping_country");
+      if(saved) {
+        setSelected(saved);
+        onCountrySelect(saved);
+      }
     }
   }, [onCountrySelect]);
 
   const handleSelect = (code) => {
     setSelected(code);
-    localStorage.setItem("shipping_country", code);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("shipping_country", code);
+    }
     console.log("selected country: ", code)
     onCountrySelect(code);
     setOpen(false);

@@ -21,15 +21,6 @@ export const collections = [
   'agora_market'
 ]
 
-const colors = {
-  mutant: "black",
-  tsiri_synthesis: "green",
-  termite: "orange",
-  z220x11: "grey",
-  bijou_pod_pulsers: "white",
-  agora_market: "cyan",
-}
-
 const spotlightImages = {
   mutant: [
     "/images/defiant_tee1.webp",
@@ -120,6 +111,11 @@ function RotatingLinks() {
   const { camera } = useThree()
   const router = useRouter()
 
+  // Detect mobile
+  const isMobile = useMemo(() => 
+    /iPhone|iPad|iPod|Android/i.test(navigator.userAgent), []
+  )
+
   // Track current spotlight image index for each collection
   const [currentIndices, setCurrentIndices] = useState(
     collections.reduce((acc, name) => {
@@ -127,6 +123,22 @@ function RotatingLinks() {
       return acc
     }, {})
   )
+
+  const [glitchingIndex, setGlitchingIndex] = useState(null)
+  const glitchFrameRef = useRef(0)
+  
+  const glitchParams = useRef(collections.map(() => ({
+    scaleX: 1,
+    posX: 0,
+    opacity: 1,
+    color: 'white'
+  })))
+  
+  // Initialize visibility as false to prevent initial glitch storm
+  const visibilityRefs = useRef(collections.map(() => ({ isVisible: false, distance: 999 })))
+  
+  // Track if initial setup is done
+  const initializedRef = useRef(false)
 
   // Preload spotlight textures once
   const spotlightTextures = useMemo(() => {
@@ -136,6 +148,8 @@ function RotatingLinks() {
       loaded[name] = spotlightImages[name].map((path) => {
         const tex = loader.load(path)
         tex.colorSpace = THREE.SRGBColorSpace
+        tex.minFilter = THREE.LinearFilter
+        tex.magFilter = THREE.LinearFilter
         return tex
       })
     }
@@ -147,7 +161,7 @@ function RotatingLinks() {
     const loader = new THREE.TextureLoader()
     const loaded = {}
     for (const name of collections) {
-      const tex = loader.load(`/images/Icons/${name}.png`)
+      const tex = loader.load(`/images/Icons/${name}.webp`)
       tex.colorSpace = THREE.SRGBColorSpace
       loaded[name] = tex
     }
@@ -161,30 +175,57 @@ function RotatingLinks() {
     config: { duration: 800 },
   }))
 
-  // Cycle images
+  // Cycle images - only animate visible items with stricter conditions
   useEffect(() => {
     const intervals = collections.map((name, index) => {
       return setInterval(() => {
-        setCurrentIndices((prev) => {
-          const next = (prev[name] + 1) % spotlightTextures[name].length
-          return { ...prev, [name]: next }
-        })
-
+        // Wait for initialization
+        if (!initializedRef.current) return
+        
+        // Only animate if item is visible AND not currently glitching
+        const visibility = visibilityRefs.current[index]
+        if (!visibility.isVisible || glitchingIndex !== null) return
+        
+        // STRICT: Only allow glitch on the CLOSEST visible item
+        const closestVisibleIndex = visibilityRefs.current
+          .map((v, i) => ({ ...v, index: i }))
+          .filter(v => v.isVisible)
+          .sort((a, b) => a.distance - b.distance)[0]?.index
+        
+        // Only proceed if this is the closest item
+        if (closestVisibleIndex !== index) return
+        
+        // Start glitch
+        setGlitchingIndex(index)
+        glitchFrameRef.current = 0
+        
         // Animate scaleY "closing then opening" with text movement
         api.start((i) =>
           i === index
             ? [
-                // First: scale down and move text down
                 { scaleY: 0, textY: -0.3 },
-                // Then: scale up and move text back up
                 { scaleY: 1, textY: 0 }
               ]
             : {}
         )
+
+        // Change image after brief delay
+        setTimeout(() => {
+          setCurrentIndices((prev) => {
+            const next = (prev[name] + 1) % spotlightTextures[name].length
+            return { ...prev, [name]: next }
+          })
+        }, 100)
+        
+        // End glitch
+        setTimeout(() => {
+          setGlitchingIndex(null)
+        }, isMobile ? 60 : 80) // Shorter on mobile
+        
       }, 3000 + index * 400)
     })
     return () => intervals.forEach(clearInterval)
-  }, [spotlightTextures, api])
+  }, [spotlightTextures, api, glitchingIndex, isMobile])
 
   // Border texture
   const borderTexture = useMemo(() => {
@@ -194,9 +235,56 @@ function RotatingLinks() {
     return tex
   }, [])
 
-  // Billboarding + distance-based fade (for image) and shrink (for border)
   useFrame(() => {
-    const threshold = 4.5
+    // Mark as initialized after first frame
+    if (!initializedRef.current) {
+      initializedRef.current = true
+    }
+
+    // Glitch effect - throttled and only when active
+    if (glitchingIndex !== null) {
+      glitchFrameRef.current += 1
+    
+      // Update every 2-3 frames on desktop, every 3-4 frames on mobile
+      const skipFrames = isMobile ? 3 : 2
+      if (glitchFrameRef.current % skipFrames !== 0) return
+      
+      const params = glitchParams.current[glitchingIndex]
+      params.scaleX = Math.random() * 0.3 + 0.9
+      params.posX = (Math.random() - 0.8) * 0.1
+      params.opacity = 0.85 + Math.random() * 0.15
+      
+      // Fewer color variations on mobile
+      const rand = Math.random()
+      if (isMobile) {
+        // Only 3 colors on mobile
+        if (rand > 0.7) {
+          params.color = '#000fff'
+        } else if (rand > 0.4) {
+          params.color = '#f000ff'
+        } else {
+          params.color = 'white'
+        }
+      } else {
+        // Full color range on desktop
+        if (rand > 0.9) {
+          params.color = '#000fff'
+        } else if (rand > 0.75) {
+          params.color = '#f000ff'
+        } else if (rand > 0.6) {
+          params.color = '#9000ff'
+        } else if (rand > 0.45) {
+          params.color = '#00e5ff'
+        } else if (rand > 0.3) {
+          params.color = '#f066cc'
+        } else {
+          params.color = 'white'
+        }
+      }
+    }
+
+    // Stricter visibility threshold - only 1-2 items visible at a time
+    const threshold = isMobile ? 3.5 : 4.5 // Smaller threshold on mobile
     const lerpSpeed = 0.08
 
     groupRefs.current.forEach((ref, i) => {
@@ -204,21 +292,41 @@ function RotatingLinks() {
       ref.lookAt(camera.position)
 
       const dist = camera.position.distanceTo(ref.position)
-      const targetFade = dist > threshold ? 0 : 1
-      const targetBorderY = dist > threshold ? 0.4 : 1
-      const targetBorderOpacity = dist > threshold ? 1 : 0
-      const targetTextY = dist > threshold ? 0 : -0.75
+      
+      // Update visibility tracking
+      const isVisible = dist <= threshold
+      visibilityRefs.current[i].isVisible = isVisible
+      visibilityRefs.current[i].distance = dist
+      
+      const targetFade = isVisible ? 1 : 0
+      const targetBorderY = isVisible ? 1 : 0.4
+      const targetBorderOpacity = isVisible ? 0 : 1
+      const targetTextY = isVisible ? -0.75 : 0
 
       // Smooth fade for image opacity
       const image = imageRefs.current[i]
       if (image) {
-        if (!image.userData.fade) image.userData.fade = 1
+        if (!image.userData.fade) image.userData.fade = 0 // Start at 0 instead of 1
         image.userData.fade = THREE.MathUtils.lerp(
           image.userData.fade,
           targetFade,
           lerpSpeed
         )
         image.material.opacity = image.userData.fade
+        
+        // Apply glitch effects ONLY to the currently glitching item
+        const isGlitching = glitchingIndex === i && isVisible
+        if (isGlitching) {
+          const params = glitchParams.current[i]
+          image.scale.x = params.scaleX
+          image.position.x = params.posX
+          image.material.color.set(params.color)
+        } else {
+          // Reset immediately when not glitching
+          image.scale.x = 1
+          image.position.x = 0
+          image.material.color.set('white')
+        }
       }
 
       // Smooth shrink for border Y
@@ -250,7 +358,7 @@ function RotatingLinks() {
     })
   })
 
-  // Link positions
+  // Rest of the component remains the same...
   const linkPositions = useMemo(() => {
     return collections.map((_, index) => {
       const angle = (index / collections.length) * Math.PI * 2
@@ -260,8 +368,6 @@ function RotatingLinks() {
 
   return (
     <>
-      {/* <ConnectingLines linkPositions={linkPositions} /> */}
-
       {collections.map((name, index) => {
         const { x, y, z } = linkPositions[index]
         const texArray = spotlightTextures[name]
@@ -273,7 +379,6 @@ function RotatingLinks() {
             position={[x, y, z]}
             ref={(el) => (groupRefs.current[index] = el)}
           >
-            {/* Spotlight image */}
             <a.mesh
               scale-y={springs[index].scaleY}
               ref={(el) => (imageRefs.current[index] = el)}
@@ -282,11 +387,9 @@ function RotatingLinks() {
               <a.meshBasicMaterial
                 map={currentTex}
                 transparent
-                opacity={1} // controlled by useFrame fade
               />
             </a.mesh>
 
-            {/* Border overlay */}
             <mesh
               position={[0, 0, 0.01]}
               ref={(el) => (borderRefs.current[index] = el)}
@@ -299,7 +402,6 @@ function RotatingLinks() {
               />
             </mesh>
 
-            {/* Text label with animated position */}
             <a.group 
               position-y={springs[index].textY}
               ref={(el) => (textRefs.current[index] = el)}
@@ -324,8 +426,7 @@ function RotatingLinks() {
                   map={iconTextures[name]} 
                   transparent
                 />
-                
-            </mesh>
+              </mesh>
             </a.group>
           </group>
         )
@@ -359,6 +460,8 @@ function SwipeHint ({ hasSwiped }) {
 
     return () => clearInterval(interval)
   }, [hasSwiped])
+
+  if (hasSwiped) return null
 
   return (
     <img

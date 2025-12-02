@@ -77,13 +77,6 @@ export default function CollectionPage() {
       </div>
       <BackButton />
       <h1 className="text-4xl flex items-center justify-center mt-0 font-extrabold py-0">{ params.collection }</h1>
-      <div className="flex flex-col items-center justify-center mt-4">
-        <img 
-          src={`/images/Icons/${params.collection}.png`} 
-          alt={params.collection}
-          className="w-18 h-18 mb-2 mt-0"
-        />
-      </div>
       <img src="/images/cyber_line.png" className="w-160 mx-auto my-8 mt-3 max-w-[90%]"/>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-8">
         {products.map(product => (
@@ -91,9 +84,9 @@ export default function CollectionPage() {
               key={product.id}
               name={product.name}
               slug={product.slug}
-              desc={product.description}
               price={product.priceUSD}
               stock={product.stock}
+              collection={product.collection}
             />
           ))}
       </div>
@@ -101,7 +94,7 @@ export default function CollectionPage() {
   );
 }
 
-export function Card({ name, slug, desc, price, stock }) {
+export function Card({ name, slug, price, stock, collection }) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -113,12 +106,19 @@ export function Card({ name, slug, desc, price, stock }) {
       onClick={handleClick}
       className="relative max-w-[380px] min-h-[100px] w-full h-full mx-auto rounded p-5 overflow-hidden shadow-md"
     >
+      <Image 
+        src={`/images/Icons/${collection}.webp`}
+        alt="Cool looking icon"
+        width={70}
+        height={70}
+        className="absolute top-0 right-0 z-20"
+      />
       {/* BORDER IMAGE - slightly scaled taller on Y axis */}
       <Image
         src="/images/Borders/border2 thin fadde.webp"
         alt="Border"
         fill
-        className="pointer-events-none z-5"
+        className="pointer-events-none z-10"
         style={{ transform: 'scale(1.05, 1.05)' }}
         loading="eager"
       />
