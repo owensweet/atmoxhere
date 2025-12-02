@@ -225,7 +225,7 @@ function RotatingLinks() {
       }, 3000 + index * 400)
     })
     return () => intervals.forEach(clearInterval)
-  }, [spotlightTextures, api, glitchingIndex, isMobile])
+  }, [spotlightTextures, isMobile])
 
   // Border texture
   const borderTexture = useMemo(() => {
@@ -318,9 +318,9 @@ function RotatingLinks() {
         const isGlitching = glitchingIndex === i && isVisible
         if (isGlitching) {
           const params = glitchParams.current[i]
-          image.scale.x = params.scaleX
-          image.position.x = params.posX
-          image.material.color.set(params.color)
+          // image.scale.x = params.scaleX
+          // image.position.x = params.posX
+          // image.material.color.set(params.color)
         } else {
           // Reset immediately when not glitching
           image.scale.x = 1
