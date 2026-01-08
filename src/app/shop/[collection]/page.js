@@ -127,7 +127,7 @@ export function Card({ name, slug, price, stock, collection }) {
       <div className="aspect-square relative w-full rounded-lg overflow-hidden z-4 translate-y-[10px] mix-blend-normal">
         <div className="absolute inset-0 bg-black/10 backdrop-blur-xs" />
         <Image
-          src={`/images/${slug}1.webp`}
+          src={`/images/Clothes/${slug}1.webp`}
           alt={name}
           className="object-cover rounded-t pointer-events-none scale-[0.9] z-10"
           fill

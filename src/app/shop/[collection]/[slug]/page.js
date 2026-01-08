@@ -135,7 +135,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
 
         const checkImages = async () => {
           while(true) {
-            const url = `/images/${slug}${index}.webp`;
+            const url = `/images/Clothes/${slug}${index}.webp`;
             try {
               const res = await fetch(url);
               if (res.ok) {
