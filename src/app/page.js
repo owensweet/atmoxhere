@@ -23,31 +23,31 @@ export const collections = [
 
 const spotlightImages = {
   mutant: [
-    "/images/defiant_tee1.webp",
-    "/images/sister_alma_tee1.webp",
-    "/images/tsiri_tee1.webp",
+    "/images/Clothes/mini_defiant_tee1.webp",
+    "/images/Clothes/mini_sister_alma_tee1.webp",
+    "/images/Clothes/mini_tsiri_tee1.webp",
   ],
   tsiri_synthesis: [
-    "/images/transmute_neck_mutation1.webp",
-    "/images/suffix_neck_mutation1.webp",
+    "/images/Clothes/mini_transmute_neck_mutation1.webp",
+    "/images/Clothes/mini_suffix_neck_mutation1.webp",
   ],
   termite: [
-    "/images/termite_sweater1.webp",
-    "/images/termite_jeans1.webp",
+    "/images/Clothes/mini_termite_sweater1.webp",
+    "/images/Clothes/mini_termite_jeans1.webp",
   ],
   z220x11: [
-    "/images/pilot_boots1.webp",
-    "/images/pilot_boots3.webp",
-    "/images/pilot_boots4.webp",
+    "/images/Clothes/mini_pilot_boots1.webp",
+    "/images/Clothes/mini_pilot_boots3.webp",
+    "/images/Clothes/mini_pilot_boots4.webp",
   ],
   bijou_pod_pulsers: [
-    "/images/bijou_pod_pulsers1.webp",
-    "/images/bijou_pod_pulsers3.webp",
-    "/images/bijou_pod_pulsers2.webp"
+    "/images/Clothes/mini_bijou_pod_pulsers1.webp",
+    "/images/Clothes/mini_bijou_pod_pulsers3.webp",
+    "/images/Clothes/mini_bijou_pod_pulsers2.webp"
   ],
   agora_market: [
-    "/images/n_root_respirator1.webp",
-    "/images/n_root_respirator2.webp",
+    "/images/Clothes/mini_n_root_respirator1.webp",
+    "/images/Clothes/mini_n_root_respirator2.webp",
   ]
 }
 
