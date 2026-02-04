@@ -110,15 +110,6 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
           </form>
         )}
         <p>[{stock > 0 ? "available" : "SUPPLY_LOCKED] [dropping soon"}]</p>
-
-        <div className="relative w-full h-300">
-          <Image
-            src="/images/size chart mutant blackstroke thick border.webp"
-            fill
-            alt="size chart"
-            className="pointer-events-none"
-          />
-        </div>
       </div>
     </div>
   );

@@ -18,6 +18,14 @@
     animation: pulse 1.5s infinite ease-in-out;
   }  */
   
+  * {
+  cursor: url('/images/cursor.png') 16 16, auto;
+  }
+
+  a:hover, button:hover {
+  cursor: url('/images/cursor_hover.png') 16 16, pointer;
+}
+
   @keyframes pulse {
     0% {
       transform: translateX(-50%) scale(1);
