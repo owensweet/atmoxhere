@@ -1,6 +1,9 @@
 # IMMEDIATE CHANGES
 
-- fix failed deployment
+
+- cant scroll
+
+- distance for nodes opening on the root page is bugged on mobile and threshold needs to be modified? but worked before?
 
 - make the vault page and have a button from the admin page to add photos to the vault page
 
