@@ -20,6 +20,7 @@
   
   * {
   cursor: url('/images/cursor.png') 16 16, auto;
+  pointer-events: none;
   }
 
   a:hover, button:hover {

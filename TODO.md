@@ -1,5 +1,6 @@
 # IMMEDIATE CHANGES
 
+- icons dont load on mobile
 
 - cant scroll
 
@@ -8,8 +9,6 @@
 - make the vault page and have a button from the admin page to add photos to the vault page
 
 - add sizes 1 2 3 4 for amount/availability of each size into firestore and then add sizes to slug page (selector and replace size chart with text)
-
-- fix icons not loading and lag on root
 
 - JASHIN email
 
