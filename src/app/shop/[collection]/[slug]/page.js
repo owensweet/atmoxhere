@@ -3,7 +3,6 @@
   import { useParams, useSearchParams } from 'next/navigation';
   import Image from 'next/image';
   import { useState, useEffect, useRef } from 'react'; 
-  import { BackButton } from '@/lib/backButton/backbutton';
   import '@/styles/globals.css';
   import { ShoppingCartIcon } from '@heroicons/react/24/solid';
 
@@ -74,7 +73,6 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
 
   return (
     <div className="pt-0">
-      <BackButton />
       <h1 className="text-3xl flex items-center justify-center mt-0 font-extrabold py-0">item :: data</h1>
       <img src="/images/cyber_line.png" className="w-160 mx-auto my-6 mt-3 max-w-[90%]"/>
       <div className="flex flex-col overflow-hidden w-full h-300 text-center py-0 px-10 gap-5">

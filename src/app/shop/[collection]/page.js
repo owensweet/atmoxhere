@@ -3,7 +3,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import Firestore from '@/lib/firebase/Firestore'
-import { BackButton } from '@/lib/backButton/backbutton';
 import { useRouter } from 'next/navigation';
 import { useParams } from 'next/navigation';
 import '@/styles/globals.css';
@@ -75,7 +74,6 @@ export default function CollectionPage() {
           {chars}
         </div>
       </div>
-      <BackButton />
       <h1 className="text-4xl flex items-center justify-center mt-0 font-extrabold py-0">{ params.collection }</h1>
       <img src="/images/cyber_line.png" className="w-160 mx-auto my-8 mt-3 max-w-[90%]"/>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-8">

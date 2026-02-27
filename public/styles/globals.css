@@ -19,13 +19,12 @@
   }  */
   
   * {
-  cursor: url('/images/cursor.png') 16 16, auto;
-  pointer-events: none;
+    cursor: url('/images/cursor.png') 16 16, auto;
   }
 
   a:hover, button:hover {
-  cursor: url('/images/cursor_hover.png') 16 16, pointer;
-}
+    cursor: url('/images/cursor_hover.png') 16 16, pointer;
+  }
 
   @keyframes pulse {
     0% {
