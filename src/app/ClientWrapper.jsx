@@ -15,7 +15,7 @@ export default function ClientWrapper({ children }) {
     <div className='overscroll-none'>
       <div className="fixed top-0 right-0 h-full w-[50%] z-[-10] pointer-events-none crt">
         <Image
-          src="/images/gimpedit%203.webp"
+          src="/images/gimpedit-3.webp"
           alt="sigil"
           fill
           className="object-fill opacity-40"
@@ -25,8 +25,8 @@ export default function ClientWrapper({ children }) {
       </div>
       <div className="fixed top-0 left-0 h-full w-[50%] z-[-10] pointer-events-none">
         <Image
-          src="/images/gimpedit%204.webp"
-          alt="sigil"
+          src="/images/gimpedit-4.webp"
+          alt="sigil2"
           fill
           className="object-fill opacity-40"
           priority
@@ -43,7 +43,7 @@ export default function ClientWrapper({ children }) {
       <Image 
         src="/images/Components/corner.png"
         alt="corner sigil"
-        className="absolute z-[0] top-1 right-[-5]"
+        className="absolute z-[0] top-1 right-[-5] h-auto"
         priority
         width = {120}
         height = {100}
@@ -51,7 +51,7 @@ export default function ClientWrapper({ children }) {
       <Image 
         src="/images/Components/corner_left.png"
         alt="corner sigil"
-        className="absolute z-[0] top-1 left-[-5]"
+        className="absolute z-[0] top-1 left-[-5] h-auto"
         priority
         width = {100}
         height = {100}
