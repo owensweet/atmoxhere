@@ -13,7 +13,7 @@ export default function ClientWrapper({ children }) {
 
   return (
     <div className='overscroll-none'>
-      <div className="fixed top-0 right-0 h-full w-[50%] z-[-10] pointer-events-none crt">
+      <div className="fixed top-0 right-0 h-screen w-[50%] z-[-10] pointer-events-none">
         <Image
           src="/images/gimpedit-3.webp"
           alt="sigil"
@@ -23,7 +23,7 @@ export default function ClientWrapper({ children }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
-      <div className="fixed top-0 left-0 h-full w-[50%] z-[-10] pointer-events-none">
+      <div className="fixed top-0 left-0 h-screen w-[50%] z-[-10] pointer-events-none">
         <Image
           src="/images/gimpedit-4.webp"
           alt="sigil2"

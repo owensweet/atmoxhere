@@ -284,7 +284,7 @@ function RotatingLinks() {
     }
 
     // Stricter visibility threshold - only 1-2 items visible at a time
-    const threshold = isMobile ? 3.5 : 4.5 // Smaller threshold on mobile
+    const threshold = 4.5
     const lerpSpeed = 0.08
 
     groupRefs.current.forEach((ref, i) => {
