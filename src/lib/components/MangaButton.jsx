@@ -128,7 +128,7 @@ export default function MangaButton({ manga_name }) {
                 onClick={() => setIsOpen(true)}
                 className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/30 rounded transition-all"
             >
-                <p>{manga_name}</p>
+                <p><span className = "font-black outline-black">DATA_LOG_0: </span>{manga_name}</p>
             </button>
         )
     }
