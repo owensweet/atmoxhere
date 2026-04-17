@@ -17,7 +17,7 @@ export default function MangaButton({ manga_name }) {
         let pageCount = 1
         const checkPage = async (num) => {
             try {
-                const response = await fetch(`/images/Manga/${manga_name}_${num}.png`)
+                const response = await fetch(`/images/Manga/${manga_name}_${num}.webp`)
                 return response.ok
             } catch {
                 return false
@@ -170,7 +170,7 @@ export default function MangaButton({ manga_name }) {
                             className="min-w-full h-full flex items-center justify-center"
                         >
                             <Image
-                                src={`/images/Manga/${manga_name}_${i + 1}.png`}
+                                src={`/images/Manga/${manga_name}_${i + 1}.webp`}
                                 alt={`${manga_name} page ${i + 1}`}
                                 width={1200}
                                 height={1600}
