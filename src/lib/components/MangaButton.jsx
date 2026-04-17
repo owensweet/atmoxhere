@@ -105,6 +105,7 @@ export default function MangaButton({ manga_name }) {
         const clickX = e.clientX - rect.left
         const containerWidth = rect.width
 
+        // Change the denominator for skinnier hitboxes on either side of the page
         if (clickX < containerWidth / 3) {
             prevPage()
         } else if (clickX > (containerWidth * 2) / 3) {

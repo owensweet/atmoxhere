@@ -12,6 +12,8 @@
 
 - ADMIN PAGE NEEDS TO BE ABLE TO UPLOAD VAULT PHOTOS AND ALSO FULFILL/DELETE THE ORDERS ON THE PAGE
 
+- Matrix effect on /collection is costly and lags the page (too many react rerenders?)
+
 # ideas / bugs
 
 - route.js line 106
