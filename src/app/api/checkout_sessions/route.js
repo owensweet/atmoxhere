@@ -41,6 +41,13 @@ export async function POST(request) {
             return NextResponse.json({ error: `Missing priceID`}, { status: 400 });
         }
 
+        if (!SHIPPING_RATES.includes(shippingCountry) ) {
+            return NextResponse.json(
+                { error: "shippingCountry is not supported" },
+                { status: err.statusCode || 400 }
+            )
+        }
+
         const shippingPriceUSD = SHIPPING_RATES[shippingCountry]
 
         const session = await stripe.checkout.sessions.create({

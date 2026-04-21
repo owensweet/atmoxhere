@@ -42,7 +42,7 @@ npm run lint     # ESLint
 
 - Product images: `public/images/Clothes/{slug}{n}.webp` (numbered from 1)
 - Collection icons: `public/images/Icons/{collection}.webp`
-- Manga pages: `public/images/Manga/{manga_name}_{n}.png` (numbered from 1)
+- Manga pages: `public/images/Manga/{manga_name}_{n}.webp` (numbered from 1)
 - Border overlays: `public/images/Borders/`
 
 ### Styling
