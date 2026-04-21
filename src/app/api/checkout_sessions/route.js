@@ -6,6 +6,7 @@ import { stripe } from '@/lib/stripe/stripe.js'
 const SHIPPING_RATES = {
   CA: 2000,    // $20.00 domestic (Canada)
   US: 2500,    // $25.00 USA (Xpresspost USA)
+  CN: 6500,    // $65.00 China
   MX: 3500,    // $35.00 Mexico (Xpresspost International)
   GB: 5500,    // $55.00 United Kingdom
   FR: 5500,    // $55.00 France
@@ -55,6 +56,7 @@ export async function POST(request) {
                 allowed_countries: [
                 'US', 
                 'CA', 
+                'CN',
                 'GB', 
                 'AU', 
                 'DE', 
