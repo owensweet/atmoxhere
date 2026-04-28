@@ -1,6 +1,5 @@
-import { Truculenta } from 'next/font/google';
 import { db } from './config';
-import { collection, getDocs, addDoc, query, where, limit, updateDoc, doc, incremenent } from 'firebase/firestore'
+import { collection, getDocs, addDoc, query, where, limit, updateDoc, doc, increment } from 'firebase/firestore'
 
 class Firestore {
     constructor() {
@@ -50,9 +49,9 @@ class Firestore {
     }
 
     // Get the firestore product by the stripe priceId that is the priceId field on firestore
-    async getProductbyPriceId(priceId) {
+    async getProductByPriceId(priceId) {
         try {
-            const qq = query(
+            const q = query(
                 this.productsCollection,
                 where('priceID', '==', priceId),
                 limit(1)

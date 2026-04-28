@@ -42,10 +42,10 @@ export async function POST(request) {
             return NextResponse.json({ error: `Missing priceID`}, { status: 400 });
         }
 
-        if (!SHIPPING_RATES.includes(shippingCountry) ) {
+        if (!(shippingCountry in SHIPPING_RATES)) {
             return NextResponse.json(
                 { error: "shippingCountry is not supported" },
-                { status: err.statusCode || 400 }
+                { status: 400 }
             )
         }
 
