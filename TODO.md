@@ -16,6 +16,8 @@
 
 # ideas / bugs
 
+- hamburger menu instead of lore button on the left (cool animation + feel vv important)
+
 - route.js line 106
 
 - finalize footer (finish links and blur and remove redundancy)
