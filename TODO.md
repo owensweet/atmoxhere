@@ -1,5 +1,7 @@
 # IMMEDIATE CHANGES
 
+- manga page loading not lazy!
+
 - icons dont load on mobile
 
 - distance for nodes opening on the root page is bugged on mobile and threshold needs to be modified? but worked before?

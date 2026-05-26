@@ -254,29 +254,23 @@ function RotatingLinks() {
       params.posX = (Math.random() - 0.8) * 0.1
       params.opacity = 0.85 + Math.random() * 0.15
       
-      // Fewer color variations on mobile
+      // Mostly white, occasional soft tint
       const rand = Math.random()
       if (isMobile) {
-        // Only 3 colors on mobile
-        if (rand > 0.7) {
-          params.color = '#000fff'
-        } else if (rand > 0.4) {
-          params.color = '#f000ff'
+        if (rand > 0.9) {
+          params.color = '#a0c4ff'
+        } else if (rand > 0.8) {
+          params.color = '#ffb3e6'
         } else {
           params.color = 'white'
         }
       } else {
-        // Full color range on desktop
-        if (rand > 0.9) {
-          params.color = '#000fff'
-        } else if (rand > 0.75) {
-          params.color = '#f000ff'
-        } else if (rand > 0.6) {
-          params.color = '#9000ff'
-        } else if (rand > 0.45) {
-          params.color = '#00e5ff'
-        } else if (rand > 0.3) {
-          params.color = '#f066cc'
+        if (rand > 0.92) {
+          params.color = '#a0c4ff'
+        } else if (rand > 0.84) {
+          params.color = '#ffb3e6'
+        } else if (rand > 0.76) {
+          params.color = '#c4a0ff'
         } else {
           params.color = 'white'
         }
@@ -318,9 +312,9 @@ function RotatingLinks() {
         const isGlitching = glitchingIndex === i && isVisible
         if (isGlitching) {
           const params = glitchParams.current[i]
-          // image.scale.x = params.scaleX
-          // image.position.x = params.posX
-          // image.material.color.set(params.color)
+          image.scale.x = params.scaleX
+          image.position.x = params.posX
+          image.material.color.set(params.color)
         } else {
           // Reset immediately when not glitching
           image.scale.x = 1
@@ -483,7 +477,12 @@ export default function ShopHome() {
       <h1 className="text-5xl font-bold mb-2 z-0">atmoxhere.</h1>
       <img src="/images/cyber_line.png" className="w-100 max-w-[90%] z-0"/>
       <div className="w-full h-[500px] relative">
-        <Canvas camera={{ position: [0, 2, 5.5] }} onPointerDown={() => setHasSwiped(true)}>
+        <Canvas
+          camera={{ position: [0, 2, 5.5] }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: false, powerPreference: 'high-performance' }}
+          onPointerDown={() => setHasSwiped(true)}
+        >
           <Suspense fallback={<Loader />}>
             <ambientLight intensity={0.5} />
             <WireframeSphere />

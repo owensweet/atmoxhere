@@ -184,12 +184,12 @@ export default function MangaButton({ manga_name }) {
 
             {/* Navigation hints */}
             {currentPage > 0 && (
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-2xl pointer-events-none">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-4xl pointer-events-none">
                     ‹
                 </div>
             )}
             {currentPage < totalPages - 1 && (
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 text-2xl pointer-events-none">
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 text-4xl pointer-events-none">
                     ›
                 </div>
             )}
