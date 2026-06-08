@@ -1,0 +1,299 @@
+PERFORMANCE FIXES FOR THE ROOT PAGE (THE SPINNING SPHERE)
+=========================================================
+File touched: src/app/page.js
+Date: 2026-05-26
+
+
+THE PROBLEM
+-----------
+The root page renders a 3D scene using Three.js (via React Three Fiber, aka R3F).
+There is a wireframe sphere at the center, with six "collection node" cards
+orbiting it. Each node cycles through product images, and the closest node was
+supposed to play a brief "glitch" effect (a horizontal warp, x-jitter, and color
+flash) every time its image changes.
+
+The glitch effect was making the page lag badly on mobile devices.
+
+So at some point the glitch was disabled — the three lines that actually applied
+the visual effect to the mesh were commented out in src/app/page.js around lines
+321-323:
+
+    // image.scale.x = params.scaleX
+    // image.position.x = params.posX
+    // image.material.color.set(params.color)
+
+But the entire glitch machine (state, intervals, frame counter, random color
+generator) was still running every frame. So the page was paying the cost of a
+feature it wasn't even showing.
+
+
+THE DIAGNOSIS
+-------------
+Reading through page.js, the real source of mobile lag was NOT the glitch
+visuals themselves (which are cheap — three mesh property assignments per
+frame). It was three things, in order of severity:
+
+1. The <Canvas> had no device pixel ratio cap.
+2. The <Canvas> had antialiasing turned on by default.
+3. The <Canvas> wasn't requesting the high-performance GPU.
+
+The glitch was the trigger that exposed how thin the perf budget already was.
+Fix the budget and the glitch fits inside it.
+
+
+THE FIXES
+---------
+
+----------------------------------------------------------------------
+FIX 1: CAP THE DEVICE PIXEL RATIO (DPR)
+----------------------------------------------------------------------
+
+WHAT IT IS
+A modern phone screen has many more physical pixels than its CSS layout uses.
+A CSS pixel on an iPhone is rendered using 3x3 = 9 physical pixels. That
+multiplier is called the "device pixel ratio" or DPR. A DPR of 1 means one
+physical pixel per CSS pixel. A DPR of 3 means nine.
+
+WHY IT MATTERS FOR 3D
+When R3F sets up the canvas, it asks the GPU to draw at the device's native
+pixel density so things look sharp. For a normal HTML page this is fine — the
+browser optimizes it. For a WebGL 3D scene, the GPU has to actually run the
+fragment shader (the program that decides each pixel's color) once per pixel
+drawn. At DPR 3, that's 9x the shader work compared to DPR 1.
+
+This is called "fillrate" cost — how many pixels per second the GPU can fill
+in. Phones have weak fillrate compared to desktops, so a 3x DPR scene on a
+phone can run 9x slower than on a desktop, even if the scene is identical.
+
+WHAT WE CHANGED
+Added `dpr={[1, 1.5]}` to the <Canvas> prop. The array form means: minimum
+DPR of 1 (don't go lower than 1:1), maximum of 1.5 (cap it there even if the
+device wants more).
+
+Before:
+    <Canvas camera={{ position: [0, 2, 5.5] }} ...>
+
+After:
+    <Canvas
+      camera={{ position: [0, 2, 5.5] }}
+      dpr={[1, 1.5]}
+      ...
+    >
+
+WHY 1.5 AND NOT 1
+At DPR 1 on a high-DPI phone, edges look noticeably soft and the wireframe
+sphere lines look chunky. At 1.5 the image is still sharp enough that the eye
+doesn't notice, but the GPU does about 1/4 the fragment shader work compared
+to DPR 3. This is the single biggest mobile perf win available, and it's free
+(no code restructure).
+
+
+----------------------------------------------------------------------
+FIX 2: DISABLE ANTIALIASING
+----------------------------------------------------------------------
+
+WHAT IT IS
+Antialiasing (AA) is a technique to smooth jagged edges on 3D geometry. Without
+it, the diagonal lines on the wireframe sphere look like stairsteps. With it,
+they look smooth.
+
+The most common technique is MSAA (multi-sample anti-aliasing). MSAA works by
+rendering each pixel multiple times at slightly different sub-pixel positions
+and averaging the results. 4x MSAA means each pixel gets sampled four times.
+
+WHY IT MATTERS
+MSAA roughly multiplies the GPU's fragment work by the sample count. On a
+desktop GPU this is fine. On a mobile GPU it's a major hit. Worse, MSAA
+interacts badly with DPR — at DPR 3 with 4x MSAA, you're doing ~36 shader runs
+per CSS pixel.
+
+R3F enables MSAA by default. Most projects don't realize this.
+
+WHAT WE CHANGED
+Passed `gl={{ antialias: false }}` to the <Canvas>. This tells WebGL to skip
+MSAA entirely.
+
+WHY MOBILE TOLERATES IT
+Phone screens are high enough DPI that the aliasing (stairsteps on edges) is
+harder to see than on a desktop monitor. The wireframe sphere edges and the
+<Text> outline are slightly more pixelated now, but it's barely perceptible at
+phone screen density.
+
+IF YOU EVER WANT IT BACK ON DESKTOP
+You can detect mobile and conditionally enable AA. But the cost is needing to
+detect mobile up at the <Canvas> level (currently isMobile is detected inside
+RotatingLinks). Not worth it unless you notice the desktop aliasing.
+
+
+----------------------------------------------------------------------
+FIX 3: REQUEST THE HIGH-PERFORMANCE GPU
+----------------------------------------------------------------------
+
+WHAT IT IS
+Many laptops and some phones have two GPUs: a slow integrated one (built into
+the CPU, low power) and a fast discrete one (dedicated chip, more power). The
+device defaults to the integrated GPU to save battery. WebGL lets a page hint
+which one it wants.
+
+WHAT WE CHANGED
+Added `powerPreference: 'high-performance'` to the same `gl` object:
+
+    gl={{ antialias: false, powerPreference: 'high-performance' }}
+
+WHAT IT ACTUALLY DOES
+On laptops with switchable graphics (most gaming laptops, MacBook Pros), this
+tells the OS to wake up the discrete GPU for this page. On phones it's mostly
+ignored — phones only have one GPU. But there's no cost to setting it, and on
+the devices where it does matter, it can double or triple framerate.
+
+WHY IT'S NOT GUARANTEED
+It's a HINT, not a command. The browser and OS can ignore it (e.g. if the
+laptop is on battery and the user has set "save power"). But asking is free.
+
+
+----------------------------------------------------------------------
+FIX 4: RE-ENABLE THE GLITCH VISUALS
+----------------------------------------------------------------------
+
+WHAT IT IS
+Not really a perf fix — just turning the feature back on. Lines 321-323 of
+page.js were commented out, so the glitch state machine ran but nothing
+visually happened. Uncommented them:
+
+    image.scale.x = params.scaleX
+    image.position.x = params.posX
+    image.material.color.set(params.color)
+
+The state machine had been doing all the work; it just wasn't writing the
+results to the mesh.
+
+
+----------------------------------------------------------------------
+WHY ALL OF THIS WORKED
+----------------------------------------------------------------------
+
+The original lag was a "death by a thousand cuts" situation. The glitch effect
+was the visible symptom, but the real issue was that mobile didn't have enough
+perf headroom for anything. By capping DPR (4x less pixel work), disabling AA
+(another 2-4x less per pixel), and waking the better GPU, we freed up so much
+budget that the glitch visuals fit comfortably.
+
+THINK OF IT AS A BUDGET
+- The GPU has a fixed budget per frame (e.g. 16ms for 60fps).
+- Every effect costs some of that budget.
+- The glitch effect costs maybe 0.5ms.
+- Drawing the scene at DPR 3 with MSAA costs maybe 18ms on mobile — already
+  over budget, before any glitch.
+- Drop DPR to 1.5 and kill MSAA: scene drops to ~3ms. Now the glitch's 0.5ms
+  fits with 12.5ms to spare.
+
+This is the most important fundamental: when a feature feels too expensive,
+first ask if the framework's defaults are eating your budget. Often they are.
+
+
+----------------------------------------------------------------------
+WHAT WE DIDN'T FIX (BUT COULD LATER)
+----------------------------------------------------------------------
+
+These are real but smaller wins, in order of impact:
+
+A) The glitch effect and texture cycling both use React state
+   (setGlitchingIndex, setCurrentIndices). Every state change re-renders the
+   whole RotatingLinks component, which is 6 nodes worth of Three.js JSX.
+   That's a lot of work for a value change. The pattern that solves this is
+   "useRef instead of useState for animation values that change every frame."
+   Refs don't trigger re-renders; you just mutate the underlying object and
+   the next frame picks it up. This was Experiment C in the diagnosis and
+   wasn't shipped yet.
+
+B) The <Line>-based ConnectingLines component is defined but never rendered.
+   Dead code. Safe to delete when you're sure you won't bring it back.
+
+C) The inline onClick handlers on <Text> and the icon <mesh> create a new
+   function on every render. Memoizing them with useCallback (one per name)
+   would save some garbage collection churn.
+
+D) The product image .webp files — if any are bigger than ~512px on the long
+   edge, they're wasting VRAM. The mesh that draws them is 2.2 units wide,
+   which at this camera distance is maybe 200 screen pixels. So a 1024px
+   source is overkill.
+
+E) The drei <Text> component uses an SDF (signed distance field) shader. It's
+   sharp at any zoom but each instance has real cost. Six of them with an
+   outline is noticeable on mobile. If you ever wanted to push perf further,
+   pre-rendering the collection names as static textures would be the next
+   step. Trade-off: outline becomes a baked image, not a live effect.
+
+
+----------------------------------------------------------------------
+EXACT BEFORE / AFTER DIFF
+----------------------------------------------------------------------
+
+LOCATION: src/app/page.js, the <Canvas> call inside ShopHome.
+
+BEFORE:
+    <Canvas camera={{ position: [0, 2, 5.5] }} onPointerDown={() => setHasSwiped(true)}>
+
+AFTER:
+    <Canvas
+      camera={{ position: [0, 2, 5.5] }}
+      dpr={[1, 1.5]}
+      gl={{ antialias: false, powerPreference: 'high-performance' }}
+      onPointerDown={() => setHasSwiped(true)}
+    >
+
+
+LOCATION: src/app/page.js, inside useFrame in RotatingLinks (around line 321).
+
+BEFORE:
+    if (isGlitching) {
+      const params = glitchParams.current[i]
+      // image.scale.x = params.scaleX
+      // image.position.x = params.posX
+      // image.material.color.set(params.color)
+    } else {
+
+AFTER:
+    if (isGlitching) {
+      const params = glitchParams.current[i]
+      image.scale.x = params.scaleX
+      image.position.x = params.posX
+      image.material.color.set(params.color)
+    } else {
+
+
+----------------------------------------------------------------------
+GLOSSARY
+----------------------------------------------------------------------
+
+DPR (device pixel ratio): How many physical pixels per CSS pixel. iPhones are
+  typically 3. The higher it is, the more work the GPU does.
+
+Fillrate: How fast the GPU can fill in pixels. The bottleneck for high-DPR
+  scenes on mobile.
+
+Fragment shader: The GPU program that decides what color each pixel becomes.
+  Runs once per pixel drawn, per frame.
+
+MSAA (multi-sample anti-aliasing): An anti-aliasing technique that samples
+  each pixel multiple times. Smooths edges, costs fillrate.
+
+Antialiasing: Any technique for smoothing the stairstep look of diagonal lines
+  in rendered images.
+
+R3F (react-three-fiber): The React wrapper around Three.js. <Canvas> is its
+  root component.
+
+Three.js: The JavaScript 3D graphics library underneath everything.
+
+useFrame: An R3F hook that runs a function once per rendered frame. The right
+  place to put per-frame animation logic.
+
+useRef vs useState: Both store data across renders. useState triggers a
+  re-render when changed; useRef does not. For animation values that change
+  every frame, refs are the right tool — re-rendering 60 times a second is
+  what was killing the mobile perf in this file.
+
+Lerp (linear interpolation): A way to smoothly blend from one value to
+  another over time. THREE.MathUtils.lerp(current, target, speed) takes a
+  small step from current toward target each frame.

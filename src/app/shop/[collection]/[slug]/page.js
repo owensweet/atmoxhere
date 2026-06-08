@@ -79,7 +79,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
         <ImageGallery slug={slug} />
         <h1 className="text-4xl">{name}</h1>
         <p className="text-center text-gray-400">{description}</p>
-        <h3 className="text-xl">${price} USD</h3>
+        <h3 className="text-xl">{stock > 0 ? `${price} USD` : "???"}</h3>
 
         {stock > 0 && (
           <form 
