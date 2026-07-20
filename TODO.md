@@ -34,6 +34,8 @@
 
 - HOW TO IMPLEMENT MODEL PICTURES ('all' collection link cycles through model photos?)
 
+  - how to implement fan art of the brand
+
 # STRETCH FEAUTURES
 
 
