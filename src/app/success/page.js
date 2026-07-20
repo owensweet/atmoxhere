@@ -46,7 +46,7 @@ export default async function Success({ searchParams }) {
 
     for (const item of lineItems) {
       const priceId = item.price?.id
-      const quantity = item.quantity ?? 1
+    quantity = item.quantity ?? 1
 
       if (priceId) {
         await firebase.decrementStock(priceId, quantity)
@@ -56,6 +56,15 @@ export default async function Success({ searchParams }) {
     await confirmationEmail({
       to: customerEmail,
       productName: productName,
+    })
+
+    await adminEmail({
+      productName: productName,
+      customerEmail: customerEmail,
+      items: lineItems,
+      shipping: shipping,
+      paymentStatus: payment_status
+
     })
     // await jashinEmail({
       // to: customerEmail,   // going to need customer info, order info, shipping stuff, size, color all that

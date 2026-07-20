@@ -42,6 +42,24 @@ export async function confirmationEmail({ to, productName }) {
     })
 }
 
+export async function adminEmail({productName, customerEmail, items, shipping, paymentStatus }) {
+  return await resend.emails.send({
+    from: 'orders@atmoxhere.net',
+    to: 'orangesoda823496@gmail.com',
+    subject: 'atmoxhere order created',
+    html: `
+    <div>
+     product: ${productName}
+     customer email: ${customerEmail}
+     items: ${items}
+     shipping: ${shipping}
+     payment status: ${paymentStatus}
+    </div>
+    `
+
+  })
+}
+
 export async function jashinEmail({}) {
     
 }
