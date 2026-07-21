@@ -1,5 +1,5 @@
 import { db } from './config';
-import { collection, getDocs, addDoc, query, where, limit, updateDoc, doc, increment } from 'firebase/firestore'
+import { collection, getDocs, getDoc, addDoc, setDoc, query, where, limit, updateDoc, doc, increment } from 'firebase/firestore'
 
 class Firestore {
     constructor() {
@@ -135,7 +135,7 @@ class Firestore {
         }
     }
 
-    // Add order
+    // Add order with random id,used by the manual admin form
     async addOrder(orderData) {
         try {
             const docRef = await addDoc(this.ordersCollection, {
@@ -145,6 +145,47 @@ class Firestore {
             return docRef.id;
         } catch (error) {
             console.error('Error adding order:', error);
+            throw error;
+        }
+    }
+
+    // check if an order doc already exists (used by the webhook for idempotency)
+    async orderExists(orderId) {
+        try {
+            const snapshot = await getDoc(doc(this.ordersCollection, orderId));
+            return snapshot.exists();
+        } catch (error) {
+            console.error('Error checking order existence:', error);
+            throw error;
+        }
+    }
+
+    // write an order at a specific id (the stripe session id) so a repeat
+    // webhook or a refresh overwrites the same doc instead of duplicating
+    async setOrder(orderId, orderData) {
+        try {
+            await setDoc(doc(this.ordersCollection, orderId), {
+                ...orderData,
+                createdAt: new Date()
+            });
+            return orderId;
+        } catch (error) {
+            console.error('Error setting order:', error);
+            throw error;
+        }
+    }
+
+    // update order (e.g. mark as shipped)
+    async updateOrder(id, updates) {
+        try {
+            const docRef = doc(this.ordersCollection, id);
+            await updateDoc(docRef, {
+                ...updates,
+                updatedAt: new Date()
+            });
+            return true;
+        } catch (error) {
+            console.error('Error updating order:', error);
             throw error;
         }
     }

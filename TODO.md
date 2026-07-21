@@ -1,5 +1,7 @@
 # IMMEDIATE CHANGES
 
+- admin page list of orders and products should be ordered (products by stock, orders but unfulfilled but payed at the top (so he knows to ship))
+
 - manga page loading not lazy!
 
 - icons dont load on mobile

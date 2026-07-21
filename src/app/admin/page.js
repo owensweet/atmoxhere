@@ -121,6 +121,30 @@ export default function AdminPanel() {
         }
     };
 
+    // Mark an order as shipped
+    const markShipped = async (orderId) => {
+        try {
+            await firestore.updateOrder(orderId, { fulfillment: 'shipped', shippedAt: new Date() });
+            setOrders(prev => prev.map(order =>
+                order.id === orderId ? { ...order, fulfillment: 'shipped' } : order
+            ));
+        } catch (err) {
+            setError(`Failed to mark shipped: ${err.message}`);
+        }
+    };
+
+    // Mark an order as unfulfilled
+    const markUnfulfilled = async (orderId) => {
+      try {
+        await firestore.updateOrder(orderId, { fulfillment: 'unfulfilled' });
+        setOrders(prev => prev.map(order => 
+            order.id === orderId ? { ...order, fulfillment: 'unfulfilled' } : order
+        ));
+      } catch (err) {
+        setError(`Failed to mark as unfulfilled: ${err.message}`);
+      }
+    }
+
     // Update product stock
     const updateStock = async (productId, newStock) => {
         try {
@@ -359,26 +383,47 @@ export default function AdminPanel() {
                                                     </h3>
                                                     <div className="mt-1 text-sm text-gray-500">
                                                         {order.customerEmail && <p>Email: {order.customerEmail}</p>}
-                                                        {order.total && <p>Total: ${order.total}</p>}
-                                                        {order.status && <p>Status: {order.status}</p>}
+                                                        {order.amountTotal != null && (
+                                                            <p>Total: {(order.amountTotal / 100).toFixed(2)} {(order.currency || '').toUpperCase()}</p>
+                                                        )}
+                                                        <p>Payment: {order.paymentStatus || 'N/A'}</p>
                                                         {order.createdAt && (
                                                             <p>Date: {new Date(order.createdAt.seconds * 1000).toLocaleDateString()}</p>
                                                         )}
-                                                        {order.items && (
-                                                            <p>Items: {order.items.length} item(s)</p>
+                                                        {order.lineItems && (
+                                                            <p>Items: {order.lineItems.map((i) => `${i.name} x${i.quantity}`).join(', ')}</p>
                                                         )}
                                                     </div>
                                                 </div>
-                                                <div className="flex flex-col items-end">
+                                                <div className="flex flex-col items-end space-y-2">
                                                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                                        order.status === 'completed' 
+                                                        order.fulfillment === 'shipped'
                                                             ? 'bg-green-100 text-green-800'
-                                                            : order.status === 'pending'
-                                                            ? 'bg-yellow-100 text-yellow-800'
-                                                            : 'bg-gray-100 text-gray-800'
+                                                            : order.fulfillment === 'cancelled'
+                                                            ? 'bg-gray-100 text-gray-800'
+                                                            : 'bg-yellow-100 text-yellow-800'
                                                     }`}>
-                                                        {order.status || 'Unknown'}
+                                                        {order.fulfillment || 'unfulfilled'}
                                                     </span>
+
+                                                    {order.fulfillment !== 'shipped' && (
+                                                        <button
+                                                            onClick={() => markShipped(order.id)}
+                                                            className="bg-green-500 hover:bg-green-700 text-white text-xs font-bold py-1 px-3 rounded"
+                                                        >
+                                                            Mark shipped
+                                                        </button>
+                                                    )}
+
+                                                    {order.fulfillment == 'shipped' && (
+                                                      <button
+                                                        onClick={() => markUnfulfilled(order.id)}
+                                                        className="bg-blue-500 hover:bg-blue-700 text-white text-xs font-bold py-1 px-3 rounded"
+                                                      >
+                                                          Mark as not shipped
+                                                      </button>
+                                                    )}
+
                                                     <span className="text-xs text-gray-400 mt-1">
                                                         ID: {order.id}
                                                     </span>
@@ -506,28 +551,31 @@ function AddProductModal({ onAdd, onClose }) {
 function AddOrderModal({ onAdd, onClose }) {
     const [formData, setFormData] = useState({
         customerEmail: '',
-        total: '',
-        status: 'pending',
+        amountTotal: '',
+        currency: 'usd',
+        fulfillment: 'unfulfilled',
         items: ''
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        // Parse items as JSON or create simple array
+
+        // parse items as JSON, or fall back to comma-separated names
         let parsedItems;
         try {
             parsedItems = formData.items ? JSON.parse(formData.items) : [];
         } catch {
-            // If JSON parsing fails, create simple item structure
-            parsedItems = formData.items.split(',').map(item => ({ name: item.trim() }));
+            parsedItems = formData.items.split(',').map(item => ({ name: item.trim(), quantity: 1 }));
         }
-        
+
+        // match the shape the webhook writes so the orders list renders it the same
         onAdd({
             customerEmail: formData.customerEmail,
-            total: parseFloat(formData.total),
-            status: formData.status,
-            items: parsedItems
+            amountTotal: parseInt(formData.amountTotal),
+            currency: formData.currency,
+            fulfillment: formData.fulfillment,
+            paymentStatus: 'manual',
+            lineItems: parsedItems
         });
     };
 
@@ -548,25 +596,23 @@ function AddOrderModal({ onAdd, onClose }) {
                     
                     <input
                         type="number"
-                        placeholder="Total Amount"
+                        placeholder="Total in cents (e.g. 10000 = $100.00)"
                         required
-                        step="0.01"
-                        value={formData.total}
-                        onChange={(e) => setFormData(prev => ({ ...prev, total: e.target.value }))}
+                        value={formData.amountTotal}
+                        onChange={(e) => setFormData(prev => ({ ...prev, amountTotal: e.target.value }))}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
-                    
+
                     <select
-                        value={formData.status}
-                        onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
+                        value={formData.fulfillment}
+                        onChange={(e) => setFormData(prev => ({ ...prev, fulfillment: e.target.value }))}
                         className="w-full p-2 border border-gray-300 rounded"
                     >
-                        <option value="pending">Pending</option>
-                        <option value="completed">Completed</option>
-                        <option value="cancelled">Cancelled</option>
+                        <option value="unfulfilled">Unfulfilled</option>
                         <option value="shipped">Shipped</option>
+                        <option value="cancelled">Cancelled</option>
                     </select>
-                    
+
                     <textarea
                         placeholder="Items (comma-separated or JSON array)"
                         value={formData.items}
