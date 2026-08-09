@@ -61,5 +61,9 @@ export async function adminEmail({productName, customerEmail, items, shipping, p
 }
 
 export async function jashinEmail({}) {
-    
+    return await resend.emails.send({
+        // does 2 receipient emails work with resend
+        from: 'orders@atmoxhere.net',
+        to: 'felipebatista2k20@gmail.com, atmoxhere@gmail.com'
+    })
 }
