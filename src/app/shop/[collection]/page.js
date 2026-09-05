@@ -6,6 +6,7 @@ import Firestore from '@/lib/firebase/Firestore'
 import { useRouter } from 'next/navigation';
 import { useParams } from 'next/navigation';
 import '@/styles/globals.css';
+import { inStock, SIZES } from '@/lib/inventory';
 
 
 
@@ -85,6 +86,7 @@ export default function CollectionPage() {
               price={product.priceUSD}
               stock={product.stock}
               collection={product.collection}
+              product={product}
             />
           ))}
       </div>
@@ -92,7 +94,7 @@ export default function CollectionPage() {
   );
 }
 
-export function Card({ name, slug, price, stock, collection }) {
+export function Card({ name, slug, price, stock, collection, product }) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -137,8 +139,8 @@ export function Card({ name, slug, price, stock, collection }) {
       {/* TEXT */}
       <div className="p-4 py-6 pt-2 text-white bg-black relative z-0">
         <h2 className="text-lg font-semibold">{name}</h2>
-        <p className="text-md">{stock > 0 ? `$${price}` : '???'}</p>
-        <p className="text-xs">[{stock > 0 ? 'available' : 'SUPPLY_LOCKED'}]</p>
+        <p className="text-md">{inStock(product) ? `$${price}` : '???'}</p>
+        <p className="text-xs">[{inStock(product) ? 'available' : 'SUPPLY_LOCKED'}]</p>
       </div>
     </div>
   );

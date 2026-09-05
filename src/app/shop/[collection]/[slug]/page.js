@@ -5,6 +5,7 @@
   import { useState, useEffect, useRef } from 'react'; 
   import '@/styles/globals.css';
   import { ShoppingCartIcon } from '@heroicons/react/24/solid';
+  import { SIZES, inStock } from '@/lib/inventory';
 
   export default function Info() {
   const searchParams = useSearchParams();
@@ -41,6 +42,7 @@
           price={product.priceUSD}
           stock={product.stock}
           priceID={product.priceID}
+          sizes={product.sizes}
         />
       ) : (
         <p className="text-center mt-10 text-gray-500">Loading product...</p>
@@ -49,7 +51,7 @@
   );
 }
 
-function ProductInfo({ name, slug, description, price, stock, priceID }) {
+function ProductInfo({ name, slug, description, price, stock, priceID, sizes }) {
   const [showError, setShowError] = useState(false);
   const shippingInputRef = useRef(null)
 
@@ -108,6 +110,7 @@ function ProductInfo({ name, slug, description, price, stock, priceID }) {
           </form>
         )}
         <p>[{stock > 0 ? "available" : "SUPPLY_LOCKED] [dropping soon"}]</p>
+        // here generate the size selector
       </div>
     </div>
   );

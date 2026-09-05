@@ -74,6 +74,7 @@ class Firestore {
         try {
             const product = await this.getProductByPriceId(priceId);
             
+            // is this ok for prod? **
             if (!product) {
                 console.warn(`No product found for priceId: ${priceId}`);
                 return false;
@@ -90,6 +91,8 @@ class Firestore {
             throw error;
         }
     }
+
+    // async updateSizeStock()
 
     // Get all products from a specific collection
     async getProductsByCollection(collection) {

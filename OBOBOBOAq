@@ -1,0 +1,1121 @@
+[33mcommit daf8615318e1e7496a6790d5454846bcd203a387[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Aug 8 17:52:16 2026 -0700
+
+    Updated TODO.txt
+
+[33mcommit 05bfb1b9739bdcef85f8a512962fab12cf8d46ff[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Jul 20 23:46:04 2026 -0700
+
+    Moved success page logic (confirming payment and sending emails) to a webhook, fixed adding/updating orders so that all functions have the same schema and work seamlessly within the admin page
+
+[33mcommit 4fc413a59d36ffc9683d0b08af32fa64aa2bdb6a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Jul 20 00:16:14 2026 -0700
+
+    Added admin email for testing purposes (Admin gets an email on every order completion through stripe with product information)
+
+[33mcommit ef5710098f5a730a45067c9784cb81492d9312a4[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun Jul 19 23:53:48 2026 -0700
+
+    Fixed Test image route so that I can test on the checkout
+
+[33mcommit 90cacd4007514ef437f4af7c1c212d7795b8bbf9[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Jun 8 00:42:09 2026 -0700
+
+    Fixed the price showing on slug page depending on available stock (??? or price)
+
+[33mcommit 298418c4d10a42a14ec5229f2b4de6bc2898b683[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue May 26 16:16:26 2026 -0700
+
+    Testing the glitch effect again (revert if crash)
+
+[33mcommit 4102fc22a699551b4ba364d9205a2b4d43e865d2[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Apr 28 18:48:48 2026 -0700
+
+    Updated TODO.txt
+
+[33mcommit 2493901f87bcd311cf0ee60acc62fb031ed0be02[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Apr 28 04:22:01 2026 -0700
+
+    Changed it back
+
+[33mcommit d8986660b80ee932038b6628a8dfce500a03794b[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Apr 28 04:20:56 2026 -0700
+
+    Fixed bug in checkout api and changed google analytics script
+
+[33mcommit 8cbfc5bd2c0e58b31c55a2a6f34d1c875c20be5a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Apr 28 03:57:05 2026 -0700
+
+    Updated China shipping rate
+
+[33mcommit c4330675b36d1bafe9219e5338acb3dcb99d43af[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Apr 21 01:00:42 2026 -0700
+
+    Added china to list of supported countries
+
+[33mcommit 1980008cde95b47b09c7f53234c1cc74f7a4d6eb[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Apr 20 17:24:42 2026 -0700
+
+    Added validation for the shipping country, and it currently returns a NextResponse with the error code 400 if the country isn't supported.
+
+[33mcommit e9c34ab2a20b5a8e52a5cdc86ff6f544b749739a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Apr 16 17:32:05 2026 -0700
+
+    Fixed file extensions in MangaButton.jsx
+
+[33mcommit 67f4fadba4f5858cf1d8fbf4509ecf9d4813e81a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Apr 16 17:29:48 2026 -0700
+
+    Added CLAUDE.md file for claude agents. Will help with security audits and automation but will not do any of the core programming
+
+[33mcommit d0df42db4eb1f77464f230c266bf37a9b4efdacc[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Mar 21 20:54:39 2026 -0700
+
+    Added the other manga for testing
+
+[33mcommit 12aa688f95876dc9af4ef146e35e9ca0620bb175[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Mar 18 23:47:30 2026 -0700
+
+    Fixed background glitch
+
+[33mcommit 776a62ef5fbff061be4d524c9978e3d907966181[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Mar 5 02:46:46 2026 -0800
+
+    Renamed the image files and renamed the image src source to include dash instead of %20
+
+[33mcommit 5b2171be0177b930e30fe300cefc59ea13833021[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Mar 5 02:36:22 2026 -0800
+
+    Changed background 2 pieces to include %20 instead of space in the filenames
+
+[33mcommit 07a6810a5e0a972e133312385bc315acc76ecc2e[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Feb 27 03:48:50 2026 -0800
+
+    Added new buttons, fixed the scroll glitch, removed back button as it was redundant
+
+[33mcommit f405a0c89e2f279a2ff5247cf3e61ae28ba529e4[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Feb 26 01:14:03 2026 -0800
+
+    Fixed scrolling bug in globals.css
+
+[33mcommit 6d05cf3bf467a2e6f64d0b137d0752bed0049cbb[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Feb 13 20:55:41 2026 -0800
+
+    Last commit before valentines :)
+
+[33mcommit 1f4be4d355b7b413c0c058283eaeb63855da927a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Feb 4 03:59:26 2026 -0800
+
+    Test commit
+
+[33mcommit 4a07a1f7b6e0ad0644e688b4e3d4c387b8ce2d78[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Feb 4 03:41:17 2026 -0800
+
+    Updated some dependencies #2
+
+[33mcommit 948d68847b55dfb730fb286ca95fec52053a664c[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Feb 4 03:38:15 2026 -0800
+
+    Updated some dependencies
+
+[33mcommit 058de327e1333d14ac885ddf53e3a6fb1fe74a96[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Feb 4 03:32:52 2026 -0800
+
+    Added back the CountryButton, updated TODO.md and added a custom cursor for desktop users
+
+[33mcommit d87c5c357356e268b379f3feb4de183a6241a859[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Jan 31 21:34:59 2026 -0800
+
+    Recent desktop changes
+
+[33mcommit 7025e075bac49dde337fc082a90fdeed28a2f465[m
+Merge: 6a4df07 ec90609
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jan 21 18:08:23 2026 -0800
+
+    Merged
+
+[33mcommit 6a4df075bdbb1c4e142018d9600d355181bb8c21[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jan 21 18:03:02 2026 -0800
+
+    Added MangaButton component
+
+[33mcommit ec90609069f15df5a8df8d62a42d24e234cdad37[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Thu Jan 8 04:28:52 2026 -0800
+
+    Smaller images for loading time
+
+[33mcommit e1e7c3364b8618e361fa40fad419006337068c9c[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Dec 2 04:57:39 2025 -0800
+
+    Trying out new changes (commented out glitch mesh edits and removed api and glitchingIndex from useEffect dependencies)
+
+[33mcommit 0b92a524fb3729616205829405deb1c929998b93[m
+Merge: 01f34fa 7483816
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Dec 2 04:39:39 2025 -0800
+
+    Merge branch 'main' of https://github.com/owensweet/atmoxhere
+
+[33mcommit 01f34facad47834ac240c11ea44957e5e3fb4cb4[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Dec 2 04:38:30 2025 -0800
+
+    Commit before merge
+
+[33mcommit 7483816d118ade40913c5fce3012f65223f514ad[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Nov 25 23:59:39 2025 -0800
+
+    Added the bare bones feature for the manga button but still need to comment and also implement it into the product pages (edit the firestore fields)
+
+[33mcommit 1cf4df81ca77540c61987d1d0fc9ec760ef39fee[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Nov 25 23:21:09 2025 -0800
+
+    Trying some new optimizations
+
+[33mcommit 4c545ba50f797d3c7e66630b8c33796dd5cbec98[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Nov 12 22:46:08 2025 -0800
+
+    COmmenting out the icons to test performance
+
+[33mcommit 3eb7e5eef04a7e9be33e3ac937df2db377e0e19c[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Nov 10 02:17:08 2025 -0800
+
+    Fixed sizing of icons and still trying to make the glitch effect look half decent
+
+[33mcommit 91cf95d6677e4c2533faa14118a84d96629c6929[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Nov 10 01:47:48 2025 -0800
+
+    Test for mobile, with glitch effect commented out of the useFrane
+
+[33mcommit 13eccd7120914cdf88c8081fa3c6d7c9ec54c6f8[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun Nov 9 22:49:26 2025 -0800
+
+    Made the glitch transition better
+
+[33mcommit 3d5968056b2dfc879502e906c4bd34eb2d8f3eee[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun Nov 9 22:39:03 2025 -0800
+
+    Changed icons to webp, some improvements to performance on root page, vignette effect fixed to the viewport
+
+[33mcommit 4f7a7bfba917b37d657253d2fddc54d2a3ce796d[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Nov 5 18:42:49 2025 -0800
+
+    Some styling changes, loading time improvements, glitch image effect on root page, and updated next and node dependencies
+
+[33mcommit 83de5e8338114d089eaaf8a83fe38c1e6932d319[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Nov 5 15:29:20 2025 -0800
+
+    [Checkpoint] Added new pictures and about to make build changes with react-three/postprocessing glitch
+
+[33mcommit 579260d7eb958f81c3e202bbb6128e9168b5737a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Nov 3 01:07:43 2025 -0800
+
+    Added icons to the image cards on /collectoiin
+
+[33mcommit 3cf508b973095e770e97e1ce8527404357e2cfd9[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Oct 28 12:17:07 2025 -0700
+
+    Fixed some styling with the view all button
+
+[33mcommit b23471b652aad38d7df0c9687d485e183bbd34a4[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Oct 28 11:07:26 2025 -0700
+
+    Changed pathname for collection page aswell
+
+[33mcommit fbc0b8b20a4c71e34ee304feccbc2a56dc0ca0ca[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Oct 28 11:01:18 2025 -0700
+
+    Changed path to be properly capitalized
+
+[33mcommit f95de87fff2a91c919c6bf231251168868193072[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Oct 28 03:29:42 2025 -0700
+
+    Added icons to pages
+
+[33mcommit 8ae7712c881a776b197c3bfef45cda9cabe48e5e[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Oct 28 02:46:53 2025 -0700
+
+    Changed title of slug page to 'item :: data' because it looks cool
+
+[33mcommit 8b91f4db2b0dbffb703652e5b7f6d3f52f0865ef[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Oct 28 02:37:16 2025 -0700
+
+    Added some styling
+
+[33mcommit f700d19e3dd0a281c80c7227df6869749b96e167[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Oct 27 04:11:21 2025 -0700
+
+    Updated styling on the view all button
+
+[33mcommit afcf29132afd10134ec124a19120add794598756[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Oct 27 03:59:54 2025 -0700
+
+    Added a loading animation for the initial page threejs render
+
+[33mcommit ff3e5f14468afc74cd331d8f65f415bbe32a9e70[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Oct 27 02:11:02 2025 -0700
+
+    Changed increment function for decrementing the stock amount from the database
+
+[33mcommit c509a64e5a163a627a3135695699a398811dd511[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Mon Oct 27 02:01:05 2025 -0700
+
+    Changed some order on /app
+
+[33mcommit c7c408773d26f4dbba6626d73ea16e8edbce4bbe[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Oct 26 04:40:43 2025 -0700
+
+    Added view all button and added code on the success page to decrease the stock of the item(s) purchased
+
+[33mcommit 7dfd68797d4519afae0bd670331f911cde4ca2c4[m
+Merge: d2813e0 3422ec2
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Oct 14 01:18:39 2025 -0700
+
+    Merge branch 'main' of https://github.com/owensweet/atmoxhere
+
+[33mcommit d2813e0e90af8c25f52ba5329b754bcbe4a31b5c[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Sep 28 17:14:34 2025 -0700
+
+    Updated TODO.txt
+
+[33mcommit 3422ec21ef81d276faa4555f2291e10eeb6eae34[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Sep 24 18:26:01 2025 -0700
+
+    Updated TODO.txt
+
+[33mcommit 384480139d0c154288eb84cbb55c518fbd79828f[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Mon Sep 15 20:05:30 2025 -0700
+
+    fixed script tag using next/script
+
+[33mcommit d7c79c8785f0c094fb863d676564015e0626d3e3[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Mon Sep 15 19:20:15 2025 -0700
+
+    Added google amalytics tag
+
+[33mcommit fd417c98c8a089331452718e279874f1996727a8[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Mon Sep 15 16:20:19 2025 -0700
+
+    Updated TODO.txt
+
+[33mcommit 19aec8f7f37a00706994e9cd08aa082d73657e65[m
+Merge: 516091c b611ab3
+Author: Owen Sweet <141327750+owensweet@users.noreply.github.com>
+Date:   Mon Sep 15 13:06:49 2025 -0700
+
+    Merge pull request #2 from owensweet/website_content
+    
+    Added Website Content
+
+[33mcommit 516091c3519ecc977d12da457a1de85d626b6fee[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun Sep 14 19:34:36 2025 -0700
+
+    Added manga in the images folder
+
+[33mcommit 20f39e7abfeaccbded4981055a26068a02073e6b[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Sep 13 22:09:16 2025 -0700
+
+    Changed the order of the images on root page and added Manga and Model directories to the static images folder
+
+[33mcommit a31eddd21a2f1c9e8ee29566e112db73015cd2a4[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Sep 13 18:26:26 2025 -0700
+
+    Can move camera in all directions again, animated text and border opacity aswell for /app page.js
+
+[33mcommit a9a2ccc5f72bb8775c92d2dcb73d0e9aeb679b69[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Wed Sep 10 20:10:03 2025 -0700
+
+    Updated TODO.txt
+
+[33mcommit e14f9964475dff97ee1c24cdde4acf31939f728e[m
+Merge: 2d80eba 04f03b4
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Thu Sep 4 09:47:02 2025 -0700
+
+    Merge branch 'main' of https://github.com/owensweet/atmoxhere
+
+[33mcommit b611ab3b073ea5708fc6ca925c1e48001a256e06[m[33m ([m[1;31morigin/website_content[m[33m)[m
+Author: Alex Ronczewski <alex.ronczewski@gmail.com>
+Date:   Tue Sep 2 13:29:58 2025 -0700
+
+    Update page.jsx
+
+[33mcommit c673c82944ee0789268655c4e2dcb81794661794[m
+Author: Alex Ronczewski <alex.ronczewski@gmail.com>
+Date:   Tue Sep 2 13:27:15 2025 -0700
+
+    Removed black background
+
+[33mcommit 767557e7a82e2e2f7ab4df4fa45c9cf8757e2d17[m
+Author: Alex Ronczewski <alex.ronczewski@gmail.com>
+Date:   Sat Aug 30 16:26:44 2025 -0700
+
+    Changes for page content
+
+[33mcommit bc36d53625a6360a594fd56c07b5922aa887623c[m
+Author: Alex Ronczewski <alex.ronczewski@gmail.com>
+Date:   Sat Aug 30 15:47:17 2025 -0700
+
+    Update page.jsx
+
+[33mcommit 04f03b478f2956d7da6b9336f89b669fbd963a8d[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Aug 28 04:36:17 2025 -0700
+
+    Removed dual export of auth from config.js firestore
+
+[33mcommit aa6447fc8e3ea5712e5dba3871833177fab6fd08[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Aug 28 04:24:36 2025 -0700
+
+    Added authentication on the admin page and added a simple admin page with products and orders
+
+[33mcommit ef6b790147fa36d0b45478bb1463358eb3ace8c7[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Aug 27 22:45:07 2025 -0700
+
+    Made firestore methods more efficient and collection page logic more efficient
+
+[33mcommit 2d80ebaed0d3cc0e741d5463f5ab21889534927a[m
+Merge: a8363f6 fc23c6b
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Wed Aug 27 00:16:36 2025 -0700
+
+    Merge branch 'main' of https://github.com/owensweet/atmoxhere
+
+[33mcommit a8363f680d32e386207f60ffff8c906d37086b15[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Wed Aug 27 00:15:31 2025 -0700
+
+    Made collection images load eager (stay after lazy loading once)
+
+[33mcommit fc23c6b062360e1ec4909e0437e7a4840c5208ca[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Aug 26 00:30:44 2025 -0700
+
+    Increased distance of footer to rest of main content
+
+[33mcommit 8b7cad6f9d23c790b7b2ab9cb3e1acebec9bc724[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 05:25:07 2025 -0700
+
+    Fixed footer margin issue with MouseFollower
+
+[33mcommit 06e09920876cb2e8afa93a4f1a98d6048f62bb49[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 04:40:35 2025 -0700
+
+    Possible fix to localStorage bug [8]
+
+[33mcommit f6bba15d21d77b1f4fad8a7785f6950e4136b990[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 04:39:11 2025 -0700
+
+    Possible fix to localStorage bug [7]
+
+[33mcommit 5141d4025a15ff1ffb6ba6d62c47c8c76e476236[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 04:07:19 2025 -0700
+
+    Possible fix to localStorage bug [6]
+
+[33mcommit d50557de1bd6d381ac2a1b97e187edb341833ed5[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 04:04:06 2025 -0700
+
+    Possible fix to localStorage bug [5]
+
+[33mcommit 0272a6c9d457861c8ac1f7b08022a0b31d158066[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 03:58:40 2025 -0700
+
+    Possible fix to localStorage bug [4]
+
+[33mcommit 0640cf95dde3501168acf77f4706e0dc10c41892[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 03:56:50 2025 -0700
+
+    Possible fix to localStorage bug [3]
+
+[33mcommit 880334ae833625d12cc4986caec64695a78ebfd3[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 03:47:56 2025 -0700
+
+    Possible fix to localStorage bug
+
+[33mcommit aa95058812fd526ad1d8c7d6ed733c528a070e16[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 03:40:45 2025 -0700
+
+    Fixed deployment syntax issue in confirmationEmail.js
+
+[33mcommit 199fb1c5df70ebd4ac18ab0c7f40149a36e4a7ee[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 03:38:30 2025 -0700
+
+    Possibly fixed localStorage bug
+
+[33mcommit 4e29b06c048fcd8b9fd8327cf201f5e9b1d41828[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 03:26:43 2025 -0700
+
+    Fixed collections in the footer to be dynamic (imported from app/page.js const)
+
+[33mcommit 94254fdac6de2ce87be29eccd785396b126336be[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 03:05:58 2025 -0700
+
+    Added swipe hint icon and changed threshold
+
+[33mcommit d79616ddb1596761d8f3a7a4428c5c493978ba18[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 24 01:42:21 2025 -0700
+
+    Added shrinking with transitions depending on distance from camera, and also lines with calculations, /app page.js still needs to be cleaned up and commented more verbosely
+
+[33mcommit fbdad61e797a67bbc88719ddc07521b6419b0371[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Aug 19 00:33:44 2025 -0700
+
+    Changed interaction on the root page and update TODO.txt
+
+[33mcommit 1e70e2609b78463c564061d58c1b9315569bc182[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 17 04:31:43 2025 -0700
+
+    Fixed border image not showing up
+
+[33mcommit 4c231fd7b23b93926203658d892681b378454cb3[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 17 02:35:16 2025 -0700
+
+    Fixed country selector not showing up (set z-index: 2000)
+
+[33mcommit cc58baf376a610b1ba5418b2f1a5e7a28bd0fc16[m
+Merge: a5c0ba8 a5a9729
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 17 00:37:55 2025 -0700
+
+    Commit before merge
+
+[33mcommit a5c0ba83d2ed0e190440cf0b8b7ebf3a2019bbfb[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun Aug 17 00:35:23 2025 -0700
+
+    COmmit before merge
+
+[33mcommit a5a9729b9431ea1a8b405fcae40d4a37d06b3c03[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Aug 12 02:50:03 2025 -0700
+
+    Improved styling on the country selector and updated TODO.txt'
+
+[33mcommit a5dc53661752dfb32fcccc6f6ef50b30b87dc773[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Aug 12 02:39:44 2025 -0700
+
+    Applied crt filter onto countr
+
+[33mcommit f3eb44a421a3d665b68c9d106513c3f3f0fe0464[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Aug 12 02:30:51 2025 -0700
+
+    Fixed image issue for png images
+
+[33mcommit 167e24629582a3d14c2409c55d6c77befbc3830e[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Aug 12 02:22:40 2025 -0700
+
+    Added TODO.txt
+
+[33mcommit fd513b50c560489827a8ca3beaf275e8eaa74692[m
+Merge: d76b8f2 52301b2
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Aug 12 02:19:58 2025 -0700
+
+    Merge branch 'main' of https://github.com/owensweet/atmoxhere
+
+[33mcommit d76b8f2d249ce0de3d3d989d6ae3718e7aa12df1[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Aug 12 02:18:01 2025 -0700
+
+    Commit before merge
+
+[33mcommit 52301b21fdbf2851407d1552b1b18115f42ff828[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Aug 12 01:14:46 2025 -0700
+
+    Updated TODO.txt
+
+[33mcommit 3cd9ba77c961c14c7f3c81de234919e30771efac[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Aug 9 04:02:18 2025 -0700
+
+    Changed the 3d rendering for the rotating links and also cleaned up the images folder
+
+[33mcommit 24f03c15eccf6bc2413a379518e8d53a59f39dd2[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Aug 7 02:35:31 2025 -0700
+
+    Revamped the country selector screen so it doesnt look bad
+
+[33mcommit 55cb73b9e6cf8cf057c2a67741b9e4e9ee6e9d84[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Aug 6 23:52:13 2025 -0700
+
+    Added sister alma tee
+
+[33mcommit 13546bd345f0d87910235fb916b16fd886042266[m
+Author: Alex Ronczewski <alex.ronczewski@gmail.com>
+Date:   Sat Jul 26 16:30:10 2025 -0700
+
+    Update TODO.txt
+
+[33mcommit 98d25ccee958402dfb517ae6f8a026757434dbab[m
+Author: Alex Ronczewski <alex.ronczewski@gmail.com>
+Date:   Sat Jul 26 16:27:52 2025 -0700
+
+    Re-added changes that got lost in the PR
+    
+    Added Twitter logo in footer that links to Atmoxhere Twitter
+    Added description "Year 2077 AXH Spacesuit Factory"
+    Added a Lore/Manga Placeholder page for future use
+
+[33mcommit f120094e7c3ed1e861c6f632ff2ec52ddf3caf5c[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Jul 26 15:57:19 2025 -0700
+
+    Fixed some things about country selector, need to test with mobile
+
+[33mcommit ee3658ab408ab215d37123bfa0673426f28f910b[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jul 25 21:30:02 2025 -0700
+
+    Moved the footer down a bit
+
+[33mcommit 8c587e3f42901bfe9fe40e15121056f6c21ddbd7[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jul 25 18:01:12 2025 -0700
+
+    Added back some things that were deleted
+
+[33mcommit 00ae56e4e10f903a4038ff060b6f35a656ceb04e[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jul 25 17:53:05 2025 -0700
+
+    Merge commit
+
+[33mcommit 7018f884b4186031b0e870d05e9d456de09460c2[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jul 25 03:10:10 2025 -0700
+
+    Changed background image to smaller size and also to webp to fix the lag
+
+[33mcommit 33f96b60bc1450a45222750d8b2b936274dab680[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Jul 24 01:11:34 2025 -0700
+
+    Changed the globe icon and also working on lining up the 3d links
+
+[33mcommit b9a64723c25f791985cedf78f7f758fb206d496b[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jul 23 05:43:03 2025 -0700
+
+    Updated TODO.txt
+
+[33mcommit 9ee2a5a6380a7f677f6e23d618f7891c886b0cea[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jul 23 05:40:12 2025 -0700
+
+    Played around with the width of the border images and how it affects their lateral position. Also loading speed needs to be tested on iphone
+
+[33mcommit 2fffa6d0e155b084d41ae581ec4205c9d7672fab[m
+Merge: 87abd25 64742af
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jul 23 05:31:32 2025 -0700
+
+    test commit
+
+[33mcommit 87abd2546cc76244fc52659e8116d5bf3510cdfd[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jul 23 05:21:12 2025 -0700
+
+    First iteration of the 3d interactive home page. Got border images and text links to face the camera, next step is to have them floating on lines connected to the planet like waypoints
+
+[33mcommit 64742afbd4f074b23fd7424e5ec87a08810d2d63[m
+Author: Owen Sweet <141327750+owensweet@users.noreply.github.com>
+Date:   Tue Jul 22 16:44:54 2025 -0700
+
+    Update README.md
+
+[33mcommit cafca31ee0ad6e4d95505cf6a9fe3d8b7f9067c7[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Jul 19 14:18:21 2025 -0700
+
+    Created country toggle button for calculating flat shipping rates
+
+[33mcommit 168eaab1a785ff054a423ca103a821b328e85cd9[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Jul 17 18:45:35 2025 -0700
+
+    Collections page sort by descending stock amounts'
+
+[33mcommit d617f93722c55fbf52ceb9c66e9deab9ff4471cd[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jul 16 22:26:13 2025 -0700
+
+    Removed rendering the purchase button for items that are not available (stock == 0)
+
+[33mcommit 2fc14baa1b6a6af27041b321f03eba0ef615a2d1[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jul 16 22:18:50 2025 -0700
+
+    Changed all png images to webp (kept the pngs still) other than the background gimpedit1 and 2 pictures because they were too big. Also fixed the padding on the image card text and increased the background shadow by a bit
+
+[33mcommit f3af42d46c6db26cb540c60e1ba331c591eaeeae[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jul 16 21:06:35 2025 -0700
+
+    Fixed syntax issue with placeholder shipping data being added to the request
+
+[33mcommit 4b3641517317bcedd91dd46709e144804053928a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jul 16 02:25:40 2025 -0700
+
+    Fixed border image bug:
+
+[33mcommit b2f4d67d76651cb8c1132e253f444f51935d6f15[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Thu Jul 3 22:33:40 2025 -0700
+
+    Changed some styling
+
+[33mcommit b7c2e67940ab8044f22020dae37a5c9796dc2c11[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Thu Jul 3 19:37:38 2025 -0700
+
+    Added border, maybe needs to be changed
+
+[33mcommit 6ddf8dc79f99a54688c601bd71a791daf69d8fbc[m
+Merge: c973aea f1b95ff
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Mon Jun 30 04:34:17 2025 -0700
+
+    Merge branch 'main' of https://github.com/owensweet/atmoxhere
+
+[33mcommit c973aea6d7527ccc9dacbd80ec15b4a872f691a0[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Mon Jun 30 04:33:47 2025 -0700
+
+    Updated TODO.txt and added an image
+
+[33mcommit f1b95ff733bf0b3905400d5e2b9ea12abea1a8f2[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Jun 28 04:46:22 2025 -0700
+
+    Updated TODO.txt
+
+[33mcommit 5b936abb5f67509836612d0cb16ff941e7d8a34e[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat Jun 28 04:45:23 2025 -0700
+
+    Finished the confirmationEmail functionality without webhooks, just from the success page. HTML can still be tweaked to look better
+
+[33mcommit b1ae2f9ab0a206af276a2911abf1a9788e95fa74[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 27 04:38:22 2025 -0700
+
+    Added different text for when an item is available/unavailable
+
+[33mcommit 69c0cf5e38445e09b2b050671586a9498e900003[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 27 03:59:50 2025 -0700
+
+    Added confirmationEmail.js inside email folder in lib, as a utility that can be used to send automated emails using resend
+
+[33mcommit a0e7747787c82b6385f8d9c2831dbc7b89afcb3d[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 25 23:46:09 2025 -0700
+
+    Updated TODO.txt
+
+[33mcommit a938e443930186142878e2d9022385558fd3019b[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Jun 23 03:47:34 2025 -0700
+
+    Updated todo.txt
+
+[33mcommit ad663976076a474220237b005b2e230690fc4025[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 20 02:02:14 2025 -0700
+
+    Added priceID for tsiri_tee and conencted stripe, still needs to be tested with a 0.01 dollar product and to test the success page along with the confirmation email stuff. Also need to make more methods inside the firestore DAO class to add remove and change stock amount when restocked or purchaseed, and also handle order objects from the same class
+
+[33mcommit 75d2dad37b6df1162721257f6687056996eba986[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Thu Jun 19 01:59:44 2025 -0700
+
+    Added new products
+
+[33mcommit 5c8c9b048f16d53b002200393efe8f62bf967eb4[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Jun 17 03:57:41 2025 -0700
+
+    Fixed the bug with the image cards not extending fully and also added new tsiri_synthesis products to the store
+
+[33mcommit 74a22fc3d98bc8d6c86ec52963196139ae14d9ec[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 13 18:12:15 2025 -0700
+
+    Added overscroll-none tailwind css to the client wrapper to see if that works
+
+[33mcommit 8c69a0b7cc38740a3938ce091bd8ad917860ad1d[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 13 18:04:49 2025 -0700
+
+    Removed overflow hidden to see if it lets me scroll at all
+
+[33mcommit d86158b42277e6ae744fed6b714534a7a4852d32[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 13 17:47:45 2025 -0700
+
+    Testing with 3 added lines to globals.css to test if overscroll on mobile still happend
+
+[33mcommit e5a947d63eadf678d70848b0b75b1081e8b8a89a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 13 03:18:27 2025 -0700
+
+    Updated TODO.txt
+
+[33mcommit c940dde7f09a024beabd588713f471d555fbb387[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 13 03:14:40 2025 -0700
+
+    Playing around with some background texturing and also added the div for the purchase button, using hero icons for react
+
+[33mcommit 0c8c13e5580bb24c7b09c9a528d717a43286d138[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 13 01:37:44 2025 -0700
+
+    Fixed overscroll and made back button more square
+
+[33mcommit b0312753ed335bcb26a04719bd5e40cf28d0b2ed[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Fri Jun 13 01:12:34 2025 -0700
+
+    Changed styling on title on the 3 main pages to be higher up
+
+[33mcommit f3054ae9743f3e08d315d8b168b51295efc3596d[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 22:39:17 2025 -0700
+
+    Added timeout 150 as another test
+
+[33mcommit bd0058d5498ee650e300a26337fc2186e5e1f8b8[m
+Merge: 1799c0d 634e0c5
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 18:04:23 2025 -0700
+
+    Test
+
+[33mcommit 1799c0dea33146a581dea133dae8049d461531c3[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 18:03:51 2025 -0700
+
+    Test
+
+[33mcommit 634e0c505c12e4c578c7bb0319802e5e755bc922[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 05:10:44 2025 -0700
+
+    Test by adding fake click after touch release
+
+[33mcommit 08fb0a88b4c53f45f3ceb43610d7becccd331274[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 05:04:16 2025 -0700
+
+    test
+
+[33mcommit e9b7b952840e1eb7b9dd50a6a76140870892984e[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 05:00:00 2025 -0700
+
+    Test with triggering mouse down after touch is released
+
+[33mcommit 16d2a66e34e16fb03ded3bdc8924cb3ac9062afc[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 03:49:23 2025 -0700
+
+    Another test commit
+
+[33mcommit 02642e433e155f01863bd93af446ef6a818499b8[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 03:41:33 2025 -0700
+
+    Reset the duration test changed to elastic maybe works and added log statemments to try and view on mobile to see if its taking a mouse statement
+
+[33mcommit 546c8cd455f0831a6586e6b02c8b1e1e860c6bd5[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 03:20:18 2025 -0700
+
+    Testing with duration 0 for the fade in and out animation
+
+[33mcommit e0bfb7f973d52047e8cea83244d3ee198d0d8ee0[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 03:11:39 2025 -0700
+
+    Comment out the showtimeout clear
+
+[33mcommit 1bc5dab9cdd965a9e8eaf356623717f089890a0a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 03:05:30 2025 -0700
+
+    Played with the values a bit
+
+[33mcommit efe5aa998c6fbe27c8659abd3281d29fc2ac1c8a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 03:03:01 2025 -0700
+
+    Pasted in some ai code to see if it helps
+
+[33mcommit 7a0d871c5660e35d73b579271311ae718396c46c[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 02:44:41 2025 -0700
+
+    Trying to fix the icon not showing up on quick taps
+
+[33mcommit 12b34fb60fefb7307911ff11ee0f7a65f518c98b[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 02:16:07 2025 -0700
+
+    Added a 150ms delay to the isTouching flag as a test to see if there was a racce condition between elements
+
+[33mcommit 23ae5cdcfbd3d5fa35b49d190aff510625ec7e7a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 01:34:15 2025 -0700
+
+    Still broken, changed the fill property on the bigger image and just doubled the w and h of the smaller image
+
+[33mcommit dd380133e45f81ac9fff10169519d8d5aa66a0d0[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 01:19:44 2025 -0700
+
+    Broke again, added relative and cover full to the image wrapping div
+
+[33mcommit e44174406a5e5bb0041c4e18513b11f50906da1d[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 01:15:45 2025 -0700
+
+    Seeing that commenting out the images made tapping work again, i will test them wrapped in a minimal div with pointer-events-none
+
+[33mcommit bb45db4a3027f18640c1822deadaf21919c5b892[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 01:07:29 2025 -0700
+
+    Test commit
+
+[33mcommit 898bf452b18e95f87a3d55a101557936390d8dd5[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 11 00:46:16 2025 -0700
+
+    Test commit for removing fixed from mousefollower image parent
+
+[33mcommit 690a62c40af9befc2782c034ede8b25720136dd9[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Jun 10 20:05:40 2025 -0700
+
+    Another commit on the same bug:
+
+[33mcommit 3c59876238ca327328c57f737ad2014e598d4fba[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Jun 10 19:55:26 2025 -0700
+
+    Another deployement commit to test bug
+
+[33mcommit 9702598b094d53a164047451ab477c976a203e36[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Jun 10 19:15:56 2025 -0700
+
+    Added passive: true to touch event handlers to hopefully fix the bug on mobile
+
+[33mcommit 5a58d2dd690181e3b11f15b709bb629e1d32155d[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Jun 10 14:18:09 2025 -0700
+
+    Added pointer-events-none css to MouseFollower images to try and fix the tapping bug on mobile
+
+[33mcommit 6b678248492bf528bc1eb41d3937946dc87bbfad[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Jun 10 14:06:51 2025 -0700
+
+    Fixed the import issues causing deployement isssues (FINALLY)
+
+[33mcommit b64f739f7fe07ea4239bd10b8a884789b34c6b97[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Jun 10 04:47:03 2025 -0700
+
+    Fixed production error with hydration error and also edited colours of background and matrix a bit since desktop has saturation and brightness buffed
+
+[33mcommit bcb815c9a7e820563e5d4c2ae753055788351717[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Tue Jun 10 04:20:54 2025 -0700
+
+    Put all pages in ClientWrapper that is a wrapper client component since layout.js was a server component. Also completed the MouseFollower component that appears on click and touch but still needs to be tested on different mobile browers and from instagram app
+
+[33mcommit acf00e1c41ed55c58941959faa38600cd1316b6c[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Jun 9 01:56:21 2025 -0700
+
+    Added some more ideas and issues in TODO.txt
+
+[33mcommit 0fbfb663c06939e11e3dfede591f7ae9f5fe0a0d[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Jun 8 23:59:13 2025 -0700
+
+    Added some padding and also decreased opacity for scanlines2, it looks way better already
+
+[33mcommit 477ba98cd665ac6e316254358421686e08a8f7e7[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Jun 8 23:45:09 2025 -0700
+
+    Added more chars to the matrix code and made the vignette a little darker
+
+[33mcommit 306b4283f6fe79e807453fa99a22a6aa5d86e1a2[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Sun Jun 8 23:37:51 2025 -0700
+
+    Fixed matrix code layer bug, fixed colouring for crt effect, added vignette, still working on overall styling and also touch effects
+
+[33mcommit 7549089cdbaf2f98679b41507341e00bcaae0d46[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 4 02:45:25 2025 -0700
+
+    Fixed the weirdness that came with the rgb shift, just change 90deg to 110deg
+
+[33mcommit 3f4e52326a4e828b58789701239aa7dc2cfdeb11[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Wed Jun 4 02:19:51 2025 -0700
+
+    Added crt monitor colour effects and experimented with some matrix background ascii art.
+
+[33mcommit 2ef53f1ef70b92e6ba8f65af71d3c4b96933500f[m
+Author: Owen Sweet <o.sweet.work@gmail.com>
+Date:   Tue Jun 3 04:32:39 2025 -0700
+
+    Fixed colour issues with non-dark mode and disabled dark-reader extension for the site
+
+[33mcommit b8773eaa7d22b2064dc6cba83d5decb96a6affa5[m
+Merge: 94ab62d d503a9e
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat May 10 03:51:29 2025 -0700
+
+    Recovered branch
+
+[33mcommit 94ab62d338bf44d5bc6821e7fbcc6c6203e9a7db[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sat May 10 03:41:07 2025 -0700
+
+    Commit before merge
+
+[33mcommit d503a9ea35bb8883e0b9d46a851060ad1dbd38f1[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed May 7 02:40:16 2025 -0700
+
+    Added info page for the product, still needs to be styled, formatted, and add payment system.
+
+[33mcommit 68d96afc2e736376f8b7db62cbc7e470d8922f14[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon May 5 15:20:04 2025 -0700
+
+    Added termite jeans to the products and images, still working on the [slug] dynamic route that will have purchasing logic
+
+[33mcommit 579f0eb099896cd868206d8861b9426d00aba6dc[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun May 4 04:58:04 2025 -0700
+
+    Made the back button look better, still might delete it
+
+[33mcommit 62221c68f0eb21d30a599103250c43c0aee285bf[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun May 4 04:55:45 2025 -0700
+
+    Added filtered subpages instead of all products on the main page. Added a back button that may be removed later due to that screenspace being used for the language toggle or just less basic ui clutter on the screen.
+
+[33mcommit 4a6e6dae43a4a84750406f4e9057c9f26f7ab0a6[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Wed Apr 30 03:16:06 2025 -0700
+
+    Added firebase connection to the shop page in the lib directory. Implemented the Firestore object in page.js to get the current list of products and display them with cards. Cards still need work and different subpages for the separate collections still need to be made.
+
+[33mcommit 2c4b3058d1f90e682dd82180d25c8d19fae3de0a[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Mon Apr 28 21:19:17 2025 -0700
+
+    Cleared out some of the default Next.js code
+
+[33mcommit 805ffb4420381464d6b0ad1851f4b96f40b62b23[m
+Author: owensweet <o.sweet.work@gmail.com>
+Date:   Sun Apr 27 18:34:59 2025 -0700
+
+    Initial commit from Create Next App
